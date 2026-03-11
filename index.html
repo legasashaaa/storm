@@ -1,138 +1,356 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Новости Storm Snos</title>
-  <style>
-    body {
-      font-family: "Inter", sans-serif;
-      background-color: #0b0b0f;
-      color: #ffffff;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storm Snos — Новости</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-    header {
-      display: flex;
-      align-items: center;
-      padding: 1rem;
-      background-color: #000;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    header img {
-      width: 24px;
-      margin-right: 10px;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a14;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-    .logo {
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background-color: #0a0a14;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .content {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: radial-gradient(circle at top, #2b1b88, #0b0b0f);
-    }
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
 
-    .content h1 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-    }
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+        }
 
-    .content p {
-      color: #9aa0b2;
-    }
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 16px;
+        }
 
-    .news-section {
-      max-width: 600px;
-      margin: 1rem auto;
-      padding: 0 1rem;
-    }
+        .ghost-icon {
+            width: 40px;
+            height: 40px;
+        }
 
-    .news-item {
-      background-color: #101018;
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin-bottom: 1.2rem;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
+        .header-title {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
 
-    .news-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-    }
+        /* Gradient line under header */
+        .header-line {
+            height: 2px;
+            background: linear-gradient(90deg, #1a1a3e, #4a3aff, #7b5aff, #4a3aff, #1a1a3e);
+        }
 
-    .news-header h3 {
-      margin: 0;
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
+        /* Hero Section */
+        .hero {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px 50px;
+            overflow: hidden;
+            min-height: 380px;
+        }
 
-    .tag {
-      background-color: #2d1b9a;
-      color: #fff;
-      padding: 0.2rem 0.6rem;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      margin-right: 0.5rem;
-    }
+        .hero-bg {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center, rgba(80, 50, 220, 0.6) 0%, rgba(40, 20, 140, 0.4) 40%, rgba(10, 10, 20, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    .date {
-      background-color: #1c1c28;
-      color: #9aa0b2;
-      padding: 0.2rem 0.6rem;
-      border-radius: 8px;
-      font-size: 0.8rem;
-    }
+        .hero-circle {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            border: 1px solid rgba(100, 80, 220, 0.3);
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    p.desc {
-      color: #c8cbda;
-      line-height: 1.5;
-      margin-top: 0.5rem;
-    }
-  </style>
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            position: relative;
+            z-index: 1;
+            font-size: 17px;
+            line-height: 1.6;
+            color: #a0a0c0;
+            max-width: 500px;
+        }
+
+        .hero p a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* Info Banner */
+        .info-banner {
+            margin: 0 16px 30px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(60, 100, 255, 0.4);
+            background: linear-gradient(135deg, rgba(20, 30, 80, 0.5), rgba(10, 15, 40, 0.5));
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            color: #c0c0e0;
+            overflow: hidden;
+        }
+
+        .info-banner .dot {
+            width: 10px;
+            height: 10px;
+            min-width: 10px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            flex-shrink: 0;
+        }
+
+        .info-banner strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* News Cards */
+        .news-container {
+            padding: 0 16px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .news-card {
+            border-radius: 16px;
+            border: 1px solid rgba(80, 60, 180, 0.3);
+            background: linear-gradient(145deg, rgba(20, 18, 50, 0.8), rgba(12, 12, 30, 0.9));
+            padding: 30px 24px;
+            transition: border-color 0.3s ease;
+        }
+
+        .news-card:hover {
+            border-color: rgba(100, 80, 220, 0.5);
+        }
+
+        .news-card h2 {
+            font-size: 30px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid rgba(100, 100, 180, 0.4);
+            background: rgba(40, 40, 80, 0.4);
+            color: #c0c0e8;
+        }
+
+        .meta-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: #606080;
+        }
+
+        .date-tag {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Courier New', monospace;
+            border: 1px solid rgba(100, 100, 180, 0.3);
+            background: rgba(30, 30, 60, 0.4);
+            color: #9090b0;
+        }
+
+        .news-card p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #a0a0c0;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a14;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a50;
+            border-radius: 3px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .news-card h2 {
+                font-size: 26px;
+            }
+
+            .hero-bg {
+                width: 400px;
+                height: 400px;
+            }
+
+            .hero-circle {
+                width: 350px;
+                height: 350px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <span style="font-size:1.4rem; margin-right:0.5rem;">👻</span>
-    <span class="logo">Storm Snos</span>
-  </header>
 
-  <section class="content">
-    <h1>Новости Storm Snos</h1>
-    <p>На этой странице отображаются только те новости, которые мы публикуем через Админ‑панель Storm Snos.</p>
-  </section>
-
-  <section class="news-section">
-    <div class="news-item">
-      <div class="news-header">
-        <h3>Запуск StormSnos v2.0</h3>
-      </div>
-      <div style="margin-bottom: 0.4rem;">
-        <span class="tag">Администрация</span>
-        <span class="date">2026‑02‑17</span>
-      </div>
-      <p class="desc">
-        Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.
-      </p>
+    <!-- Header -->
+    <div class="header">
+        <button class="back-btn" onclick="history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Назад
+        </button>
+        <div class="header-logo">
+            <!-- Ghost Icon SVG -->
+            <svg class="ghost-icon" viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5C28 5 15 25 15 45v40c0 3 2 5 5 5s5-3 5-5v-5c0-3 2-5 5-5s5 2 5 5v5c0 3 2 5 5 5s5-3 5-5v-5c0-3 2-5 5-5s5 2 5 5v5c0 3 2 5 5 5s5-3 5-5v-5c0-3 2-5 5-5s5 2 5 5v5c0 3 2 5 5 5s5-2 5-5V45C85 25 72 5 50 5z"/>
+                <rect x="32" y="35" width="12" height="14" rx="3" fill="#0a0a14"/>
+                <rect x="56" y="35" width="12" height="14" rx="3" fill="#0a0a14"/>
+                <rect x="40" y="55" width="20" height="6" rx="3" fill="#0a0a14"/>
+            </svg>
+            <span class="header-title">Storm Snos</span>
+        </div>
     </div>
 
-    <div class="news-item">
-      <div class="news-header">
-        <h3>Обновление безопасности</h3>
-      </div>
-      <div style="margin-bottom: 0.4rem;">
-        <span class="tag">Администрация</span>
-        <span class="date">2026‑02‑17</span>
-      </div>
-      <p class="desc">
-        Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.
-      </p>
+    <!-- Gradient Line -->
+    <div class="header-line"></div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-circle"></div>
+        <h1>Новости Storm Snos</h1>
+        <p>На этой странице отображаются только те новости, которые мы публикуем через <a href="#">Админ-панель Storm Snos</a>.</p>
     </div>
-  </section>
+
+    <!-- Info Banner -->
+    <div class="info-banner">
+        <span class="dot"></span>
+        <span>Актуальные обновления проекта в формате <strong>ленты новостей</strong></span>
+    </div>
+
+    <!-- News Cards -->
+    <div class="news-container">
+
+        <!-- Card 1 -->
+        <div class="news-card">
+            <h2>Запуск StormSnos v2.0</h2>
+            <div class="news-meta">
+                <span class="tag">Администрация</span>
+                <span class="meta-dot"></span>
+                <span class="date-tag">2026-02-17</span>
+            </div>
+            <p>Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="news-card">
+            <h2>Обновление безопасности</h2>
+            <div class="news-meta">
+                <span class="tag">Администрация</span>
+                <span class="meta-dot"></span>
+                <span class="date-tag">2026-02-17</span>
+            </div>
+            <p>Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</p>
+        </div>
+
+        <!-- Card 3 (additional example) -->
+        <div class="news-card">
+            <h2>Новый интерфейс панели</h2>
+            <div class="news-meta">
+                <span class="tag">Администрация</span>
+                <span class="meta-dot"></span>
+                <span class="date-tag">2026-02-15</span>
+            </div>
+            <p>Полностью переработан интерфейс админ-панели для более удобного управления проектом и мониторинга всех процессов.</p>
+        </div>
+
+    </div>
+
 </body>
 </html>
