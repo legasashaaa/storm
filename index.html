@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Storm Snos — новости (точная копия)</title>
+    <title>Storm Snos — новости (точная копия скринов 5688/5689)</title>
     <!-- Font Awesome 6 (Free) для иконки призрака -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -14,56 +14,34 @@
         }
 
         body {
-            background-color: #000000;  /* Чёрный фон как просили */
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000000;  /* абсолютно чёрный фон как на скринах */
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 20px 16px;
+            padding: 18px 14px;
         }
 
-        /* центральный блок (мобильный/планшетный каркас) */
+        /* основной контейнер — точная цветопередача, мягкий чёрный */
         .phone-frame {
             max-width: 440px;
             width: 100%;
-            background-color: #0c0c0e;    /* очень тёмный, но чуть мягче pure black */
-            border-radius: 36px;
-            box-shadow: 0 0 0 1px #2a2a32, 0 30px 50px rgba(0,0,0,0.8);
+            background-color: #0a0a0c;    /* глубокий тёмный, как на JPEG */
+            border-radius: 32px;
+            box-shadow: 0 0 0 1px #2a2a35, 0 25px 40px rgba(0,0,0,0.9);
             overflow: hidden;
-            padding: 24px 22px 32px 22px;
-            border: 1px solid #2b2b35;
+            padding: 22px 20px 28px 20px;
+            border: 1px solid #2b2b3a;
         }
 
-        /* верхняя строка: stormsnos.fun (слева) + иконка призрака справа? 
-           Но на скринах слева домен, потом Назад. Я размещу домен сверху отдельно, 
-           потом блок Назад+логотип, как на изображении. Но скрин начинается с "stormsnos.fun" — значит это самый верх.
-           Сделаем как на картинке: сначала stormsnos.fun (мелко, как заголовок сайта), потом Назад и Storm Snos.
-        */
-        .domain-row {
-            color: #88889c;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.2px;
-            margin-bottom: 14px;
-            background: rgba(255,255,255,0.02);
-            padding: 6px 0 6px 6px;
-            border-bottom: 1px dashed #2e2e42;
-        }
-
-        .domain-row i {
-            color: #a0a;
-            margin-right: 8px;
-            font-size: 15px;
-        }
-
-        /* навигация Назад + Storm Snos + иконка призрака (встрою рядом с названием) */
+        /* навигация Назад + Storm Snos + призрак */
         .nav-bar {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 28px;
+            margin-bottom: 22px;
             flex-wrap: wrap;
         }
 
@@ -71,258 +49,218 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #d3d9e6;
+            color: #e0e6f0;
             font-size: 16px;
             font-weight: 500;
             text-decoration: none;
-            background-color: #1e1e2a;
-            padding: 7px 18px 7px 14px;
+            background-color: #1b1b26;
+            padding: 6px 18px 6px 12px;
             border-radius: 40px;
-            border: 1px solid #3a3a50;
-            transition: 0.15s;
-            line-height: 1.2;
-        }
-
-        .back-link:hover {
-            background-color: #2c2c3c;
-            border-color: #5a5a80;
+            border: 1px solid #3c3c54;
+            transition: 0.1s;
+            line-height: 1.3;
         }
 
         .back-arrow {
             font-size: 22px;
             margin-right: 6px;
-            line-height: 1;
-            color: #b0b8d0;
+            color: #b5c0dd;
         }
 
         .project-name {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: -0.3px;
-            color: #f0f2f8;
+            letter-spacing: -0.2px;
+            color: #ffffff;
             display: flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(145deg, #ffffff, #c5cae0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            text-shadow: 0 0 6px rgba(180, 130, 255, 0.5);
         }
 
-        /* иконка призрака (Ghost) — расположил прямо в названии проекта, как акцент */
+        /* иконка призрака (как просили) — везде, где нужно */
         .ghost-icon {
-            color: #c8aaff;
+            color: #bfa8ff;
             font-size: 28px;
-            filter: drop-shadow(0 0 5px #7766cc);
-            -webkit-text-fill-color: initial; /* отключаем градиент для иконки */
-            color: #b7a2ff;
-            background: none;
+            filter: drop-shadow(0 0 6px #7a60dd);
         }
 
-        /* главный заголовок "Новости Storm Snos" */
+        /* Главный заголовок Новости Storm Snos */
         .page-title {
             font-size: 32px;
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             color: #ffffff;
-            letter-spacing: -0.5px;
-            text-shadow: 0 2px 5px rgba(0,150,255,0.2);
+            letter-spacing: -0.4px;
         }
 
-        /* описание (как на скрине — полное совпадение текста) */
-        .page-subhint {
-            font-size: 15px;
-            color: #a8b3cc;
-            margin-bottom: 26px;
-            padding: 14px 18px;
-            background-color: #15151f;
-            border-radius: 20px;
-            border-left: 5px solid #4f4399;
-            font-weight: 400;
-            border: 1px solid #2f2f45;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.7);
-        }
-
-        /* буллит "Актуальные обновления проекта в формате ленты новостей" — точная копия */
-        .feature-bullet {
-            list-style: none;
-            margin-bottom: 32px;
-        }
-        .feature-bullet li {
-            display: flex;
-            align-items: center;
-            gap: 14px;
+        /* Текст про админ-панель — один в один как на скрине 5688, без лишнего блока */
+        .admin-description {
             font-size: 16px;
-            color: #cfd9f0;
-            background-color: #14141e;
-            padding: 14px 20px;
-            border-radius: 50px;
-            border: 1px solid #3d3d5a;
-            box-shadow: 0 6px 0 #0b0b12;
-        }
-        .feature-bullet li::before {
-            content: "•";
-            font-weight: 900;
-            font-size: 32px;
-            color: #aa99ff;
-            line-height: 1;
-            text-shadow: 0 0 6px #8466ff;
+            color: #b5c2dc;
+            margin-bottom: 20px;
+            padding: 12px 18px;
+            background-color: #12121c;
+            border-radius: 18px;
+            border: 1px solid #30304a;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);
+            font-weight: 400;
+            line-height: 1.5;
         }
 
-        /* новостные карточки */
+        /* маленький блок "Актуальные обновления проекта в формате ленты новостей" — максимально компактный, как на скрине */
+        .news-bullet-mini {
+            display: inline-block;      /* делаем блок меньше, чтобы был как на изображении */
+            background-color: #151521;
+            border-radius: 40px;
+            padding: 8px 20px 8px 20px;
+            margin-bottom: 28px;
+            border: 1px solid #3e3e60;
+            font-size: 15px;
+            color: #d0dafc;
+            font-weight: 450;
+            box-shadow: 0 4px 0 #07070b;
+            letter-spacing: 0.1px;
+            /* делаем его не во всю ширину, а по размеру контента */
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .news-bullet-mini i {
+            margin-right: 8px;
+            color: #b197ff;
+            font-size: 16px;
+        }
+
+        /* карточки новостей */
         .news-card {
-            background-color: #111117;
-            border-radius: 30px;
-            padding: 22px;
-            margin-bottom: 22px;
-            border: 1px solid #33334a;
-            box-shadow: 0 12px 20px -10px #03030a;
+            background-color: #0f0f15;
+            border-radius: 26px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid #34344c;
+            box-shadow: 0 12px 15px -10px #03030a;
         }
 
-        .news-header {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: baseline;
-            justify-content: space-between;
-            margin-bottom: 14px;
-        }
-
+        /* заголовок новости */
         .news-title {
-            font-size: 26px;
+            font-size: 27px;
             font-weight: 800;
             color: #ffffff;
-            letter-spacing: -0.3px;
+            margin-bottom: 10px;
+            letter-spacing: -0.2px;
             display: flex;
             align-items: center;
-            gap: 12px;
             flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .version-tag {
-            background-color: #312b5c;
-            color: #cdc3ff;
+        .version-badge {
+            background-color: #312a58;
+            color: #cfbfff;
             border-radius: 60px;
-            padding: 5px 15px;
-            font-size: 15px;
+            padding: 5px 16px;
+            font-size: 16px;
             font-weight: 700;
-            border: 1px solid #6c5fc7;
-            box-shadow: 0 0 12px #5750b0;
-            text-transform: uppercase;
+            border: 1px solid #6b5ac2;
+            box-shadow: 0 0 12px #5245a0;
         }
 
-        .news-meta {
+        /* мета-информация (Администрация + дата) в виде отдельных элементов */
+        .meta-row {
             display: flex;
             align-items: center;
-            gap: 16px;
-            color: #a6b3d9;
-            font-size: 15px;
-            background-color: #1e1e2c;
-            padding: 6px 18px;
+            gap: 20px;
+            background-color: #1a1a28;
+            padding: 8px 20px;
             border-radius: 60px;
-            border: 1px solid #424262;
+            width: fit-content;
+            margin-bottom: 16px;
+            border: 1px solid #40406b;
         }
 
-        .author {
+        .meta-author {
             font-weight: 700;
-            color: #b5aeff;
+            color: #c2b3ff;
+            font-size: 16px;
         }
 
-        .date {
-            font-weight: 400;
-            color: #9da7c7;
+        .meta-date {
+            color: #a5b1da;
+            font-size: 15px;
         }
 
         .news-content {
             font-size: 17px;
-            line-height: 1.5;
-            color: #d2daf2;
-            margin-top: 16px;
-            padding-top: 14px;
-            border-top: 2px dashed #2b2b44;
+            line-height: 1.55;
+            color: #d3dcf5;
+            padding-top: 10px;
+            border-top: 2px dashed #2a2a44;
         }
 
         .news-content strong {
-            color: #ffec9e;
+            color: #ffecb3;
             font-weight: 700;
         }
 
-        /* вторая новость про безопасность */
-        .security-badge {
-            background-color: #1c2640;
-            border-radius: 40px;
-            padding: 6px 16px;
+        /* второй блок новости безопасности */
+        .security-tag {
+            background-color: #18203a;
+            border-radius: 60px;
+            padding: 6px 18px;
             font-size: 14px;
             font-weight: 500;
-            color: #a6c9ff;
+            color: #b3ceff;
             display: inline-block;
-            margin-top: 12px;
-            border: 1px solid #4f6390;
+            margin-top: 14px;
+            border: 1px solid #4b6193;
         }
 
-        /* дополнительный блок "Администрация • дата" как внизу скрина 5653? Там есть повтор. Добавим для полноты */
-        .meta-duo {
+        /* дополнительная референсная мета внизу (как на скрине иногда) */
+        .footer-meta {
             display: flex;
-            gap: 14px;
-            font-size: 15px;
-            color: #a7b3d9;
+            gap: 16px;
             justify-content: flex-end;
-            margin: 20px 0 10px;
-        }
-        .meta-duo span {
-            background: #191926;
-            padding: 8px 18px;
-            border-radius: 40px;
-            border: 1px solid #404066;
+            margin: 20px 0 15px;
         }
 
-        .admin-note {
-            margin-top: 28px;
-            text-align: center;
-            font-size: 14px;
-            color: #6c7aa0;
-            border-top: 1px solid #2e2e4a;
-            padding-top: 22px;
-        }
-        .admin-note span {
-            background-color: #13131d;
-            padding: 8px 24px;
-            border-radius: 40px;
+        .footer-meta span {
+            background: #181825;
+            padding: 7px 20px;
+            border-radius: 60px;
             border: 1px solid #41416b;
-            display: inline-block;
+            color: #b2c0ec;
+            font-size: 14px;
         }
 
-        /* иконка призрака везде, где можно (добавим возле домена) */
-        .ghost-decor {
-            margin-right: 5px;
-            color: #a28eff;
+        .footer-meta i {
+            color: #9d89ff;
+            margin-right: 6px;
         }
 
-        /* абсолютная точность текста: первая новость обрывается на "Мы рады представить полностью" (как в 5651,5652), 
-           но в 5653 текст полный. Я сделаю первую новость с обрывом (точно как первые два скрина), 
-           а третья картинка показывает полный текст, но это визуально другой блок — "V2.0" отдельно.
-           Я воспроизведу обрыв в первом блоке (как на 5651/5652) и ниже полную версию, но чтобы не дублировать, 
-           размещу первую карточку с текстом "Мы рады представить полностью" (без продолжения), 
-           а затем карточку безопасности. И добавлю ещё один блок, который на третьем скрине — "V2.0" с полным текстом.
-           Но так как третий скрин — это отдельный фрагмент, я объединю: 
-           - Запуск StormSnos v2.0 (обрыв) ровно как 5651
-           - Потом карточка "Обновление безопасности" (полностью)
-           - И ещё дополнительно выведу "V2.0 / Администрация / полный текст" как на 5653, чтобы не потерять детали.
-           Но чтобы не было разночтений: пользователь просил точь-в-точь как на этих скринах, значит нужно показать:
-           * два заголовка новостей: "Запуск StormSnos v2.0" (с обрывом) и "Обновление безопасности" (полный)
-           * плюс отдельно где-то строка "V2.0" жирно? на третьем скрине есть жирная "V2.0" над администрацией. 
-           Сделаем отдельный элемент, стилизованный под заголовок "V2.0" как на третьем скрине.
-        */
+        /* призрак в подвале */
+        .ghost-footer {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 36px;
+            opacity: 0.5;
+            color: #434578;
+        }
+
+        /* точное соответствие скринам: убрали stormsnos.fun, убрали дубликат "Мы рады представить" (оставили только один обрыв в первом блоке) */
+        .extra-storm (display: none;)
+
+        /* делаем так, чтобы блок с лентой новостей выглядел именно как короткий элемент */
+        .bullet-compact {
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
     <div class="phone-frame">
-        <!-- первая строка: stormsnos.fun (как в скрине 5651/5652) -->
-        <div class="domain-row">
-            <i class="fas fa-ghost ghost-decor"></i> stormsnos.fun
-        </div>
-
-        <!-- навигация: Назад + Storm Snos (и иконка призрака уже встроена в название) -->
+        <!-- навигация: Назад + Storm Snos + иконка призрака -->
         <div class="nav-bar">
             <a href="#" class="back-link" onclick="return false;">
                 <span class="back-arrow">←</span> Назад
@@ -332,89 +270,63 @@
             </span>
         </div>
 
-        <!-- основной заголовок "Новости Storm Snos" -->
+        <!-- Главный заголовок "Новости Storm Snos" (как на скрине 5688) -->
         <h1 class="page-title">Новости Storm Snos</h1>
-        
-        <!-- точное описание из скрина -->
-        <div class="page-subhint">
+
+        <!-- Текст про админ-панель — один в один, без лишних блоков, ровно как на изображении -->
+        <div class="admin-description">
             На этой странице отображаются только те новости, которые мы публикуем через Админ-панель Storm Snos.
         </div>
 
-        <!-- маркированный элемент "Актуальные обновления..." -->
-        <ul class="feature-bullet">
-            <li>Актуальные обновления проекта в формате ленты новостей</li>
-        </ul>
+        <!-- компактный буллит "Актуальные обновления проекта в формате ленты новостей" — маленький, как на скрине -->
+        <div class="news-bullet-mini">
+            <i class="fas fa-ghost" style="opacity:0.8;"></i> Актуальные обновления проекта в формате <strong>ленты новостей</strong>.
+        </div>
 
-        <!-- НОВОСТЬ 1 (точно как на скринах 5651 и 5652 — обрыв фразы) -->
+        <!-- Первая новость: Запуск StormSnos v2.0 (ТОЧНО как на скрине 5688 и 5689 — обрыв "Мы рады представить полностью" без продолжения) -->
         <div class="news-card">
-            <div class="news-header">
-                <div class="news-title">
-                    Запуск StormSnos v2.0
-                    <span class="version-tag">v2.0</span>
-                </div>
-                <div class="news-meta">
-                    <span class="author">Администрация</span>
-                    <span class="date">2026-02-17</span>
-                </div>
+            <div class="news-title">
+                Запуск StormSnos v2.0
+                <span class="version-badge">v2.0</span>
+            </div>
+            <!-- мета отдельно: Администрация и дата, как на скрине 5689 (две строки, но мы сделаем meta-row) 
+                 но на скрине 5688 Администрация и дата под заголовком отдельно, а на 5689 более структурировано. 
+                 Сделаем единообразно: используем meta-row для красоты, но при этом чтобы выглядело как на скринах. -->
+            <div class="meta-row">
+                <span class="meta-author"><i class="fas fa-user-shield" style="margin-right: 6px; color:#b19eff;"></i>Администрация</span>
+                <span class="meta-date"><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>2026–02–17</span>
             </div>
             <div class="news-content">
                 Мы рады представить полностью
-                <!-- обрыв как на скрине, дальше ничего нет -->
+                <!-- обрывается ровно как на скриншотах 5688 и 5689 (первая новость без продолжения) -->
             </div>
         </div>
 
-        <!-- НОВОСТЬ 2: Обновление безопасности (из 5653) -->
+        <!-- Вторая новость: Обновление безопасности (полностью, как на скрине 5689) -->
         <div class="news-card">
-            <div class="news-header">
-                <div class="news-title">Обновление безопасности</div>
-                <div class="news-meta">
-                    <span class="author">Администрация</span>
-                    <span class="date">2026-02-17</span>
-                </div>
+            <div class="news-title">Обновление безопасности</div>
+            <div class="meta-row">
+                <span class="meta-author"><i class="fas fa-user-shield" style="margin-right: 6px;"></i>Администрация</span>
+                <span class="meta-date"><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>2026–02–17</span>
             </div>
             <div class="news-content">
                 Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.
-                <div class="security-badge">🔒 шифрование + защита</div>
+                <div class="security-tag"><i class="fas fa-lock" style="margin-right: 8px;"></i> защита данных</div>
             </div>
         </div>
 
-        <!-- отдельный блок из скриншота 5653: жирный V2.0 и полное описание.
-            Там было:
-            # stormsnos.fun
-            ## Storm Snos
-            ### V2.0
-            **Администрация** 2026-02-17
-            Мы рады представить полностью обновлённую версию StormSnos! ...
-            Воспроизведу это как карточку с явной версией, но уже без обрыва -->
-        <div style="background: #0b0b12; border-radius: 30px; padding: 22px; border: 1px solid #4b3b9a; margin: 30px 0 10px; box-shadow: 0 0 15px #2a2355;">
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
-                <span style="background: #352e6b; padding: 6px 20px; border-radius: 60px; font-weight: 800; color: white; font-size: 28px; letter-spacing: 2px;">V2.0</span>
-                <span style="color: #a793ff; font-weight:600;">⚡</span>
-            </div>
-            <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 14px; background: #1b1b2a; padding: 8px 16px; border-radius: 50px; width: fit-content;">
-                <span style="color: #c3beff; font-weight:700;">Администрация</span>
-                <span style="color: #a7afda;">2026-02-17</span>
-            </div>
-            <div style="color: #e8ecff; font-size: 17px; line-height: 1.5; border-left: 4px solid #7a62e0; padding-left: 18px;">
-                Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.
-            </div>
+        <!-- Блок с метой внизу (как на скрине 5689 есть повтор "Администрация - 2026–02–17", сделаем деликатно) -->
+        <div class="footer-meta">
+            <span><i class="fas fa-ghost"></i> Администрация</span>
+            <span><i class="far fa-calendar"></i> 2026–02–17</span>
         </div>
 
-        <!-- блок повторяющий мету (Администрация • дата) как в конце 5653 -->
-        <div class="meta-duo">
-            <span><i class="fas fa-ghost" style="margin-right: 6px; opacity:0.8;"></i> Администрация</span>
-            <span>2026-02-17</span>
-        </div>
-
-        <!-- footer с доменом и намёком на админ-панель -->
-        <div class="admin-note">
-            <span>⚡ stormsnos.fun · админ-панель Storm Snos ⚡</span>
-        </div>
-
-        <!-- дополнительная иконка призрака в самом низу для атмосферы -->
-        <div style="text-align: center; margin-top: 14px; font-size: 38px; opacity: 0.5; color: #48507a;">
+        <!-- подвальный призрак (атмосфера) -->
+        <div class="ghost-footer">
             <i class="fas fa-ghost"></i>
         </div>
     </div>
+
+    <!-- полное соответствие скринам: нет stormsnos.fun, нет дублирующего "Мы рады представить" с полным текстом, блок ленты новостей уменьшен -->
 </body>
 </html>
