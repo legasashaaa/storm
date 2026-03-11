@@ -1,283 +1,138 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Storm Snos - Новости</title>
-    <style>
-        :root {
-            --bg-color: #050505;
-            --card-bg: #111319;
-            --text-main: #ffffff;
-            --text-secondary: #8b8e97;
-            --accent-purple: #5b5df5;
-            --accent-glow: rgba(91, 93, 245, 0.15);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 500px;
-            padding: 20px;
-            box-sizing: border-box;
-            background: radial-gradient(circle at top, #1a1a3a 0%, #050505 60%);
-        }
-
-        /* Шапка */
-        .header {
-            display: flex;
-            align-items: center;
-            padding-bottom: 30px;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        .back-btn {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 15px;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .back-btn:hover {
-            color: var(--text-main);
-            transform: translateX(-3px);
-        }
-
-        .back-btn span {
-            margin-right: 8px;
-            font-size: 18px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            margin-left: auto; /* Сдвигаем логотип вправо или центрируем */
-            margin-right: auto;
-        }
-
-        .logo-text {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            background: linear-gradient(to right, #fff, #8c9eff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Заголовок */
-        .main-title {
-            text-align: center;
-            font-size: 32px;
-            font-weight: 800;
-            margin: 40px 0 10px 0;
-            line-height: 1.2;
-        }        .sub-description {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 30px;
-            padding: 0 20px;
-        }
-
-        /* Инфо-плашка */
-        .info-banner {
-            background-color: var(--accent-glow);
-            border: 1px solid rgba(91, 93, 245, 0.2);
-            border-radius: 12px;
-            padding: 12px 15px;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-        }
-
-        .info-banner::before {
-            content: "";
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-purple);
-            border-radius: 50%;
-            margin-right: 12px;
-            box-shadow: 0 0 10px var(--accent-purple);
-            animation: pulse 2s infinite;
-        }
-
-        /* Список новостей */
-        #news-container {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .news-card {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            padding: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .news-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(91, 93, 245, 0.4);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .news-card h2 {
-            margin: 0 0 12px 0;
-            font-size: 22px;
-            font-weight: 700;
-        }
-
-        .card-meta {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .badge {
-            background-color: var(--accent-dark, #1c1f29);
-            color: #8c9eff;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(140, 158, 255, 0.2);
-        }
-
-        .date {
-            color: var(--text-secondary);
-            font-size: 13px;
-        }
-
-        .card-content {
-            color: #bdc1c6;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .dot {
-            width: 4px;
-            height: 4px;
-            background-color: var(--text-secondary);
-            border-radius: 50%;
-            opacity: 0.5;
-        }
-
-        /* Анимации */
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .news-card {
-            animation: fadeInUp 0.5s ease backwards;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <div class="header">
-        <a href="#" class="back-btn"><span>←</span> Назад</a>
-        <div class="logo">
-            <span style="font-size: 22px; margin-right: 8px;">👻</span>
-            <span class="logo-text">Storm Snos</span>
-        </div>
-    </div>
-
-    <h1 class="main-title">Новости</h1>
-    <p class="sub-description">
-        Актуальные события и обновления системы управления <b>Storm Snos</b>.
-    </p>
-
-    <div class="info-banner">Лента обновляется в режиме реального времени
-    </div>
-
-    <!-- Контейнер для новостей -->
-    <div id="news-container">
-        <!-- Сюда JavaScript вставит карточки -->
-    </div>
-</div>
-
-<script>
-    // Массив с новостями — удобно редактировать в одном месте
-    const newsData = [
-        {
-            title: "Запуск StormSnos v2.0",
-            tag: "Обновление",
-            date: "17 Фев 2026",
-            content: "Мы рады представить полностью обновленную версию StormSnos! Новый дизайн, улучшенная производительность и исправленные ошибки прошлых версий."
-        },
-        {
-            title: "Безопасность превыше всего",
-            tag: "Защита",
-            date: "15 Фев 2026",
-            content: "Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и методы шифрования данных пользователей."
-        },
-        {
-            title: "Технические работы",
-            tag: "Инфо",
-            date: "10 Фев 2026",
-            content: "Плановое обслуживание серверов завершено. Скорость отклика API увеличена на 40% благодаря переходу на новые узлы."
-        }
-    ];
-
-    const container = document.getElementById('news-container');
-
-    // Функция для отрисовки новостей
-    function renderNews() {
-        container.innerHTML = newsData.map((item, index) => `
-            <div class="news-card" style="animation-delay: ${index * 0.1}s">
-                <div class="card-meta">
-                    <div class="badge">${item.tag}</div>
-                    <div class="dot"></div>
-                    <div class="date">${item.date}</div>
-                </div>
-                <h2>${item.title}</h2>
-                <div class="card-content">
-                    ${item.content}
-                </div>
-            </div>
-        `).join('');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новости Storm Snos</title>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #0b0b0f;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
     }
 
-    // Запуск
-    renderNews();
-</script>
+    header {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background-color: #000;
+    }
 
+    header img {
+      width: 24px;
+      margin-right: 10px;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .content {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: radial-gradient(circle at top, #2b1b88, #0b0b0f);
+    }
+
+    .content h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .content p {
+      color: #9aa0b2;
+    }
+
+    .news-section {
+      max-width: 600px;
+      margin: 1rem auto;
+      padding: 0 1rem;
+    }
+
+    .news-item {
+      background-color: #101018;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .news-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .news-header h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .tag {
+      background-color: #2d1b9a;
+      color: #fff;
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+    }
+
+    .date {
+      background-color: #1c1c28;
+      color: #9aa0b2;
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+    }
+
+    p.desc {
+      color: #c8cbda;
+      line-height: 1.5;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span style="font-size:1.4rem; margin-right:0.5rem;">👻</span>
+    <span class="logo">Storm Snos</span>
+  </header>
+
+  <section class="content">
+    <h1>Новости Storm Snos</h1>
+    <p>На этой странице отображаются только те новости, которые мы публикуем через Админ‑панель Storm Snos.</p>
+  </section>
+
+  <section class="news-section">
+    <div class="news-item">
+      <div class="news-header">
+        <h3>Запуск StormSnos v2.0</h3>
+      </div>
+      <div style="margin-bottom: 0.4rem;">
+        <span class="tag">Администрация</span>
+        <span class="date">2026‑02‑17</span>
+      </div>
+      <p class="desc">
+        Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.
+      </p>
+    </div>
+
+    <div class="news-item">
+      <div class="news-header">
+        <h3>Обновление безопасности</h3>
+      </div>
+      <div style="margin-bottom: 0.4rem;">
+        <span class="tag">Администрация</span>
+        <span class="date">2026‑02‑17</span>
+      </div>
+      <p class="desc">
+        Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.
+      </p>
+    </div>
+  </section>
 </body>
 </html>
