@@ -8,13 +8,12 @@
     <style>
         :root {
             --bg-color: #030305;
-            --card-bg: #0d0d14;
+            --card-bg: #0b0b12;
             --border-color: rgba(255, 255, 255, 0.08);
-            --primary: #5c4dff;
-            --primary-hover: #4a3be0;
+            --primary: #4f3dff;
+            --primary-hover: #3b2bcc;
             --text-main: #ffffff;
             --text-muted: #8b8b9e;
-            --accent-blue: #5c4dff;
             --gold: #f5a623;
         }
 
@@ -38,7 +37,22 @@
             color: inherit;
         }
 
-        /* HEADER */
+        /* --- PAGE ROUTING --- */
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HEADERS --- */
         .header {
             position: sticky;
             top: 0;
@@ -46,23 +60,58 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 24px;
-            background: rgba(3, 3, 5, 0.8);
+            padding: 16px 20px;
+            background: rgba(3, 3, 5, 0.85);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-subpage {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: rgba(3, 3, 5, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-size: 22px;
             font-weight: 800;
+            margin-left: 16px;
+        }
+        
+        .header .logo {
+            margin-left: 0;
         }
 
         .logo svg {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             fill: white;
         }
 
@@ -78,13 +127,13 @@
 
         .burger span {
             display: block;
-            width: 28px;
+            width: 26px;
             height: 2px;
             background-color: white;
             border-radius: 2px;
         }
 
-        /* MOBILE MENU */
+        /* --- MOBILE MENU --- */
         .nav-overlay {
             position: fixed;
             top: 0;
@@ -97,7 +146,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 30px;
+            gap: 24px;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
@@ -119,38 +168,158 @@
             cursor: pointer;
         }
 
-        .nav-overlay a {
-            font-size: 24px;
+        .nav-overlay a, .nav-overlay button {
+            background: none;
+            border: none;
+            font-size: 22px;
             font-weight: 600;
             color: var(--text-muted);
             transition: color 0.2s;
+            cursor: pointer;
+            font-family: inherit;
         }
 
-        .nav-overlay a:hover {
+        .nav-overlay a:hover, .nav-overlay button:hover {
             color: white;
         }
 
-        /* HERO SECTION */
+        /* --- NEWS PAGE (Первая страница) --- */
+        .news-hero {
+            position: relative;
+            padding: 80px 20px 40px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .news-glow {
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150%;
+            height: 500px;
+            background: radial-gradient(circle at top, rgba(79, 61, 255, 0.6) 0%, rgba(20, 10, 100, 0.4) 40%, transparent 70%);
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .news-hero h1 {
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .news-hero p {
+            font-size: 15px;
+            color: var(--text-muted);
+            max-width: 450px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .news-hero p strong {
+            color: white;
+        }
+
+        .info-banner {
+            margin: 0 20px 30px;
+            padding: 14px 16px;
+            background: rgba(15, 20, 45, 0.6);
+            border: 1px solid rgba(79, 61, 255, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .info-banner .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        .info-banner strong {
+            color: white;
+        }
+
+        .news-container {
+            padding: 0 20px 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .news-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+        }
+
+        .news-card h2 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag-admin {
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(79, 61, 255, 0.15);
+            border: 1px solid rgba(79, 61, 255, 0.3);
+            color: #9b8cff;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .tag-date {
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .meta-dot {
+            width: 4px;
+            height: 4px;
+            background-color: var(--text-muted);
+            border-radius: 50%;
+        }
+
+        .news-card p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* --- MAIN PAGE GLOBALS --- */
         .hero {
             position: relative;
-            padding: 80px 24px 60px;
+            padding: 60px 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-
-        .hero-glow {
-            position: absolute;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 400px;
-            background: radial-gradient(circle, rgba(92, 77, 255, 0.4) 0%, rgba(3, 3, 5, 0) 70%);
-            filter: blur(60px);
-            z-index: -1;
-            pointer-events: none;
+            overflow: hidden;
         }
 
         .trust-badge {
@@ -163,8 +332,7 @@
             border-radius: 30px;
             font-size: 13px;
             font-weight: 500;
-            margin-bottom: 30px;
-            color: var(--text-main);
+            margin-bottom: 24px;
         }
 
         .dot-green {
@@ -172,30 +340,27 @@
             height: 8px;
             background-color: #22c55e;
             border-radius: 50%;
-            box-shadow: 0 0 10px #22c55e;
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 900;
             line-height: 1.1;
-            letter-spacing: -0.5px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .hero h2 {
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 900;
-            color: var(--accent-blue);
-            line-height: 1.1;
-            margin-bottom: 24px;
+            color: var(--primary);
+            margin-bottom: 20px;
         }
 
         .hero p {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--text-muted);
             max-width: 400px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             line-height: 1.6;
         }
 
@@ -215,11 +380,10 @@
             width: 100%;
             max-width: 320px;
             transition: background 0.2s;
+            font-family: inherit;
         }
 
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-        }
+        .btn-primary:hover { background-color: var(--primary-hover); }
 
         .btn-outline {
             display: inline-flex;
@@ -227,31 +391,28 @@
             justify-content: center;
             background: transparent;
             color: white;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
-            padding: 16px 32px;
+            padding: 14px 32px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
             cursor: pointer;
             width: 100%;
             max-width: 320px;
-            margin-top: 16px;
+            margin-top: 12px;
             transition: background 0.2s;
+            font-family: inherit;
         }
 
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* SECTION GLOBALS */
+        /* --- SECTIONS --- */
         .section {
-            padding: 60px 24px;
+            padding: 50px 20px;
         }
 
         .section-label {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
-            color: var(--accent-blue);
+            color: var(--primary);
             text-transform: uppercase;
             letter-spacing: 1px;
             text-align: center;
@@ -259,7 +420,7 @@
         }
 
         .section-title {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
             text-align: center;
             margin-bottom: 16px;
@@ -271,38 +432,10 @@
             color: var(--text-muted);
             text-align: center;
             max-width: 500px;
-            margin: 0 auto 40px;
+            margin: 0 auto 30px;
             line-height: 1.6;
         }
 
-        /* TABS (METHODS) */
-        .tabs-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--border-color);
-            scrollbar-width: none;
-        }
-        .tabs-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .tab {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-muted);
-            white-space: nowrap;
-            cursor: pointer;
-            padding-bottom: 12px;
-            position: relative;
-        }
-
-        .tab.active {
-            color: white;
-        }
-
-        /* CARDS GLOBALS */
         .cards-grid {
             display: flex;
             flex-direction: column;
@@ -318,212 +451,103 @@
             padding: 24px;
         }
 
+        /* TABS */
+        .tabs-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+            scrollbar-width: none;
+            margin-bottom: 20px;
+        }
+        .tabs-container::-webkit-scrollbar { display: none; }
+
+        .tab {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-muted);
+            white-space: nowrap;
+            cursor: pointer;
+            padding-bottom: 8px;
+        }
+        .tab.active { color: white; border-bottom: 2px solid var(--primary); }
+
         /* VIDEO */
         .video-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             text-align: center;
-            padding: 60px 24px;
+            padding: 50px 20px;
         }
-
         .play-btn {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             background-color: var(--primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 24px;
-            cursor: pointer;
-            transition: transform 0.2s;
+            margin: 0 auto 20px;
         }
-        
-        .play-btn:active {
-            transform: scale(0.95);
-        }
+        .play-btn svg { width: 24px; height: 24px; fill: white; margin-left: 4px; }
 
-        .play-btn svg {
-            width: 32px;
-            height: 32px;
-            fill: white;
-            margin-left: 6px;
-        }
-
-        .video-card h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .video-card p {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        /* FEATURES */
+        /* FEATURES & ICONS */
         .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(92, 77, 255, 0.1);
+            width: 44px;
+            height: 44px;
+            background: rgba(79, 61, 255, 0.1);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
-
-        .feature-icon svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--primary);
-            fill: none;
-            stroke-width: 2;
-        }
-
-        .card h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            font-size: 15px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
+        .feature-icon svg { width: 22px; height: 22px; stroke: var(--primary); fill: none; stroke-width: 2; }
+        .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .card p { font-size: 14px; color: var(--text-muted); }
 
         /* STATS */
-        .stat-card {
-            text-align: center;
-            padding: 32px 24px;
-        }
-
-        .stat-label {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
-
-        .stat-number {
-            font-size: 42px;
-            font-weight: 900;
-            color: white;
-        }
+        .stat-card { text-align: center; padding: 24px; }
+        .stat-label { font-size: 14px; color: var(--text-muted); margin-bottom: 4px; }
+        .stat-number { font-size: 36px; font-weight: 900; color: white; }
 
         /* PRICING */
-        .pricing-card {
-            position: relative;
-            padding: 32px 24px;
-        }
-
-        .pricing-card.popular {
-            border-color: var(--primary);
-        }
-
-        .pricing-card.best {
-            border-color: var(--gold);
-        }
-
+        .pricing-card { position: relative; padding: 30px 20px; }
+        .pricing-card.popular { border-color: var(--primary); }
+        .pricing-card.best { border-color: var(--gold); }
         .badge {
             position: absolute;
-            top: -14px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            padding: 6px 16px;
+            padding: 4px 12px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 700;
             white-space: nowrap;
         }
-
-        .badge.purple {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .badge.gold {
-            background-color: var(--gold);
-            color: black;
-        }
-
-        .duration {
-            font-size: 16px;
-            color: white;
-            margin-bottom: 8px;
-        }
-
-        .price-wrap {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .price {
-            font-size: 40px;
-            font-weight: 900;
-        }
-
-        .price-suffix {
-            font-size: 16px;
-            color: var(--text-muted);
-        }
-
-        .plan-name {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
+        .badge.purple { background-color: var(--primary); color: white; }
+        .badge.gold { background-color: var(--gold); color: black; }
+        
+        .duration { font-size: 15px; color: white; margin-bottom: 8px; }
+        .price-wrap { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
+        .price { font-size: 36px; font-weight: 900; }
+        .price-suffix { font-size: 14px; color: var(--text-muted); }
+        .plan-name { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
 
         .btn-card {
             width: 100%;
             padding: 14px;
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
-            text-align: center;
             background: transparent;
             border: 1px solid var(--border-color);
             color: white;
-            transition: background 0.2s;
             cursor: pointer;
+            font-family: inherit;
         }
-
-        .pricing-card.popular .btn-card {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .pricing-card.best .btn-card {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: black;
-        }
-
-        /* ADDONS */
-        .addon-feature {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .addon-feature svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--primary);
-            stroke-width: 3;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .addon-feature span {
-            font-size: 15px;
-            color: var(--text-muted);
-        }
+        .pricing-card.popular .btn-card { background: var(--primary); border-color: var(--primary); }
+        .pricing-card.best .btn-card { background: var(--gold); border-color: var(--gold); color: black; }
 
         /* FAQ */
         .faq-item {
@@ -531,206 +555,114 @@
             border: 1px solid var(--border-color);
             border-radius: 16px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            margin-bottom: 12px;
         }
-
         .faq-question {
             width: 100%;
-            padding: 20px 24px;
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: none;
             border: none;
             color: white;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             text-align: left;
             cursor: pointer;
             font-family: inherit;
         }
-
-        .faq-question svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--text-muted);
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-question svg {
-            transform: rotate(180deg);
-            stroke: var(--primary);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            padding: 0 24px;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 200px;
-            padding: 0 24px 20px;
-            opacity: 1;
-        }
-
-        .faq-answer p {
-            font-size: 15px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
+        .faq-question svg { width: 18px; height: 18px; stroke: var(--text-muted); transition: 0.3s; }
+        .faq-item.active .faq-question svg { transform: rotate(180deg); stroke: var(--primary); }
+        .faq-answer { max-height: 0; padding: 0 20px; opacity: 0; transition: 0.3s; }
+        .faq-item.active .faq-answer { max-height: 200px; padding: 0 20px 16px; opacity: 1; }
+        .faq-answer p { font-size: 14px; color: var(--text-muted); }
 
         /* TEAM */
-        .team-card {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 20px 24px;
-        }
-
+        .team-card { display: flex; align-items: center; gap: 16px; padding: 16px 20px; }
         .avatar {
-            width: 50px;
-            height: 50px;
+            width: 44px; height: 44px;
             background-color: var(--primary);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
         }
-
-        .avatar svg {
-            width: 24px;
-            height: 24px;
-            fill: white;
-        }
-
-        .team-info h4 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .team-info p {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
+        .avatar svg { width: 20px; height: 20px; fill: white; }
 
         /* CTA BOX */
         .cta-box {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 40px 24px;
+            border-radius: 20px;
+            padding: 30px 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-
-        .cta-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(92, 77, 255, 0.15) 0%, rgba(3, 3, 5, 0) 70%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
         .news-badge {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-color);
-            padding: 6px 16px 6px 6px;
+            padding: 4px 12px 4px 4px;
             border-radius: 30px;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-muted);
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             cursor: pointer;
         }
-
         .news-badge .tag {
-            background: var(--primary);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        .cta-box h2 {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            line-height: 1.2;
+            background: var(--primary); color: white;
+            padding: 4px 10px; border-radius: 20px; font-weight: 600;
         }
 
         /* FOOTER */
         .footer {
-            padding: 60px 24px 30px;
+            padding: 50px 20px 30px;
             border-top: 1px solid var(--border-color);
         }
+        .footer .logo { margin-left: 0; margin-bottom: 16px; }
+        .footer-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 30px; line-height: 1.6; }
+        .footer-nav { margin-bottom: 30px; }
+        .footer-nav h4 { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+        .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-nav a { font-size: 14px; color: var(--text-muted); }
+        .copyright { text-align: center; font-size: 13px; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 20px; }
 
-        .footer .logo {
-            margin-bottom: 20px;
-        }
-
-        .footer-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-
-        .footer-nav h4 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .footer-nav ul {
-            list-style: none;
+        /* --- MIRRORS PAGE --- */
+        .mirrors-container {
+            padding: 60px 20px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 40px;
-        }
-
-        .footer-nav a {
-            font-size: 15px;
-            color: var(--text-muted);
-            transition: color 0.2s;
-        }
-
-        .footer-nav a:hover {
-            color: white;
-        }
-
-        .copyright {
+            align-items: center;
             text-align: center;
-            font-size: 14px;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            padding-top: 24px;
+            min-height: 80vh;
         }
-
+        .mirrors-container h1 { font-size: 32px; font-weight: 800; margin-bottom: 10px; }
+        .mirrors-container p { color: var(--text-muted); margin-bottom: 30px; }
+        
+        .mirror-card {
+            background: var(--card-bg);
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+        .bot-name { font-size: 24px; font-weight: 700; color: white; margin-bottom: 6px; }
+        .bot-link { font-size: 15px; color: var(--primary); margin-bottom: 24px; word-break: break-all; }
+        
+        .btn-secondary {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.05); color: white;
+            border: 1px solid var(--border-color); border-radius: 12px;
+            padding: 14px; width: 100%; font-size: 15px; font-weight: 600;
+            margin-top: 12px; cursor: pointer; font-family: inherit;
+        }
     </style>
 </head>
 <body>
 
-    <!-- SVGs -->
+    <!-- Иконки SVG -->
     <svg style="display:none">
         <symbol id="icon-ghost" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12v10l3-3 3 3 3-3 3 3 3-3 3 3V12c0-5.52-4.48-10-10-10zm-3 9c-.83 0-1.5-.67-1.5-1.5S8.17 8 9 8s1.5.67 1.5 1.5S9.83 11 9 11zm6 0c-.83 0-1.5-.67-1.5-1.5S14.17 8 15 8s1.5.67 1.5 1.5S15.83 11 15 11z"/>
@@ -738,450 +670,237 @@
         <symbol id="icon-user" viewBox="0 0 24 24">
             <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
         </symbol>
+        <symbol id="icon-chevron" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" fill="none" stroke="currentColor"/>
+        </symbol>
     </svg>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">
-            <svg><use href="#icon-ghost"></use></svg>
-            Storm Snos
-        </div>
-        <button class="burger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </header>
-
-    <!-- Mobile Menu Overlay -->
+    <!-- МЕНЮ (ОБЩЕЕ) -->
     <div class="nav-overlay" id="mobileMenu">
         <button class="nav-close" onclick="toggleMenu()">×</button>
-        <a href="#hero" onclick="toggleMenu()">Главная</a>
-        <a href="#methods" onclick="toggleMenu()">Методы</a>
-        <a href="#video" onclick="toggleMenu()">Видеообзор</a>
-        <a href="#features" onclick="toggleMenu()">Возможности</a>
-        <a href="#stats" onclick="toggleMenu()">Статистика</a>
-        <a href="#pricing" onclick="toggleMenu()">Цены</a>
-        <a href="#addons" onclick="toggleMenu()">Доп. Пакеты</a>
-        <a href="#faq" onclick="toggleMenu()">FAQ</a>
-        <a href="#team" onclick="toggleMenu()">Команда</a>
+        <button onclick="switchPage('mainPage'); toggleMenu();">Главная</button>
+        <button onclick="switchPage('newsPage'); toggleMenu();">Новости</button>
+        <button onclick="switchPage('mirrorsPage'); toggleMenu();">Зеркала</button>
     </div>
 
-    <!-- Hero -->
-    <section class="hero" id="hero">
-        <div class="hero-glow"></div>
-        <div class="trust-badge">
-            <div class="dot-green"></div>
-            Нам доверяют тысячи пользователей
-        </div>
-        <h1>STORM SNOS</h1>
-        <h2>Следит за порядком</h2>
-        <p>Сервис помогает очистить Telegram от нарушителей через автоматизированную методы отправки.</p>
-        <button class="btn-primary">
-            Перейти к зеркалам 
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-        <button class="btn-outline">Работы Storm Snos</button>
-    </section>
-
-    <!-- Methods -->
-    <section class="section" id="methods">
-        <div class="section-label">МЕТОДЫ</div>
-        <h2 class="section-title">Методы отправки<br>"Telegram"</h2>
-        <p class="section-desc">10+ различных способов блокировки: Email, Username, Стикеры, DC запросы и другие методы. Гарантированный результат для любого нарушителя.</p>
-        
-        <div class="tabs-container">
-            <div class="tab">Метод "Стикер"</div>
-            <div class="tab active">Метод "Username"</div>
-            <div class="tab">Метод "Канал"</div>
-            <div class="tab">Метод "БОТ"</div>
-            <div class="tab">Метод "Email"</div>
-        </div>
-    </section>
-
-    <!-- Video -->
-    <section class="section" id="video">
-        <div class="section-label">ВИДЕООБЗОР</div>
-        <h2 class="section-title">Видеообзор</h2>
-        <p class="section-desc">Небольшой обзор возможностей Storm Snos и того, как выглядит работа с платформой.</p>
-        
-        <div class="card video-card">
-            <div class="play-btn">
-                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <!-- ========================================== -->
+    <!-- 1. СТРАНИЦА НОВОСТЕЙ (ОТКРЫВАЕТСЯ ПЕРВОЙ)  -->
+    <!-- ========================================== -->
+    <div id="newsPage" class="page active">
+        <header class="header-subpage">
+            <button class="back-btn" onclick="switchPage('mainPage')">
+                <svg><use href="#icon-chevron"></use></svg> Назад
+            </button>
+            <div class="logo">
+                <svg><use href="#icon-ghost"></use></svg>
+                Storm Snos
             </div>
-            <h3>Смотреть видеообзор</h3>
-            <p>Нажмите, чтобы запустить видео</p>
+        </header>
+
+        <section class="news-hero">
+            <div class="news-glow"></div>
+            <h1>Новости Storm<br>Snos</h1>
+            <p>На этой странице отображаются только те новости, которые мы публикуем через <strong>Админ-панель Storm Snos</strong>.</p>
+        </section>
+
+        <div class="info-banner">
+            <div class="dot"></div>
+            <span>Актуальные обновления проекта в формате <strong>ленты новостей</strong></span>
         </div>
-    </section>
 
-    <!-- Features -->
-    <section class="section" id="features">
-        <div class="section-label">ВОЗМОЖНОСТИ</div>
-        <h2 class="section-title">Хороший инструмент<br>для комфортной работы</h2>
-        <p class="section-desc">Storm Snos предоставляет полный арсенал методов для быстрой и эффективной отправки, которые нарушают правила Telegram.</p>
+        <div class="news-container">
+            <div class="news-card">
+                <h2>Запуск StormSnos<br>v2.0</h2>
+                <div class="news-meta">
+                    <span class="tag-admin">Администрация</span>
+                    <div class="meta-dot"></div>
+                    <span class="tag-date">2026-02-17</span>
+                </div>
+                <p>Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</p>
+            </div>
 
-        <div class="cards-grid">
-            <div class="card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div class="news-card">
+                <h2>Обновление<br>безопасности</h2>
+                <div class="news-meta">
+                    <span class="tag-admin">Администрация</span>
+                    <div class="meta-dot"></div>
+                    <span class="tag-date">2026-02-17</span>
                 </div>
-                <h3>Эффективность Работы</h3>
-                <p>Storm Snos анализирует каждый подбор на нарушителей в Telegram, обеспечивая быструю эффективность.</p>
-            </div>
-            <div class="card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                </div>
-                <h3>Множество Методов</h3>
-                <p>Используем 10+ различных методов сноса: через Email, Username, Стикеры и другие способы.</p>
-            </div>
-            <div class="card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                </div>
-                <h3>Точная Фильтрация</h3>
-                <p>Автоматическая проверка: принимаем запрос на логи только если система подтвердила реальное нарушение правил Telegram и оповещает вас</p>
+                <p>Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Stats -->
-    <section class="section" id="stats">
-        <div class="section-label">СТАТИСТИКА</div>
-        <h2 class="section-title">Наша статистика</h2>
-        <p class="section-desc">Статистика обновляется каждые 24 часа</p>
 
-        <div class="cards-grid">
-            <div class="card stat-card">
-                <div class="stat-label">Пользователей</div>
-                <div class="stat-number">113609</div>
+    <!-- ========================================== -->
+    <!-- 2. ГЛАВНАЯ СТРАНИЦА                        -->
+    <!-- ========================================== -->
+    <div id="mainPage" class="page">
+        <header class="header">
+            <div class="logo">
+                <svg><use href="#icon-ghost"></use></svg>
+                Storm Snos
             </div>
-            <div class="card stat-card">
-                <div class="stat-label">Обновлений вышло</div>
-                <div class="stat-number">50+</div>
-            </div>
-            <div class="card stat-card">
-                <div class="stat-label">Покупателей</div>
-                <div class="stat-number">3940</div>
-            </div>
-            <div class="card stat-card">
-                <div class="stat-label">Дней с открытия</div>
-                <div class="stat-number">390</div>
-            </div>
-        </div>
-    </section>
+            <button class="burger" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
 
-    <!-- Pricing -->
-    <section class="section" id="pricing">
-        <div class="section-label">ТАРИФЫ</div>
-        <h2 class="section-title">Честные цены на<br>ПОДПИСКИ</h2>
-        <p class="section-desc">Выбери подписку по длительности — от одного дня до пожизненного доступа. Никаких визуалов, только настоящая блокировка нарушителей.</p>
+        <section class="hero" id="hero">
+            <div class="trust-badge">
+                <div class="dot-green"></div> Нам доверяют тысячи пользователей
+            </div>
+            <h1>STORM SNOS</h1>
+            <h2>Следит за порядком</h2>
+            <p>Сервис помогает очистить Telegram от нарушителей через автоматизированные методы отправки.</p>
+            <button class="btn-primary" onclick="switchPage('mirrorsPage')">
+                Перейти к зеркалам 
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <button class="btn-outline">Работы Storm Snos</button>
+        </section>
 
-        <div class="cards-grid">
-            <div class="card pricing-card">
-                <div class="duration">1 день</div>
-                <div class="price-wrap">
-                    <span class="price">249 ₽</span>
-                    <span class="price-suffix">/ One-time</span>
-                </div>
-                <div class="plan-name">Базовый пакет</div>
-                <button class="btn-card">Перейти к зеркалам</button>
+        <section class="section" id="methods">
+            <div class="section-label">МЕТОДЫ</div>
+            <h2 class="section-title">Методы отправки<br>"Telegram"</h2>
+            <p class="section-desc">10+ различных способов блокировки: Email, Username, Стикеры, DC запросы и другие методы.</p>
+            <div class="tabs-container">
+                <div class="tab">Стикер</div>
+                <div class="tab active">Username</div>
+                <div class="tab">Канал</div>
+                <div class="tab">Бот</div>
+                <div class="tab">Email</div>
             </div>
-            
-            <div class="card pricing-card">
-                <div class="duration">3 дня</div>
-                <div class="price-wrap">
-                    <span class="price">499 ₽</span>
-                    <span class="price-suffix">/ One-time</span>
-                </div>
-                <div class="plan-name">Стандартный пакет</div>
-                <button class="btn-card">Перейти к зеркалам</button>
-            </div>
+        </section>
 
-            <div class="card pricing-card">
-                <div class="duration">7 дней</div>
-                <div class="price-wrap">
-                    <span class="price">699 ₽</span>
-                    <span class="price-suffix">/ One-time</span>
+        <section class="section">
+            <div class="section-label">ВОЗМОЖНОСТИ</div>
+            <h2 class="section-title">Хороший инструмент<br>для работы</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <h3>Эффективность</h3>
+                    <p>Storm Snos анализирует каждый подбор на нарушителей, обеспечивая быструю эффективность.</p>
                 </div>
-                <div class="plan-name">Расширенный пакет</div>
-                <button class="btn-card">Перейти к зеркалам</button>
             </div>
+        </section>
 
-            <div class="card pricing-card popular">
-                <div class="badge purple">Больше всего популярно</div>
-                <div class="duration">15 дней</div>
-                <div class="price-wrap">
-                    <span class="price">899 ₽</span>
-                    <span class="price-suffix">/ One-time</span>
+        <section class="section" id="pricing">
+            <div class="section-label">ТАРИФЫ</div>
+            <h2 class="section-title">Честные цены на<br>ПОДПИСКИ</h2>
+            <div class="cards-grid">
+                <div class="card pricing-card">
+                    <div class="duration">1 день</div>
+                    <div class="price-wrap"><span class="price">249 ₽</span><span class="price-suffix">/ One-time</span></div>
+                    <div class="plan-name">Базовый пакет</div>
+                    <button class="btn-card" onclick="switchPage('mirrorsPage')">Перейти к зеркалам</button>
                 </div>
-                <div class="plan-name">Профессиональный пакет</div>
-                <button class="btn-card">Перейти к зеркалам</button>
+                <div class="card pricing-card popular">
+                    <div class="badge purple">Самый популярный</div>
+                    <div class="duration">15 дней</div>
+                    <div class="price-wrap"><span class="price">899 ₽</span><span class="price-suffix">/ One-time</span></div>
+                    <div class="plan-name">Профессиональный пакет</div>
+                    <button class="btn-card" onclick="switchPage('mirrorsPage')">Перейти к зеркалам</button>
+                </div>
             </div>
+        </section>
 
-            <div class="card pricing-card">
-                <div class="duration">30 дней</div>
-                <div class="price-wrap">
-                    <span class="price">1 299 ₽</span>
-                    <span class="price-suffix">/ One-time</span>
+        <section class="section" id="team">
+            <div class="section-label">КОМАНДА</div>
+            <h2 class="section-title">Наша команда</h2>
+            <div class="cards-grid">
+                <div class="card team-card">
+                    <div class="avatar"><svg><use href="#icon-user"></use></svg></div>
+                    <div class="team-info"><h4>???</h4><p>Владелец проекта</p></div>
                 </div>
-                <div class="plan-name">Премиум пакет</div>
-                <button class="btn-card">Перейти к зеркалам</button>
+                <div class="card team-card">
+                    <div class="avatar"><svg><use href="#icon-user"></use></svg></div>
+                    <div class="team-info"><h4>леха уставший</h4><p>Совладелец проекта</p></div>
+                </div>
             </div>
+        </section>
 
-            <div class="card pricing-card best">
-                <div class="badge gold">Лучший выбор</div>
-                <div class="duration">Навсегда</div>
-                <div class="price-wrap">
-                    <span class="price">2 499 ₽</span>
-                    <span class="price-suffix">/ One-time</span>
-                </div>
-                <div class="plan-name">VIP пакет</div>
-                <button class="btn-card">Перейти к зеркалам</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Addons -->
-    <section class="section" id="addons">
-        <div class="section-label">ДОПОЛНЕНИЯ</div>
-        <h2 class="section-title">Дополнительные<br>пакеты</h2>
-        <p class="section-desc">Расширьте возможности с дополнительными опциями для более одной защиты и функциональности.</p>
-
-        <div class="cards-grid">
-            <div class="card pricing-card">
-                <div class="duration" style="font-size:15px;color:var(--text-muted)">Лайт список</div>
-                <div class="price-wrap">
-                    <span class="price">150 ₽</span>
-                    <span class="price-suffix">/ One-time</span>
-                </div>
-                <div class="plan-name" style="color:white;font-size:16px">Белый список</div>
-                <div class="addon-feature">
-                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Добавляет вас в белый список сносера</span>
-                </div>
-                <button class="btn-card">Перейти к зеркалам</button>
-            </div>
-
-            <div class="card pricing-card">
-                <div class="duration" style="font-size:15px;color:var(--text-muted)">VIP-доступ</div>
-                <div class="price-wrap">
-                    <span class="price">500 ₽</span>
-                    <span class="price-suffix">/ One-time</span>
-                </div>
-                <div class="plan-name" style="color:white;font-size:16px">Премиум доступ</div>
-                <div class="addon-feature">
-                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Расширенные возможности</span>
-                </div>
-                <button class="btn-card">Перейти к зеркалам</button>
-            </div>
-
-            <div class="card pricing-card">
-                <div class="duration" style="font-size:15px;color:var(--text-muted)">Coming Soon</div>
-                <div class="price-wrap">
-                    <span class="price">?</span>
-                    <span class="price-suffix">/ One-time</span>
-                </div>
-                <div class="plan-name" style="color:white;font-size:16px">Скоро</div>
-                <div class="addon-feature">
-                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Новое предложение в разработке</span>
-                </div>
-                <button class="btn-card" style="opacity: 0.5; pointer-events: none;">Coming Soon</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section" id="faq">
-        <div class="section-label">FAQ</div>
-        <h2 class="section-title">Часто задаваемые<br>вопросы</h2>
-        <p class="section-desc">Всё, что нужно знать о Storm Snos. Если у вас остались вопросы, свяжитесь с нами.</p>
-
-        <div class="cards-grid">
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    Как работает Storm Snos?
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="faq-answer">
-                    <p>Storm Snos Анализирует лог и подбирает лучшие решение для правил Telegram через множество методов (Email, Username, Стикеры и другие).</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    Какой процент успешных сносов?
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="faq-answer">
-                    <p>Storm Snos имеет более 1000+ успешных принятых логов. Благодаря множеству методов отправки и постоянному обновлению, вероятность успешного принятого лога превышает 80%</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    Как быстро срабатывает система?
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="faq-answer">
-                    <p>Большинство Логов Принимаются в течение 1 часа и до 3 дней. Скорость зависит от выбранного вами метода и реакции Telegram на Запрос.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    Безопасен ли сервис для пользователя?
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="faq-answer">
-                    <p>Да. Storm Snos использует безопасные методы отправки запросов и Ваш аккаунт никак не связан с этим и не рискует быть заблокированным.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team -->
-    <section class="section" id="team">
-        <div class="section-label">КОМАНДА</div>
-        <h2 class="section-title">Наша команда</h2>
-        <p class="section-desc">Список пользователей без которых бы проект никогда не состоялся и которым вы видите его сейчас</p>
-
-        <div class="cards-grid">
-            <div class="card team-card">
-                <div class="avatar"><svg><use href="#icon-user"></use></svg></div>
-                <div class="team-info">
-                    <h4>???</h4>
-                    <p>Владелец проекта</p>
-                </div>
-            </div>
-            <div class="card team-card">
-                <div class="avatar"><svg><use href="#icon-user"></use></svg></div>
-                <div class="team-info">
-                    <h4>леха уставший</h4>
-                    <p>Совладелец проекта – №2</p>
-                </div>
-            </div>
-            <div class="card team-card">
-                <div class="avatar"><svg><use href="#icon-user"></use></svg></div>
-                <div class="team-info">
-                    <h4>KRUIZ</h4>
-                    <p>Совладелец проекта – №3</p>
-                </div>
-            </div>
-            <div class="card team-card">
-                <div class="avatar"><svg><use href="#icon-user"></use></svg></div>
-                <div class="team-info">
-                    <h4>supernegr767</h4>
-                    <p>Дизайнер проекта</p>
-                </div>
-            </div>
-            <div class="card team-card">
-                <div class="avatar"><svg><use href="#icon-user"></use></svg></div>
-                <div class="team-info">
-                    <h4>мат!x | moral</h4>
-                    <p>Оператор проекта</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section">
-        <div class="cards-grid">
-            <div class="cta-box">
-                <div class="cta-glow"></div>
-                <div class="cta-content">
-                    <div class="news-badge">
-                        <span class="tag">Новости</span>
-                        Смотри актуальные новости об обновлениях 
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        <section class="section">
+            <div class="cards-grid">
+                <div class="cta-box">
+                    <div class="news-badge" onclick="switchPage('newsPage')">
+                        <span class="tag">Новости</span> Смотри актуальные обновления
                     </div>
                     <h2>Готов навести<br>порядок?</h2>
-                    <p class="section-desc" style="color:var(--text-muted);margin-bottom:24px">Storm Snos помогает избавиться от нарушителей в твоём Telegram сообществе. Автоматическая блокировка через множество методов — гарантированный результат.</p>
-                    <button class="btn-outline" style="max-width:none">
-                        Готов, перейти к зеркалам 
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:6px"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </button>
+                    <button class="btn-primary" onclick="switchPage('mirrorsPage')" style="width:100%; max-width:100%;">Готов, перейти к зеркалам</button>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="logo">
-            <svg><use href="#icon-ghost"></use></svg>
-            Storm Snos
-        </div>
-        <p class="footer-desc">Storm Snos — сервис для автоматизации работы с жалобами в Telegram. Помогает выявлять аккаунты и каналы, нарушающие правила платформы, и передавать обращения на модерацию в лучшем виде. Используется аналитика и структурированная подача жалоб. Более 1000 обращений успешно обработано.</p>
-        
-        <div class="footer-nav">
-            <h4>Навигация</h4>
-            <ul>
-                <li><a href="#hero">Главная</a></li>
-                <li><a href="#methods">Методы</a></li>
-                <li><a href="#video">Видеообзор</a></li>
-                <li><a href="#features">Возможности</a></li>
-                <li><a href="#stats">Статистика</a></li>
-                <li><a href="#pricing">Цены</a></li>
-                <li><a href="#addons">Доп. Пакеты</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#team">Команда</a></li>
-            </ul>
-        </div>
+        <footer class="footer">
+            <div class="logo"><svg><use href="#icon-ghost"></use></svg> Storm Snos</div>
+            <p class="footer-desc">Storm Snos — сервис для автоматизации работы с жалобами в Telegram. Помогает выявлять аккаунты нарушителей.</p>
+            <div class="copyright">© 2026 Storm Snos. Все права защищены.</div>
+        </footer>
+    </div>
 
-        <div class="footer-nav">
-            <h4>Документация</h4>
-            <ul>
-                <li><a href="#">Политика конфиденциальности</a></li>
-                <li><a href="#">Публичная оферта</a></li>
-            </ul>
-        </div>
 
-        <div class="copyright">
-            © 2026 Storm Snos. Все права защищены.
-        </div>
-    </footer>
+    <!-- ========================================== -->
+    <!-- 3. СТРАНИЦА ЗЕРКАЛ                         -->
+    <!-- ========================================== -->
+    <div id="mirrorsPage" class="page">
+        <header class="header-subpage">
+            <button class="back-btn" onclick="switchPage('mainPage')">
+                <svg><use href="#icon-chevron"></use></svg> Назад
+            </button>
+            <div class="logo">
+                <svg><use href="#icon-ghost"></use></svg>
+                Storm Snos
+            </div>
+        </header>
 
+        <div class="mirrors-container">
+            <h1>Зеркала бота</h1>
+            <p>Выберите доступного бота для начала работы</p>
+
+            <div class="mirror-card">
+                <div class="bot-name">@snos_storm_robot</div>
+                <div class="bot-link" id="botLink">https://t.me/snos_storm_robot</div>
+                
+                <!-- Кнопка, которая реально открывает Telegram -->
+                <a href="https://t.me/snos_storm_robot" target="_blank" style="text-decoration:none;">
+                    <button class="btn-primary" style="max-width:100%">Открыть бота</button>
+                </a>
+                
+                <button class="btn-secondary" onclick="copyBotLink()">Скопировать ссылку</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- СКРИПТЫ -->
     <script>
-        // Toggle mobile menu
+        // Функция переключения страниц
+        function switchPage(pageId) {
+            // Скрываем все страницы
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Показываем нужную
+            document.getElementById(pageId).classList.add('active');
+            // Скроллим наверх
+            window.scrollTo(0, 0);
+        }
+
+        // Мобильное меню
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('active');
-            if(menu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
         }
 
-        // Accordion for FAQ
-        function toggleFaq(btn) {
-            const currentItem = btn.parentElement;
-            const allItems = document.querySelectorAll('.faq-item');
-            
-            // If current is active, just close it
-            if(currentItem.classList.contains('active')) {
-                currentItem.classList.remove('active');
-                return;
-            }
-            
-            // Otherwise close all and open current
-            allItems.forEach(item => item.classList.remove('active'));
-            currentItem.classList.add('active');
-        }
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        // Копирование ссылки
+        function copyBotLink() {
+            const link = document.getElementById('botLink').innerText;
+            navigator.clipboard.writeText(link).then(() => {
+                alert('Ссылка скопирована!');
             });
-        });
+        }
     </script>
 </body>
 </html>
