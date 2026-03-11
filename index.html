@@ -3,324 +3,475 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Storm Snos — Новости</title>
+    <title>Storm Snos - Clone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        :root {
+            --bg-color: #030005;
+            --card-bg: rgba(15, 12, 25, 0.6);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-muted: #8b8994;
+            --accent-blue: #3b42f5;
+            --accent-purple: #4a28a0;
+            --accent-light: #5f65f7;
+        }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a0a14;
-            color: #ffffff;
-            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             overflow-x: hidden;
         }
 
-        .header {
+        /* Top Gradient */
+        .top-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 600px;
+            background: radial-gradient(ellipse at top center, rgba(59, 66, 245, 0.3) 0%, var(--bg-color) 70%);
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 16px 20px;
-            background-color: #0a0a14;
+            padding: 20px;
             position: sticky;
             top: 0;
             z-index: 100;
+            background: rgba(3, 0, 5, 0.8);
+            backdrop-filter: blur(10px);
         }
 
-        .back-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        .back-btn svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .header-logo {
+        .logo-container {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-left: 16px;
-        }
-
-        .ghost-icon {
-            width: 40px;
-            height: 40px;
-        }
-
-        .header-title {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
-            letter-spacing: -0.5px;
         }
 
-        .header-line {
-            height: 2px;
-            background: linear-gradient(90deg, #1a1a3e, #4a3aff, #7b5aff, #4a3aff, #1a1a3e);
+        .menu-btn {
+            font-size: 24px;
+            color: var(--text-main);
+            cursor: pointer;
         }
 
+        /* Main Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
         .hero {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             text-align: center;
-            padding: 60px 20px 50px;
-            overflow: hidden;
-            min-height: 380px;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(ellipse at center, rgba(80, 50, 220, 0.6) 0%, rgba(40, 20, 140, 0.4) 40%, rgba(10, 10, 20, 0) 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .hero-circle {
-            position: absolute;
-            top: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            border: 1px solid rgba(100, 80, 220, 0.3);
-            pointer-events: none;
-            z-index: 0;
+            padding: 40px 0;
         }
 
         .hero h1 {
-            position: relative;
-            z-index: 1;
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 900;
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .hero p {
-            position: relative;
-            z-index: 1;
-            font-size: 17px;
-            line-height: 1.6;
-            color: #a0a0c0;
-            max-width: 500px;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 30px;
         }
 
-        .hero p a {
-            color: #ffffff;
-            text-decoration: none;
+        .highlight {
+            color: var(--accent-light);
         }
 
-        .info-banner {
-            margin: 0 16px 30px;
-            padding: 16px 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(60, 100, 255, 0.4);
-            background: linear-gradient(135deg, rgba(20, 30, 80, 0.5), rgba(10, 15, 40, 0.5));
+        /* Ticker / Marquee */
+        .ticker-wrap {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 10px 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 15px;
-            color: #c0c0e0;
             overflow: hidden;
+            margin-bottom: 40px;
+            font-size: 12px;
         }
 
-        .info-banner .dot {
-            width: 10px;
-            height: 10px;
-            min-width: 10px;
+        .ticker-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-light);
             border-radius: 50%;
-            background-color: #3b82f6;
+            margin-right: 10px;
             flex-shrink: 0;
+            box-shadow: 0 0 10px var(--accent-light);
         }
 
-        .info-banner strong {
-            color: #ffffff;
-            font-weight: 700;
+        .ticker-move {
+            white-space: nowrap;
+            animation: ticker 10s linear infinite;
+            color: var(--text-muted);
         }
 
-        .news-container {
-            padding: 0 16px 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
 
-        .news-card {
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 16px;
-            border: 1px solid rgba(80, 60, 180, 0.3);
-            background: linear-gradient(145deg, rgba(20, 18, 50, 0.8), rgba(12, 12, 30, 0.9));
-            padding: 30px 24px;
-            transition: border-color 0.3s ease;
+            padding: 20px;
+            margin-bottom: 15px;
         }
 
-        .news-card:hover {
-            border-color: rgba(100, 80, 220, 0.5);
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
         }
 
-        .news-card h2 {
-            font-size: 30px;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 16px;
-        }
-
-        .news-meta {
+        .tags {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
         .tag {
-            padding: 6px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            border: 1px solid rgba(100, 100, 180, 0.4);
-            background: rgba(40, 40, 80, 0.4);
-            color: #c0c0e8;
+            font-size: 12px;
+            color: var(--text-muted);
+            border: 1px solid var(--card-border);
         }
 
-        .meta-dot {
-            width: 5px;
-            height: 5px;
+        .tag.blue {
+            background: rgba(59, 66, 245, 0.1);
+            color: var(--accent-light);
+            border-color: rgba(59, 66, 245, 0.3);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Section Titles */
+        .section-header {
+            text-align: center;
+            margin: 60px 0 30px;
+        }
+
+        .section-subtitle {
+            color: var(--accent-light);
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .section-title.big {
+            font-size: 34px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Horizontal Scroll (Methods) */
+        .scroll-wrapper {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .scroll-wrapper::-webkit-scrollbar {
+            display: none; /* Chrome */
+        }
+
+        .scroll-item {
+            flex: 0 0 auto;
+            font-size: 18px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .scroll-item.active {
+            color: var(--text-main);
+        }
+
+        /* Video Box */
+        .video-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-blue);
             border-radius: 50%;
-            background-color: #606080;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            font-size: 20px;
+            box-shadow: 0 0 20px rgba(59, 66, 245, 0.5);
         }
 
-        .date-tag {
-            padding: 6px 16px;
-            border-radius: 20px;
+        .video-box h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .video-box p {
+            color: var(--text-muted);
             font-size: 14px;
-            font-weight: 500;
-            font-family: 'Courier New', monospace;
-            border: 1px solid rgba(100, 100, 180, 0.3);
-            background: rgba(30, 30, 60, 0.4);
-            color: #9090b0;
         }
 
-        .news-card p {
-            font-size: 16px;
-            line-height: 1.7;
-            color: #a0a0c0;
+        /* Features Grid */
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--accent-light);
+            font-size: 18px;
         }
 
-        ::-webkit-scrollbar {
-            width: 6px;
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
 
-        ::-webkit-scrollbar-track {
-            background: #0a0a14;
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: #2a2a50;
-            border-radius: 3px;
+        .stat-card span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 10px;
         }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 34px;
-            }
-
-            .hero p {
-                font-size: 15px;
-            }
-
-            .news-card h2 {
-                font-size: 26px;
-            }
-
-            .hero-bg {
-                width: 400px;
-                height: 400px;
-            }
-
-            .hero-circle {
-                width: 350px;
-                height: 350px;
-            }
+        .stat-card h2 {
+            font-size: 28px;
+            font-weight: 900;
         }
+
+        /* Padding for bottom */
+        .pb-100 { padding-bottom: 100px; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <button class="back-btn" onclick="history.back()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-            Назад
-        </button>
-        <div class="header-logo">
-            <svg class="ghost-icon" viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5C28 5 15 25 15 45v40c0 3 2 5 5 5s5-3 5-5v-5c0-3 2-5 5-5s5 2 5 5v5c0 3 2 5 5 5s5-3 5-5v-5c0-3 2-5 5-5s5 2 5 5v5c0 3 2 5 5 5s5-3 5-5v-5c0-3 2-5 5-5s5 2 5 5v5c0 3 2 5 5 5s5-2 5-5V45C85 25 72 5 50 5z"/>
-                <rect x="32" y="35" width="12" height="14" rx="3" fill="#0a0a14"/>
-                <rect x="56" y="35" width="12" height="14" rx="3" fill="#0a0a14"/>
-                <rect x="40" y="55" width="20" height="6" rx="3" fill="#0a0a14"/>
-            </svg>
-            <span class="header-title">Storm Snos</span>
+    <div class="top-gradient"></div>
+
+    <header>
+        <div class="logo-container">
+            <i class="fa-solid fa-ghost"></i>
+            <span>Storm Snos</span>
         </div>
-    </div>
+        <div class="menu-btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
 
-    <div class="header-line"></div>
-
-    <div class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-circle"></div>
-        <h1>Новости Storm Snos</h1>
-        <p>На этой странице отображаются только те новости, которые мы публикуем через <a href="#">Админ-панель Storm Snos</a>.</p>
-    </div>
-
-    <div class="info-banner">
-        <span class="dot"></span>
-        <span>Актуальные обновления проекта в формате <strong>ленты новостей</strong></span>
-    </div>
-
-    <div class="news-container">
-
-        <div class="news-card">
-            <h2>Запуск StormSnos v2.0</h2>
-            <div class="news-meta">
-                <span class="tag">Администрация</span>
-                <span class="meta-dot"></span>
-                <span class="date-tag">2026-02-17</span>
+    <div class="container pb-100">
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Новости Storm Snos</h1>
+            <p>На этой странице отображаются только те новости, которые <span class="highlight">мы публикуем</span> через Админ-панель Storm Snos.</p>
+            
+            <div class="ticker-wrap">
+                <div class="ticker-dot"></div>
+                <div class="ticker-move">Актуальные обновления проекта в формате ленты новостей...</div>
             </div>
-            <p>Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</p>
+        </section>
+
+        <!-- News Cards -->
+        <section class="news">
+            <div class="card">
+                <h3>Запуск StormSnos v2.0</h3>
+                <div class="tags">
+                    <div class="tag blue">Администрация</div>
+                    <div class="tag">2026-02-17</div>
+                </div>
+                <p>Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</p>
+            </div>
+
+            <div class="card">
+                <h3>Обновление безопасности</h3>
+                <div class="tags">
+                    <div class="tag blue">Администрация</div>
+                    <div class="tag">2026-02-17</div>
+                </div>
+                <p>Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section-header">
+            <div class="tag" style="display:inline-block; margin-bottom: 15px; border:none; background: rgba(255,255,255,0.05);">
+                <span class="ticker-dot" style="display:inline-block; width:6px; height:6px;"></span> Нам доверяют тысячи пользователей
+            </div>
+            <h2 class="section-title big">STORM SNOS<br><span class="highlight">Следит за порядком</span></h2>
+            <p class="section-desc">Сервис помогает очистить Telegram от нарушителей через автоматизированную методы отправки.</p>
+            
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Перейти к зеркалам <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#" class="btn btn-secondary">Работы Storm Snos</a>
+            </div>
+        </section>
+
+        <!-- Methods Section -->
+        <section class="section-header">
+            <div class="section-subtitle">МЕТОДЫ</div>
+            <h2 class="section-title">Методы отправки<br>"Telegram"</h2>
+            <p class="section-desc">10+ различных способов блокировки: Email, Username, Стикеры, DC запросы и другие методы. Гарантированный результат для любого нарушителя.</p>
+        </section>
+
+        <div class="scroll-wrapper">
+            <div class="scroll-item active">Метод "Email"</div>
+            <div class="scroll-item">Метод "Стикер"</div>
+            <div class="scroll-item">Метод "Username"</div>
+            <div class="scroll-item">АТК Запросы</div>
         </div>
 
-        <div class="news-card">
-            <h2>Обновление безопасности</h2>
-            <div class="news-meta">
-                <span class="tag">Администрация</span>
-                <span class="meta-dot"></span>
-                <span class="date-tag">2026-02-17</span>
+        <!-- Video Section -->
+        <section class="section-header">
+            <div class="section-subtitle">ВИДЕООБЗОР</div>
+            <h2 class="section-title">Видеообзор</h2>
+            <p class="section-desc">Небольшой обзор возможностей Storm Snos и того, как выглядит работа с платформой.</p>
+        </section>
+
+        <div class="video-box">
+            <div class="play-btn">
+                <i class="fa-solid fa-play" style="color: white; margin-left: 5px;"></i>
             </div>
-            <p>Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</p>
+            <h4>Смотреть видеообзор</h4>
+            <p>Нажмите, чтобы запустить видео</p>
+        </div>
+
+        <!-- Features Section -->
+        <section class="section-header">
+            <div class="section-subtitle">ВОЗМОЖНОСТИ</div>
+            <h2 class="section-title">Хороший инструмент для комфортной работы</h2>
+            <p class="section-desc">Storm Snos предоставляет полный арсенал методов для быстрой и эффективной отправки, которые нарушают правила Telegram.</p>
+        </section>
+
+        <div class="card">
+            <div class="feature-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3>Эффективность Работы</h3>
+            <p>Storm Snos анализирует каждый подбор на нарушителей в Telegram, обеспечивая быструю эффективность.</p>
+        </div>
+
+        <div class="card">
+            <div class="feature-icon">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3>Множество Методов</h3>
+            <p>Используем 10+ различных методов сноса: через Email, Username, Стикеры и другие способы.</p>
+        </div>
+
+        <!-- Statistics Section -->
+        <section class="section-header">
+            <div class="section-subtitle">СТАТИСТИКА</div>
+            <h2 class="section-title">Наша статистика</h2>
+        </section>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span>Пользователей</span>
+                <h2>113609</h2>
+            </div>
+            <div class="stat-card">
+                <span>Обновлений вышло</span>
+                <h2>50+</h2>
+            </div>
         </div>
 
     </div>
