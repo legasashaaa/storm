@@ -2,590 +2,321 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Storm Snos · интерфейс</title>
-    <!-- Font Awesome 6 (free) for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storm Snos — новости</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background: #0b0d10;
+            background-color: #e9eef3;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 12px;
+            padding: 24px 16px;
         }
 
-        /* основной экран — мобильный каркас как на скринах (темная тема) */
+        /* карточка-контейнер, имитирующая мобильный/планшетный вид */
         .phone-frame {
-            max-width: 390px;
+            max-width: 420px;
             width: 100%;
-            background: #101215;
+            background-color: #ffffff;
             border-radius: 32px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 1px rgba(75, 75, 90, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             overflow: hidden;
-            padding-bottom: 16px;
-            margin-bottom: 20px;
-            border: 1px solid #26282e;
+            padding: 20px 20px 32px 20px;
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
-        /* экраны (два варианта: главная и внутренний вид с кнопкой "Назад") */
-        .screen {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* status bar / header (время 18:46 встречается) */
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 18px 6px;
-            color: #e9e9ef;
-            font-size: 14px;
-            font-weight: 500;
-            background: #101215;
-            border-bottom: 1px solid #23252b;
-        }
-
-        .time {
-            font-weight: 600;
-        }
-
-        .status-icons i {
-            margin-left: 6px;
-            color: #a1a5b0;
-            font-size: 12px;
-        }
-
-        /* кнопка назад + лого (вид как на скринах IMG_5651,5652) */
-        .nav-header {
+        /* верхняя панель с навигацией (Назад + Storm Snos) */
+        .nav-bar {
             display: flex;
             align-items: center;
-            padding: 8px 16px;
             gap: 12px;
-            border-bottom: 1px solid #23252b;
-            background: #101215;
-        }
-
-        .back-btn {
-            background: #1f2128;
-            border: 1px solid #33363f;
-            border-radius: 40px;
-            padding: 6px 14px;
-            font-size: 15px;
+            margin-bottom: 24px;
             font-weight: 500;
-            color: #bcbfca;
-            display: inline-flex;
+        }
+
+        .back-link {
+            display: flex;
             align-items: center;
-            gap: 8px;
-            cursor: default;
+            justify-content: center;
+            color: #1f2a3a;
+            font-size: 16px;
+            text-decoration: none;
+            background-color: #f1f4f8;
+            padding: 6px 14px 6px 10px;
+            border-radius: 30px;
+            transition: background-color 0.2s;
+            border: 1px solid #dee4ed;
+            line-height: 1.2;
         }
 
-        .back-btn i {
-            font-size: 12px;
-            color: #9599a6;
+        .back-link:hover {
+            background-color: #e2e8f0;
         }
 
-        .storm-logo-header {
-            font-weight: 700;
+        .back-arrow {
             font-size: 20px;
-            letter-spacing: -0.5px;
-            color: white;
-            background: linear-gradient(130deg, #ffffff, #c0c4d0);
+            margin-right: 4px;
+            line-height: 1;
+        }
+
+        .project-name {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            color: #0b1a2b;
+            background: linear-gradient(135deg, #0f2027, #2c5364);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        /* контент */
-        .content {
-            padding: 20px 18px;
+        /* основной заголовок страницы */
+        .page-title {
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 6px;
+            color: #0a1c2f;
+            letter-spacing: -0.3px;
         }
 
-        .section-title {
+        .page-subhint {
+            font-size: 14px;
+            color: #566b82;
+            margin-bottom: 24px;
+            border-left: 4px solid #b7c9dd;
+            padding-left: 16px;
+            background-color: #f7f9fc;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-weight: 450;
+        }
+
+        /* маркированный список (фишка из скриншотов) */
+        .feature-bullet {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+        .feature-bullet li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            color: #1f2e44;
+            background-color: #f2f6fb;
+            padding: 12px 18px;
+            border-radius: 100px;
+            border: 1px solid #dae2ed;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .feature-bullet li::before {
+            content: "•";
+            font-weight: 900;
+            font-size: 24px;
+            color: #1e4f7a;
+            line-height: 1;
+        }
+
+        /* блок новости (карточка) */
+        .news-card {
+            background-color: #ffffff;
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e3eaf2;
+            box-shadow: 0 8px 18px -8px rgba(0, 35, 60, 0.1);
+            transition: transform 0.15s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-2px);
+            border-color: #bdd1e8;
+        }
+
+        .news-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .news-title {
             font-size: 22px;
             font-weight: 700;
-            color: white;
-            margin-bottom: 10px;
-        }
-
-        .section-sub {
-            font-size: 14px;
-            color: #8f94a2;
-            margin-bottom: 24px;
-            line-height: 1.4;
-        }
-
-        .badge {
-            background: #1e2128;
-            color: #b1b6c4;
-            font-size: 13px;
-            padding: 4px 12px;
-            border-radius: 50px;
-            display: inline-block;
-            border: 1px solid #2f323b;
-        }
-
-        .news-card {
-            background: #171a21;
-            border-radius: 20px;
-            padding: 18px;
-            border: 1px solid #2b2e36;
-            margin-bottom: 16px;
+            color: #0b1f33;
+            letter-spacing: -0.2px;
         }
 
         .news-meta {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: #7f8595;
-            font-size: 13px;
-            margin-bottom: 8px;
-        }
-
-        .news-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 6px;
-        }
-
-        .news-desc {
-            color: #b0b6c4;
-            font-size: 15px;
-            line-height: 1.4;
-        }
-
-        /* статистика цифры */
-        .stats-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-            background: #15181f;
-            border-radius: 26px;
-            padding: 24px 18px;
-            border: 1px solid #2b2f38;
-            margin: 24px 0;
-        }
-
-        .stat-item {
-            flex: 1 0 40%;
-        }
-
-        .stat-value {
-            font-size: 28px;
-            font-weight: 800;
-            color: white;
-            line-height: 1.2;
-        }
-
-        .stat-label {
-            color: #9ba1b0;
-            font-size: 14px;
-        }
-
-        /* карточки тарифов */
-        .tariff-grid {
-            display: flex;
-            flex-direction: column;
             gap: 12px;
-            margin: 18px 0;
-        }
-
-        .tariff-card {
-            background: #15181f;
-            border-radius: 26px;
-            padding: 18px;
-            border: 1px solid #2f333e;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .tariff-left {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .tariff-name {
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-        }
-
-        .tariff-price {
-            font-size: 22px;
-            font-weight: 800;
-            color: #cad0ff;
-            margin-top: 4px;
-        }
-
-        .tariff-price small {
+            color: #5d7189;
             font-size: 14px;
+            background-color: #f0f4fa;
+            padding: 5px 14px;
+            border-radius: 50px;
+        }
+
+        .author {
+            font-weight: 600;
+            color: #1d3a5c;
+        }
+
+        .date {
             font-weight: 400;
-            color: #83899b;
         }
 
-        .tariff-desc {
-            font-size: 13px;
-            color: #9197a8;
+        .news-content {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #1e2f40;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #cbd6e4;
         }
 
-        .mirror-btn {
-            background: #2f3441;
-            border: none;
+        /* жирный акцент внутри текста, как в первом снипете (полностью обновлённую…) */
+        .news-content strong {
+            color: #0b4770;
+            font-weight: 650;
+        }
+
+        /* дополнительный штрих: второй блок безопасности — можно оставить как есть */
+        .security-badge {
+            background-color: #e3f0fd;
             border-radius: 40px;
-            padding: 8px 18px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #d6dbf0;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            border: 1px solid #484e5e;
-            cursor: default;
-        }
-
-        /* FAQ */
-        .faq-block {
-            background: #15181f;
-            border-radius: 18px;
-            padding: 6px 0;
-            border: 1px solid #2b2f38;
-            margin: 16px 0;
-        }
-
-        .faq-question {
-            padding: 18px 18px;
-            border-bottom: 1px solid #282c35;
-            font-weight: 600;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            cursor: default;
-        }
-
-        .faq-question:last-child {
-            border-bottom: none;
-        }
-
-        .faq-answer {
-            padding: 0 18px 18px 18px;
-            color: #b8bfd0;
-            font-size: 14px;
-            line-height: 1.45;
-            border-bottom: 1px solid #282c35;
-        }
-
-        .team-row {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            background: #14171e;
-            border-radius: 28px;
-            padding: 22px;
-            border: 1px solid #2d313b;
-        }
-
-        .member {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .member-avatar {
-            width: 44px;
-            height: 44px;
-            background: #262b36;
-            border-radius: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #8d94a8;
-            font-weight: 700;
-            border: 1px solid #3d4353;
-        }
-
-        .member-name {
-            font-weight: 600;
-            color: white;
-        }
-
-        .member-role {
+            padding: 6px 16px;
             font-size: 13px;
-            color: #9198ab;
+            font-weight: 500;
+            color: #075a8b;
+            display: inline-block;
+            margin-top: 10px;
         }
 
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
+        /* версия 2.0 на скриншотах была отдельно — используем в первом заголовке */
+        .version-tag {
+            background-color: #052d49;
+            color: white;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-left: 12px;
+            letter-spacing: 0.3px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* футер / маленькая имитация админ-панели (необязательно, для настроения) */
+        .admin-note {
             margin-top: 28px;
-            padding: 16px 18px;
-            border-top: 1px solid #262a32;
-            color: #7a8092;
-            font-size: 13px;
-        }
-
-        .footer-links span {
-            margin-right: 16px;
-        }
-
-        /* доп пакеты */
-        .addon-card {
-            background: #171a22;
-            border-radius: 24px;
-            padding: 18px;
-            border: 1px solid #343a45;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .method-tags {
-            display: flex;
-            gap: 10px;
-            margin: 12px 0;
-        }
-
-        .method-tag {
-            background: #1f232c;
-            border-radius: 30px;
-            padding: 8px 18px;
-            color: #ccd2e3;
-            border: 1px solid #3b404d;
-            font-size: 14px;
-        }
-
-        .video-placeholder {
-            background: #1b1f29;
-            border-radius: 26px;
-            padding: 40px 20px;
             text-align: center;
-            border: 1px solid #3e4352;
-            margin: 20px 0;
-            color: #a7aec5;
-        }
-
-        hr {
-            border: 0.5px solid #2a2e38;
-            margin: 20px 0;
-        }
-
-        .mirror-big-btn {
-            background: #262c3a;
-            border-radius: 60px;
-            padding: 16px 24px;
-            font-size: 18px;
-            font-weight: 600;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #495067;
-            margin: 24px 0;
-        }
-
-        /* кнопка "назад" переход как на скрине 5651: первый экран с новостями */
-        .main-news-header {
-            background: #101215;
-            padding: 16px 18px 0 18px;
-        }
-        .main-news-header .small-note {
-            color: #7e8497;
             font-size: 13px;
-            margin: 4px 0 16px;
+            color: #7089a8;
+            border-top: 1px solid #cfddee;
+            padding-top: 18px;
+        }
+        .admin-note span {
+            background-color: #e2ecf9;
+            padding: 5px 14px;
+            border-radius: 30px;
         }
 
-        .dot-sep {
-            width: 4px; height: 4px; background: #5a6072; border-radius: 50%; display: inline-block; margin: 0 6px;
-        }
-
-        .text-gradient {
-            background: linear-gradient(135deg, #fff, #b3bbd1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* полностью соответствие скринам: Запуск StormSnos v2.0 должен быть как на картинке */
+        .v2-special .news-title {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
         }
     </style>
 </head>
 <body>
-    <!-- первый экран: подражаем скрину 5651/5652 (главная новости + "Назад") -->
     <div class="phone-frame">
-        <!-- статус бар с временем 18:46 как на некоторых скринах -->
-        <div class="status-bar">
-            <span class="time">18:46</span>
-            <span class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></span>
-        </div>
-        <!-- шапка с кнопкой назад и Storm Snos (как на скрине 5651) -->
-        <div class="nav-header">
-            <div class="back-btn"><i class="fas fa-chevron-left"></i> Назад</div>
-            <div class="storm-logo-header">Storm Snos</div>
+        <!-- шапка: Назад / Storm Snos (как на первом скрине) -->
+        <div class="nav-bar">
+            <a href="#" class="back-link" onclick="return false;">
+                <span class="back-arrow">←</span> Назад
+            </a>
+            <span class="project-name">Storm Snos</span>
         </div>
 
-        <!-- содержание: новости, лента -->
-        <div class="content">
-            <h1 class="section-title" style="font-size: 26px;">Новости Storm Snos</h1>
-            <div class="section-sub">На этой странице отображаются только те новости, которые мы публикуем через Админ-панель Storm Snos.</div>
-            <div class="badge" style="margin-bottom: 24px;"><i class="far fa-newspaper"></i> Актуальные обновления в формате ленты</div>
+        <!-- основной заголовок "Новости Storm Snos" -->
+        <h1 class="page-title">Новости Storm Snos</h1>
+        
+        <!-- пояснительный текст (оди-в-один из скриншотов) -->
+        <div class="page-subhint">
+            На этой странице отображаются только те новости, которые мы публикуем через Админ-панель Storm Snos.
+        </div>
 
-            <!-- новостной пост: Запуск StormSnos v2.0 (IMG_5651-5653) -->
-            <div class="news-card">
-                <div class="news-meta"><i class="far fa-user-circle"></i> Администрация <span class="dot-sep"></span> 2026-02-17</div>
-                <div class="news-title">Запуск StormSnos v2.0</div>
-                <div class="news-desc">Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</div>
+        <!-- пункт "Актуальные обновления проекта в формате ленты новостей" как буллит (скриншоты это явно показывают) -->
+        <ul class="feature-bullet">
+            <li>Актуальные обновления проекта в формате ленты новостей</li>
+        </ul>
+
+        <!-- новость 1: Запуск StormSnos v2.0 (полностью соответствует скринам: Заголовок + дата) -->
+        <div class="news-card v2-special">
+            <div class="news-header">
+                <div class="news-title">
+                    Запуск StormSnos v2.0
+                    <span class="version-tag">v2.0</span>
+                </div>
+                <div class="news-meta">
+                    <span class="author">Администрация</span>
+                    <span class="date">2026-02-17</span>
+                </div>
             </div>
+            <div class="news-content">
+                <strong>Мы рады представить полностью обновлённую версию StormSnos!</strong> Новый дизайн, улучшенная производительность и множество новых функций.
+            </div>
+        </div>
 
-            <!-- пост обновление безопасности -->
-            <div class="news-card">
-                <div class="news-meta"><i class="far fa-user-circle"></i> Администрация <span class="dot-sep"></span> 2026-02-17</div>
+        <!-- новость 2: Обновление безопасности (как на третьем скриншоте) -->
+        <div class="news-card">
+            <div class="news-header">
                 <div class="news-title">Обновление безопасности</div>
-                <div class="news-desc">Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</div>
-            </div>
-
-            <!-- блок "Нам доверяют тысячи пользователей" (IMG_5656) -->
-            <div style="background: linear-gradient(145deg, #12161e, #0e1118); border-radius: 28px; padding: 24px; margin: 26px 0; border: 1px solid #2d313a;">
-                <div style="color: #959db9; font-size: 14px; letter-spacing: 0.5px;">STORM SNOS • СЛЕДИТ ЗА ПОРЯДКОМ</div>
-                <div style="font-size: 30px; font-weight: 800; color: white; margin: 8px 0 6px;">Нам доверяют тысячи</div>
-                <div style="color: #bcc2d4;">Сервис помогает очистить Telegram от нарушителей через автоматизированные методы отправки.</div>
-                <div style="display: flex; gap: 14px; margin-top: 22px;">
-                    <span class="mirror-btn">Перейти к зеркалам <i class="fas fa-arrow-right"></i></span>
-                    <span class="mirror-btn">Работы Storm Snos</span>
+                <div class="news-meta">
+                    <span class="author">Администрация</span>
+                    <span class="date">2026-02-17</span>
                 </div>
             </div>
-
-            <!-- Методы (скрин 5658) -->
-            <h2 class="section-title">Методы отправки «Telegram»</h2>
-            <div class="section-sub">10+ различных способов блокировки: Email, Username, Стикеры, DC запросы. Гарантированный результат.</div>
-            <div class="method-tags">
-                <span class="method-tag">Метод «Группа»</span>
-                <span class="method-tag">Метод «Канал»</span>
-                <span class="method-tag">Метод «БС»</span>
+            <div class="news-content">
+                Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.
+                <!-- дополнительный индикатор безопасности (стилизация) -->
+                <div class="security-badge">🔒 шифрование данных</div>
             </div>
+        </div>
 
-            <!-- видеообзор (5659, 5660) -->
-            <div class="video-placeholder">
-                <i class="fas fa-play-circle" style="font-size: 48px; color: #627eea; margin-bottom: 12px;"></i>
-                <div style="font-weight: 600; font-size: 20px;">Видеообзор</div>
-                <div style="color: #9fa7bb; margin-top: 6px;">Небольшой обзор возможностей Storm Snos</div>
-                <div class="mirror-btn" style="margin-top: 18px; justify-content: center;">Смотреть видеообзор</div>
-            </div>
+        <!-- добавим ещё небольшую заметку о том, что новости только из админ-панели, для полноты (текст из скрина) -->
+        <div style="background: #f6faff; border-radius: 20px; padding: 12px 16px; margin: 24px 0 8px; font-size: 14px; border: 1px dashed #b3c9e2; color: #1d3a66;">
+            ⚡ Новости публикуются через Админ-панель Storm Snos.
+        </div>
 
-            <!-- хороший инструмент -->
-            <h2 class="section-title">Хороший инструмент для комфортной работы</h2>
-            <div class="section-sub">Storm Snos предоставляет полный арсенал методов для быстрой и эффективной отправки, которые нарушают правила Telegram.</div>
+        <!-- блок "Администрация • дата" иногда повторяется, в скринах это есть -->
+        <div style="display: flex; gap: 12px; font-size: 15px; color: #4d627a; justify-content: flex-end; margin-top: 10px;">
+            <span style="background: #edf2f9; padding: 6px 16px; border-radius: 40px;">Администрация</span>
+            <span style="background: #edf2f9; padding: 6px 16px; border-radius: 40px;">2026-02-17</span>
+        </div>
 
-            <!-- статистика (IMG_5663) -->
-            <div class="stats-row">
-                <div class="stat-item"><span class="stat-value">113609</span> <span class="stat-label">Пользователей</span></div>
-                <div class="stat-item"><span class="stat-value">50+</span> <span class="stat-label">Обновлений</span></div>
-                <div class="stat-item"><span class="stat-value">3940</span> <span class="stat-label">Покупателей</span></div>
-                <div class="stat-item"><span class="stat-value">390</span> <span class="stat-label">Дней с открытия</span></div>
-            </div>
-
-            <!-- тарифы -->
-            <h2 class="section-title">Честные цены на подписки</h2>
-            <div class="section-sub">Выбери подписку по длительности — от одного дня до пожизненного доступа. Никаких визуалов.</div>
-
-            <div class="tariff-grid">
-                <div class="tariff-card">
-                    <div><span class="tariff-name">1 день</span><div class="tariff-price">249 ₽ <small>/ раз</small></div><div class="tariff-desc">Базовый пакет</div></div>
-                    <span class="mirror-btn">К зеркалам</span>
-                </div>
-                <div class="tariff-card">
-                    <div><span class="tariff-name">3 дня</span><div class="tariff-price">499 ₽ <small>/ раз</small></div><div class="tariff-desc">Стандартный</div></div>
-                    <span class="mirror-btn">К зеркалам</span>
-                </div>
-                <div class="tariff-card" style="border: 2px solid #5d6f9b;">
-                    <div><span class="tariff-name">7 дней</span><div class="tariff-price">699 ₽ <small>/ раз</small></div><div class="tariff-desc">Расширенный</div></div>
-                    <span class="mirror-btn">Популярно</span>
-                </div>
-                <div class="tariff-card">
-                    <div><span class="tariff-name">15 дней</span><div class="tariff-price">899 ₽ <small>/ раз</small></div><div class="tariff-desc">Профессиональный</div></div>
-                    <span class="mirror-btn">К зеркалам</span>
-                </div>
-                <div class="tariff-card" style="background: #1a1f2c;">
-                    <div><span class="tariff-name">Навсегда</span><div class="tariff-price">2 499 ₽ <small>/ раз</small></div><div class="tariff-desc">VIP пакет · лучший выбор</div></div>
-                    <span class="mirror-btn">К зеркалам</span>
-                </div>
-            </div>
-
-            <!-- доп. пакеты (лайт/белый список) -->
-            <h2 class="section-title">Дополнительные пакеты</h2>
-            <div class="addon-card">
-                <div><span style="font-weight: 700; color: white;">Лайт список</span><br><span class="tariff-price" style="font-size: 18px;">150 ₽</span> <span class="tariff-desc">/ раз</span></div>
-                <div><span class="badge" style="background: #293040;"><i class="fas fa-check"></i> Белый список</span></div>
-                <span class="mirror-btn">К зеркалам</span>
-            </div>
-            <div class="addon-card">
-                <div><span style="font-weight: 700; color: white;">vir-досуги / Премиум</span><br><span class="tariff-price" style="font-size: 18px;">500 ₽</span> <span class="tariff-desc">/ раз</span></div>
-                <div><span class="badge">Расширенные возможности</span></div>
-                <span class="mirror-btn">К зеркалам</span>
-            </div>
-            <div class="addon-card" style="opacity: 0.8;">
-                <div><span style="font-weight: 700; color: white;">Coming Soon</span><br><span class="tariff-price">?</span> <span class="tariff-desc">/ раз</span></div>
-                <div><span class="badge">Скоро</span></div>
-                <span class="mirror-btn">Coming Soon</span>
-            </div>
-
-            <!-- FAQ -->
-            <h2 class="section-title">FAQ / Часто задаваемые</h2>
-            <div class="faq-block">
-                <div class="faq-question">Как работает Storm Snos? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Storm Snos анализирует логи и подбирает лучшее решение для правил Telegram через множество методов (Email, Username, Стикеры).</div>
-
-                <div class="faq-question">Какой процент успешных сносов? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Storm Snos имеет более 1000+ успешных принятых логов. Благодаря множеству методов, вероятность превышает 80%.</div>
-
-                <div class="faq-question">Как быстро срабатывает система? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Большинство логов принимаются в течение 1 часа и до 3 дней. Скорость зависит от метода и реакции Telegram.</div>
-
-                <div class="faq-question">Безопасен ли сервис для пользователя? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Да. Storm Snos использует безопасные методы отправки запросов, Ваш аккаунт не рискует быть заблокированным.</div>
-            </div>
-
-            <!-- команда -->
-            <h2 class="section-title">Наша команда</h2>
-            <div class="team-row">
-                <div class="member"><span class="member-avatar"><i class="fas fa-user"></i></span> <div><div class="member-name">???</div><div class="member-role">Владелец проекта</div></div></div>
-                <div class="member"><span class="member-avatar"><i class="fas fa-user"></i></span> <div><div class="member-name">lexa уставший</div><div class="member-role">Совладелец №2</div></div></div>
-                <div class="member"><span class="member-avatar"><i class="fas fa-user"></i></span> <div><div class="member-name">KRUIZ</div><div class="member-role">Совладелец №3</div></div></div>
-                <div class="member"><span class="member-avatar"><i class="fas fa-user"></i></span> <div><div class="member-name">supernegr767</div><div class="member-role">Дизайнер</div></div></div>
-                <div class="member"><span class="member-avatar"><i class="fas fa-user"></i></span> <div><div class="member-name">mat!x | moral</div><div class="member-role">Оператор</div></div></div>
-            </div>
-
-            <!-- призыв к действию и навигация по футеру (IMG_5680,5681) -->
-            <div class="mirror-big-btn" style="margin: 30px 0 10px;">
-                <span>Готов навести порядок? <span style="font-weight: 300; margin-left: 8px;">→</span></span>
-                <span class="badge" style="background: #303748;">Новости</span>
-            </div>
-
-            <!-- нижнее меню (Navigation) -->
-            <div style="background: #12161f; border-radius: 32px; padding: 22px; margin: 20px 0 10px; border: 1px solid #313644;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-                    <div><span style="color:white;">Главная</span></div><div>Методы</div><div>Видеообзор</div><div>Возможности</div>
-                    <div>Статистика</div><div>Цены</div><div>Доп. пакеты</div><div>FAQ</div><div>Команда</div>
-                </div>
-            </div>
-
-            <div class="footer-links">
-                <span>Политика конфиденциальности</span> <span>Публичная оферта</span>
-            </div>
-            <div style="color: #5f6579; font-size: 12px; padding: 10px 18px 20px;">© 2026 Storm Snos. Все права защищены.</div>
-        </div> <!-- end content -->
-    </div> <!-- end phone-frame -->
-
-    <!-- пояснение: на скринах 5651 и далее видно что это одно меню с кнопкой назад и теми же разделами -->
-    <div style="max-width: 390px; width:100%; text-align: center; color: #5b6170; font-size: 13px; margin-top: 8px;">
-        <i class="fas fa-arrow-left"></i> на скринах это единое меню с новостями, методами, тарифами, faq, командой
+        <!-- маленький футер, копирующий настроение stormsnos.fun (как домен вверху) -->
+        <div class="admin-note">
+            <span>stormsnos.fun · панель управления</span>
+        </div>
     </div>
+
+    <!-- пояснение: полное совпадение с текстом из скринов, включая обрыв фразы? но мы сделали полные предложения как в третьем скрине.
+         Однако первый скрин обрывается на "Мы рады представить полностью" — но в третьем уже完整. Я даю полную фразу как на третьем, так логичнее. 
+         Если нужно сохранить именно обрыв, могу скорректировать, но по скринам 5653 видно завершение. Оставил полноту. -->
 </body>
 </html>
