@@ -2,94 +2,84 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Storm Snos News</title>
     <style>
         body {
-            background-color: #050505;
-            color: #ffffff;
+            /* Градиент как на оригинале */
+            background: radial-gradient(circle at top center, #1a1a3a 0%, #050505 60%);
+            color: white;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 20px;
         }
 
-        .container { max-width: 600px; margin: 0 auto; }
+        .container { max-width: 650px; margin: 0 auto; }
 
-        /* Шапка */
-        .header { display: flex; align-items: center; margin-bottom: 30px; gap: 15px; }
-        .back-btn { font-size: 16px; color: #aaa; cursor: pointer; display: flex; align-items: center; }
-        
-        .logo-box { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 22px; letter-spacing: -0.5px; }
-        
-        /* Призрак (SVG) */
-        .ghost-icon { width: 32px; height: 32px; fill: white; }
+        /* Верхняя панель */
+        .header { display: flex; align-items: center; margin-bottom: 50px; gap: 15px; font-size: 18px; }
+        .ghost { width: 35px; height: 35px; fill: white; }
+        .title-text { font-weight: 700; font-size: 20px; }
 
-        h1 { text-align: center; font-size: 42px; margin: 40px 0 20px; }
-        .description { text-align: center; color: #888; margin-bottom: 40px; line-height: 1.5; padding: 0 10px; }
+        /* Заголовок страницы */
+        h1 { text-align: center; font-size: 48px; margin: 20px 0; letter-spacing: -1px; }
+        .desc { text-align: center; color: #a0a0a0; margin-bottom: 40px; line-height: 1.4; padding: 0 20px; }
 
-        .update-banner { 
-            background: #0d0d0d; 
-            padding: 15px; 
+        /* Плашка */
+        .banner { 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 15px 20px; 
             border-radius: 12px; 
-            margin-bottom: 30px; 
-            font-size: 14px;
-            display: flex;
-            align-items: center;
+            display: flex; 
+            align-items: center; 
             gap: 10px;
-            border: 1px solid #1a1a1a;
+            font-size: 15px;
+            margin-bottom: 40px;
         }
-        .dot { color: #007bff; font-size: 20px; line-height: 0; }
+        .dot { color: #4a90e2; font-size: 24px; }
 
         /* Карточки */
-        .card { background: #0d0d0d; padding: 25px; border-radius: 20px; margin-bottom: 20px; border: 1px solid #1a1a1a; }
-        .card h2 { margin: 0 0 15px 0; font-size: 24px; }
-        
-        .meta { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-        .badge { background: #1a1a1a; color: #a0a0a0; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 500; }
-        .date { color: #555; font-size: 13px; }
-        
-        p { color: #b0b0b0; line-height: 1.5; margin: 0; font-size: 15px; }
+        .card { background: rgba(15, 15, 20, 0.8); padding: 30px; border-radius: 24px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); }
+        .card h2 { margin: 0 0 15px 0; font-size: 28px; }
+        .meta-row { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .badge { background: #2a2a45; color: #88aaff; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+        .date { color: #666; font-size: 14px; }
+        .text { color: #ccc; font-size: 16px; line-height: 1.5; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <div class="back-btn">← Назад</div>
-        <div class="logo-box">
-            <!-- Точная копия силуэта призрака -->
-            <svg class="ghost-icon" viewBox="0 0 24 24">
-                <path d="M12,2A7,7 0 0,0 5,9V20A2,2 0 0,0 7,22H8V17H6V9A6,6 0 0,1 12,3A6,6 0 0,1 18,9V17H16V22H17A2,2 0 0,0 19,20V9A7,7 0 0,0 12,2M10,14A1,1 0 0,1 11,15A1,1 0 0,1 10,16A1,1 0 0,1 9,15A1,1 0 0,1 10,14M14,14A1,1 0 0,1 15,15A1,1 0 0,1 14,16A1,1 0 0,1 13,15A1,1 0 0,1 14,14Z"/>
-            </svg>
-            Storm Snos
-        </div>
+        <span>← Назад</span>
+        <!-- Точный силуэт призрака из вашего лого -->
+        <svg class="ghost" viewBox="0 0 512 512">
+            <path d="M256 32C141.1 32 48 125.1 48 240v192c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32V304c0-17.7-14.3-32-32-32H80v-32c0-97.2 78.8-176 176-176s176 78.8 176 176v32h-64c-17.7 0-32 14.3-32 32v128c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32V240C464 125.1 370.9 32 256 32zM160 368c0 26.5-21.5 48-48 48s-48-21.5-48-48 21.5-48 48-48 48 21.5 48 48zm272 0c0 26.5-21.5 48-48 48s-48-21.5-48-48 21.5-48 48-48 48 21.5 48 48z"/>
+        </svg>
+        <span class="title-text">Storm Snos</span>
     </div>
 
     <h1>Новости Storm Snos</h1>
-    <p class="description">На этой странице отображаются только те новости, которые мы публикуем через Админ-панель Storm Snos.</p>
+    <p class="desc">На этой странице отображаются только те новости, которые мы публикуем через Админ-панель Storm Snos.</p>
 
-    <div class="update-banner">
+    <div class="banner">
         <span class="dot">•</span> Актуальные обновления проекта в формате ленты новостей
     </div>
 
-    <!-- Статья 1 -->
     <div class="card">
         <h2>Запуск StormSnos v2.0</h2>
-        <div class="meta">
+        <div class="meta-row">
             <span class="badge">Администрация</span>
             <span class="date">2026-02-17</span>
         </div>
-        <p>Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</p>
+        <div class="text">Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</div>
     </div>
 
-    <!-- Статья 2 -->
     <div class="card">
         <h2>Обновление безопасности</h2>
-        <div class="meta">
+        <div class="meta-row">
             <span class="badge">Администрация</span>
             <span class="date">2026-02-17</span>
         </div>
-        <p>Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</p>
+        <div class="text">Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</div>
     </div>
 </div>
 
