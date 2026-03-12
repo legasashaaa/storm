@@ -34,7 +34,6 @@
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.5;
-            padding-bottom: 0px; /* Убран лишний отступ снизу */
         }
 
         .container {
@@ -144,16 +143,10 @@
             cursor: pointer;
             transition: 0.3s;
         }
-        .btn:hover {
-            opacity: 0.9;
-        }
         .btn-outline {
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-main);
-        }
-        .btn-outline:hover {
-            background: rgba(255,255,255,0.05);
         }
         .btn-dark {
             background: #14141e;
@@ -259,21 +252,152 @@
         .team-info .name { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
         .team-info .role { color: var(--text-muted); font-size: 12px; }
 
-        /* --- Подвал и ссылки --- */
-        footer { padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 20px; }
-        .footer-links h4 { margin: 15px 0 20px; font-size: 16px; font-weight: 700; text-align: left; }
-        .footer-links ul { list-style: none; text-align: left; }
-        .footer-links li { margin-bottom: 15px; }
-        .footer-links a { display: flex; align-items: center; gap: 10px; color: var(--text-muted); text-decoration: none; font-size: 15px; transition: color 0.2s; font-weight: 500;}
-        .footer-links a:hover { color: var(--text-main); }
-        .footer-links a i { color: var(--accent-purple); font-size: 18px; width: 20px; text-align: center;}
-        .copyright { margin-top: 40px; font-size: 13px; color: var(--text-muted); text-align: left; }
+        /* --- Секция СTA (Готов навести порядок) --- */
+        .cta-box {
+            background: linear-gradient(180deg, #0d0d16 0%, #08080c 100%);
+            border: 1px solid rgba(91, 33, 255, 0.15);
+            border-radius: 20px;
+            padding: 35px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-news-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 6px 16px 6px 6px;
+            margin-bottom: 25px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .cta-news-pill:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .cta-news-pill .badge {
+            background: #5b21ff;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .cta-news-pill .text {
+            color: #d1d1d6;
+        }
+
+        .cta-news-pill i {
+            color: #6b40ff;
+            font-size: 10px;
+            margin-left: 5px;
+        }
+
+        .cta-box h2 {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .cta-box p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .cta-box .btn-cta {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 30px;
+            padding: 14px 25px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .cta-box .btn-cta:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- Подвал (Обновленный) --- */
+        .main-footer {
+            padding: 0 0 40px;
+            text-align: left;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .footer-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .footer-nav {
+            margin-bottom: 35px;
+        }
+
+        .footer-nav h4 {
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-nav ul {
+            list-style: none;
+        }
+
+        .footer-nav li {
+            margin-bottom: 15px;
+        }
+
+        .footer-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .footer-nav a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 25px;
+            margin-top: 10px;
+            color: var(--text-muted);
+            font-size: 13px;
+            text-align: center;
+        }
 
         /* =========================================
            СТРАНИЦА "ЗЕРКАЛО" (SPA ЛОГИКА)
            ========================================= */
         #mirror-view {
-            display: none;
+            display: none; /* Скрыто по умолчанию */
             min-height: 100vh;
         }
 
@@ -343,6 +467,7 @@
             flex-direction: column;
             gap: 12px;
         }
+
     </style>
 </head>
 <body>
@@ -396,12 +521,10 @@
                 <p class="section-desc">Небольшои обзор возможностеи Storm Snos и того, как выглядит работа с платформои.</p>
                 
                 <div class="video-container">
-                    <!-- Постер с призраком -->
                     <div class="video-poster" id="custom-poster" onclick="playPromoVideo()">
                         <i class="fa-solid fa-ghost ghost-glow-icon"></i>
                         <div class="video-start-btn">Start</div>
                     </div>
-                    <!-- Сам видеоплеер (скрыт до клика) -->
                     <video id="promo-video" controls style="display: none;">
                         <source src="1950005106808122621.mp4" type="video/mp4">
                         Ваш браузер не поддерживает видео.
@@ -507,10 +630,10 @@
             <section class="section">
                 <div class="section-subtitle">FAQ</div>
                 <h2 class="section-title">Часто задаваемые<br>вопросы</h2>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как работает Storm Snos? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Сервис автоматизирует отправку жалоб на нарушителей. Выбирается эффективный метод для конкретной ситуации.</div></div>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Какои процент успешных сносов? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Успешность более 80%, в зависимости от типа нарушения и выбранного метода.</div></div>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как быстро срабатывает система? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">В среднем обработка и результат занимают от 1 часа до 3 днеи.</div></div>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Безопасен ли сервис для пользователя? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Да, использование сервиса абсолютно безопасно и анонимно.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как работает Storm Snos? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Сервис автоматизирует отправку жалоб.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Какои процент успешных сносов? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Успешность более 80%.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как быстро срабатывает система? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">От 1 часа до 3 днеи.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Безопасен ли сервис для пользователя? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Да, абсолютно безопасно.</div></div>
             </section>
 
             <!-- Команда -->
@@ -524,18 +647,59 @@
                 <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">мат!х | moral</div><div class="role">Оператор проекта</div></div></div>
             </section>
 
-            <!-- Подвал и ссылки -->
-            <footer>
-                <div class="footer-links">
-                    <h4>Полезные ссылки</h4>
+            <!-- НОВЫЙ БЛОК: Готов навести порядок -->
+            <section class="section">
+                <div class="cta-box">
+                    <div class="cta-news-pill">
+                        <span class="badge">Новости</span>
+                        <span class="text">Смотри актуальные новости об обновлениях</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    
+                    <h2>Готов навести<br>порядок?</h2>
+                    <p>Storm Snos помогает избавиться от нарушителей в твоём Telegram сообществе. Автоматическая блокировка через множество методов — гарантированный результат.</p>
+                    
+                    <button class="btn-cta mirror-trigger">
+                        Готов, перейти к зеркалам <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- НОВЫЙ ПОДВАЛ -->
+            <footer class="main-footer">
+                <div class="footer-logo">
+                    <i class="fa-solid fa-ghost"></i> Storm Snos
+                </div>
+                <p class="footer-desc">
+                    Storm Snos — сервис для автоматизации работы с жалобами в Telegram. Помогает выявлять аккаунты и каналы, нарушающие правила платформы, и передавать обращения на модерацию в лучшем виде. Используется аналитика и структурированная подача жалоб. Более 1000 обращений успешно обработано.
+                </p>
+
+                <div class="footer-nav">
+                    <h4>Навигация</h4>
                     <ul>
-                        <li><a href="#"><i class="fa-brands fa-telegram"></i> Наш Telegram канал</a></li>
-                        <li><a href="#"><i class="fa-solid fa-headset"></i> Поддержка</a></li>
-                        <li><a href="#"><i class="fa-solid fa-shield-halved"></i> Правила сервиса</a></li>
-                        <li><a href="#"><i class="fa-solid fa-star"></i> Отзывы пользователей</a></li>
+                        <li><a href="#">Главная</a></li>
+                        <li><a href="#">Методы</a></li>
+                        <li><a href="#">Видеообзор</a></li>
+                        <li><a href="#">Возможности</a></li>
+                        <li><a href="#">Статистика</a></li>
+                        <li><a href="#">Цены</a></li>
+                        <li><a href="#">Доп. Пакеты</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Команда</a></li>
                     </ul>
                 </div>
-                <div class="copyright">© 2026 Storm Snos. Все права защищены.</div>
+
+                <div class="footer-nav">
+                    <h4>Документация</h4>
+                    <ul>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#">Публичная оферта</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-bottom">
+                    © 2026 Storm Snos. Все права защищены.
+                </div>
             </footer>
         </div>
     </div>
