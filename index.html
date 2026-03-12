@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Storm Snos</title>
     <!-- Подключение шрифтов и иконок -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Базовые стили и переменные */
+        /* --- Базовые переменные --- */
         :root {
-            --bg-color: #050508;
+            --bg-color: #030305;
             --text-main: #ffffff;
             --text-muted: #8b8b99;
             --accent-purple: #5b21ff;
             --accent-blue: #3244ff;
-            --card-bg: #0f0f16;
-            --border-color: #1f1f2e;
+            --card-bg: #0a0a0f;
+            --border-color: #1a1a24;
+            --badge-yellow: #ffc107;
         }
 
         * {
@@ -25,6 +26,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Montserrat', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -32,16 +34,17 @@
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.5;
+            padding-bottom: 80px; 
         }
 
         .container {
             width: 100%;
-            max-width: 500px; /* Ограничение для ПК, чтобы выглядело как на мобилке */
+            max-width: 500px; 
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* --- Header --- */
+        /* --- Шапка --- */
         header {
             display: flex;
             justify-content: space-between;
@@ -50,8 +53,9 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(5, 5, 8, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(3, 3, 5, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
         }
 
         .logo {
@@ -62,30 +66,29 @@
             font-weight: 800;
         }
 
-        .menu-btn {
-            font-size: 24px;
+        .header-icon {
+            font-size: 20px;
             color: var(--text-main);
             cursor: pointer;
+            width: 24px;
+            text-align: center;
         }
 
-        /* --- Hero Section --- */
+        /* --- Главныи экран --- */
         .hero {
             text-align: center;
-            padding: 60px 0 40px;
+            padding: 50px 0 40px;
             position: relative;
         }
-
-        /* Фоновое свечение */
-        .hero::before {
-            content: '';
+        .hero-glow {
             position: absolute;
-            top: -100px;
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(91,33,255,0.4) 0%, rgba(50,68,255,0.2) 50%, transparent 70%);
-            filter: blur(40px);
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(91,33,255,0.35) 0%, rgba(50,68,255,0.15) 50%, transparent 70%);
+            filter: blur(50px);
             z-index: -1;
         }
 
@@ -93,42 +96,37 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 8px 16px;
             border-radius: 30px;
             font-size: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .trust-badge .dot {
             width: 8px;
             height: 8px;
             background: #00ff88;
             border-radius: 50%;
-            box-shadow: 0 0 10px #00ff88;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
         }
 
-        .hero h1 {
-            font-size: 38px;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
+        .hero h1 { font-size: 38px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; text-transform: uppercase; }
         .hero h1 .gradient-text {
             background: linear-gradient(90deg, #6b40ff, #3851ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: block;
         }
+        .hero p { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
 
-        .hero p {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 30px;
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
+        /* --- Кнопки --- */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -137,424 +135,551 @@
             background: linear-gradient(90deg, #5b21ff, #3244ff);
             color: white;
             text-decoration: none;
-            padding: 16px 30px;
+            padding: 16px 20px;
             border-radius: 12px;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
             width: 100%;
             border: none;
             cursor: pointer;
             transition: 0.3s;
         }
-
-        .btn:hover {
-            box-shadow: 0 0 20px rgba(91, 33, 255, 0.5);
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+        .btn-dark {
+            background: #14141e;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
         }
 
         /* --- Общие секции --- */
-        .section {
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            color: var(--accent-purple);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        .section-desc {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-
-        /* --- Горизонтальный скролл (Методы) --- */
-        .methods-scroll {
-            display: flex;
-            overflow-x: auto;
-            gap: 15px;
-            padding-bottom: 10px;
-            scroll-snap-type: x mandatory;
-        }
-        .methods-scroll::-webkit-scrollbar { display: none; }
+        .section { padding: 40px 0; text-align: center; }
+        .section-subtitle { color: var(--accent-purple); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .section-title { font-size: 26px; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
+        .section-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
         
-        .method-item {
-            flex: 0 0 auto;
-            color: var(--text-muted);
-            font-size: 16px;
-            font-weight: 600;
-            scroll-snap-align: start;
-        }
-
-        /* --- Карточки (Видео, Фичи, Тарифы) --- */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 30px 20px;
-            text-align: center;
+            padding: 25px 20px;
             margin-bottom: 15px;
-        }
-
-        .play-btn {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #5b21ff, #3244ff);
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin-bottom: 15px;
-            cursor: pointer;
-        }
-
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(91, 33, 255, 0.1);
-            color: #835cff;
-            border-radius: 10px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-
-        /* --- Тарифы --- */
-        .tariff-card {
-            text-align: left;
             position: relative;
         }
-        .tariff-title {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        .tariff-price {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
-        .tariff-price span {
-            font-size: 14px;
-            color: var(--text-muted);
-            font-weight: 400;
-        }
 
-        /* --- FAQ --- */
-        .faq-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            margin-bottom: 10px;
+        .methods-scroll { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 10px; scroll-snap-type: x mandatory; }
+        .methods-scroll::-webkit-scrollbar { display: none; }
+        .method-item { flex: 0 0 auto; color: var(--text-muted); font-size: 16px; font-weight: 600; scroll-snap-align: start; }
+        .method-item.active { color: white; }
+
+        /* --- Секция Видеообзора --- */
+        .video-container {
+            width: 100%;
+            background: #050508;
+            border-radius: 15px;
             overflow: hidden;
-            text-align: left;
-        }
-        .faq-question {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .faq-answer {
-            padding: 0 20px 20px;
-            color: var(--text-muted);
-            font-size: 14px;
-            display: none;
-        }
-
-        /* --- Команда --- */
-        .team-member {
-            background: var(--card-bg);
+            position: relative;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 10px;
-            text-align: left;
         }
-        .avatar {
-            width: 50px;
-            height: 50px;
-            background: #1f1f2e;
-            color: #6b40ff;
-            border-radius: 50%;
+        
+        .video-poster {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            padding: 40px 20px 20px;
+            cursor: pointer;
         }
 
-        /* --- Footer --- */
-        footer {
-            padding: 40px 0;
-            border-top: 1px solid var(--border-color);
-            margin-top: 40px;
-        }
-        .footer-links h4 {
-            margin: 20px 0 10px;
-            font-size: 14px;
-        }
-        .footer-links ul {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 14px;
+        .ghost-glow-icon {
+            font-size: 60px;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(91, 33, 255, 0.6);
+            margin-bottom: 30px;
         }
 
-        /* Плавающая кнопка новостей */
+        .video-start-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        video {
+            width: 100%;
+            border-radius: 15px;
+            display: block;
+        }
+
+        /* --- Различные элементы UI --- */
+        .feature-icon { width: 44px; height: 44px; background: rgba(91, 33, 255, 0.1); color: #835cff; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 15px; }
+        .stat-card { text-align: center; padding: 25px 20px; }
+        .stat-label { color: var(--text-muted); font-size: 14px; margin-bottom: 5px; }
+        .stat-value { font-size: 32px; font-weight: 800; }
+        
+        /* --- Тарифы --- */
+        .tariff-card { text-align: left; padding-top: 35px; }
+        .tariff-title { color: var(--text-muted); font-size: 15px; margin-bottom: 5px; }
+        .tariff-price { font-size: 32px; font-weight: 800; margin-bottom: 5px; }
+        .tariff-price span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+        .tariff-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+
+        .badge-top { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+        .badge-purple { background: #1a103c; color: #a78bfa; border: 1px solid #5b21ff; }
+        .badge-yellow { background: #2a220a; color: var(--badge-yellow); border: 1px solid var(--badge-yellow); }
+
+        .addon-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; font-size: 14px; color: var(--text-muted); }
+        .addon-check i { color: var(--accent-purple); margin-top: 3px; }
+
+        /* --- FAQ --- */
+        .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 10px; overflow: hidden; text-align: left; }
+        .faq-question { padding: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 15px; cursor: pointer; user-select: none; }
+        .faq-question i { color: var(--text-muted); transition: transform 0.3s; }
+        .faq-answer { padding: 0 20px 20px; color: var(--text-muted); font-size: 14px; line-height: 1.6; display: none; }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--text-main); }
+
+        /* --- Команда --- */
+        .team-member { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; text-align: left; }
+        .avatar { width: 46px; height: 46px; background: #14141f; color: #6b40ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .team-info .name { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
+        .team-info .role { color: var(--text-muted); font-size: 12px; }
+
+        /* --- Подвал и плавающее меню --- */
+        footer { padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 20px; }
+        .footer-links h4 { margin: 25px 0 15px; font-size: 16px; font-weight: 700; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.2s;}
+        .copyright { margin-top: 30px; font-size: 13px; color: var(--text-muted); text-align: left; }
+        
         .floating-news {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(30, 30, 45, 0.9);
+            background: rgba(15, 15, 22, 0.85);
             border: 1px solid #3244ff;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 30px;
             display: flex;
             align-items: center;
             gap: 15px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             z-index: 100;
-            width: 90%;
-            max-width: 400px;
+            width: calc(100% - 40px);
+            max-width: 460px;
             justify-content: space-between;
         }
-        .floating-news .badge {
-            background: #3244ff;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: bold;
+        .floating-news .badge { background: linear-gradient(90deg, #5b21ff, #3244ff); color: white; padding: 6px 12px; border-radius: 15px; font-size: 12px; font-weight: 700; }
+
+        /* =========================================
+           СТРАНИЦА "ЗЕРКАЛО" (SPA ЛОГИКА)
+           ========================================= */
+        #mirror-view {
+            display: none; /* Скрыто по умолчанию */
+            min-height: 100vh;
         }
+
+        .mirror-header {
+            text-align: center;
+            padding: 50px 0 30px;
+            position: relative;
+        }
+        
+        .mirror-header h1 { font-size: 32px; font-weight: 800; margin-bottom: 5px; }
+        .mirror-header p { color: var(--text-muted); font-size: 14px; }
+
+        /* Блок загрузки */
+        #loading-state {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--accent-purple);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Блок результата (ссылка на бота) */
+        #result-state {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 20px 25px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 40px rgba(91, 33, 255, 0.1);
+        }
+
+        .link-icon-circle {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--text-muted);
+            margin: 0 auto 20px;
+        }
+
+        .bot-username { font-size: 26px; font-weight: 800; margin-bottom: 5px; }
+        .bot-link { color: var(--text-muted); font-size: 13px; margin-bottom: 30px; }
+
+        .mirror-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Шапка -->
-    <header class="container">
-        <div class="logo">
-            <i class="fa-solid fa-ghost"></i> Storm Snos
-        </div>
-        <div class="menu-btn">
-            <i class="fa-solid fa-bars"></i>
-        </div>
-    </header>
-
-    <div class="container">
-        <!-- Главный экран -->
-        <section class="hero">
-            <div class="trust-badge">
-                <div class="dot"></div>
-                Нам доверяют тысячи пользователей
+    <!-- =========================================
+         ОСНОВНОИ ВИД (ГЛАВНАЯ СТРАНИЦА)
+         ========================================= -->
+    <div id="main-view">
+        <header class="container">
+            <div class="logo">
+                <i class="fa-solid fa-ghost"></i> Storm Snos
             </div>
-            <h1>STORM SNOS<br><span class="gradient-text">Следит за порядком</span></h1>
-            <p>Сервис помогает очистить Telegram от нарушителей через автоматизированную методы отправки.</p>
-            <a href="#" class="btn">Перейти к зеркалам <i class="fa-solid fa-arrow-right"></i></a>
-        </section>
-
-        <!-- Методы -->
-        <section class="section">
-            <div class="section-subtitle">Методы</div>
-            <h2 class="section-title">Методы отправки<br>"Telegram"</h2>
-            <div class="methods-scroll">
-                <div class="method-item" style="color: white;">Метод "Канал"</div>
-                <div class="method-item">Метод "БОТ"</div>
-                <div class="method-item">Telegra.ph</div>
-                <div class="method-item">Метод "WEB"</div>
-                <div class="method-item">Метод "Email"</div>
+            <div class="header-icon menu-btn">
+                <i class="fa-solid fa-bars"></i>
             </div>
-        </section>
+        </header>
 
-        <!-- Видеообзор -->
-        <section class="section">
-            <div class="section-subtitle">Видеообзор</div>
-            <h2 class="section-title">Видеообзор</h2>
-            <p class="section-desc">Небольшой обзор возможностей Storm Snos и того, как выглядит работа с платформой.</p>
-            <div class="card">
-                <div class="play-btn">
-                    <i class="fa-solid fa-play" style="margin-left: 5px;"></i>
+        <div class="container">
+            <!-- Главныи экран -->
+            <section class="hero">
+                <div class="hero-glow"></div>
+                <div class="trust-badge">
+                    <div class="dot"></div>
+                    Нам доверяют тысячи пользователеи
                 </div>
-                <h3>Смотреть видеообзор</h3>
-                <p class="section-desc" style="margin-bottom: 0;">Нажмите, чтобы запустить видео</p>
-            </div>
-        </section>
-
-        <!-- Возможности -->
-        <section class="section">
-            <div class="section-subtitle">Возможности</div>
-            <h2 class="section-title">Хороший инструмент<br>для комфортной<br>работы</h2>
-            <p class="section-desc">Storm Snos предоставляет полный арсенал методов для быстрой и эффективной отправки, которые нарушают правила Telegram.</p>
-            
-            <div class="card" style="text-align: left;">
-                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <h3 style="margin-bottom: 10px;">Эффективность Работы</h3>
-                <p style="color: var(--text-muted); font-size: 14px;">Storm Snos анализирует каждый подбор на нарушителей в Telegram, обеспечивая быструю эффективность.</p>
-            </div>
-            <div class="card" style="text-align: left;">
-                <div class="feature-icon"><i class="fa-solid fa-crosshairs"></i></div>
-                <h3 style="margin-bottom: 10px;">Точная Фильтрация</h3>
-                <p style="color: var(--text-muted); font-size: 14px;">Автоматическая проверка: принимаем запрос на логи только если система подтвердила реальное нарушение...</p>
-            </div>
-        </section>
-
-        <!-- Тарифы -->
-        <section class="section">
-            <div class="section-subtitle">Тарифы</div>
-            <h2 class="section-title">Честные цены на<br>подписки</h2>
-            <p class="section-desc">Выбери подписку по длительности — от одного дня до пожизненного доступа. Никаких визуалов, только настоящая блокировка нарушителей.</p>
-
-            <div class="card tariff-card">
-                <div class="tariff-title">1 день</div>
-                <div class="tariff-price">249 ₽ <span>/ One-time</span></div>
-                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Базовый пакет</p>
-            </div>
-            
-            <div class="card tariff-card">
-                 <div class="tariff-title" style="text-align: center;">Новое предложение в разработке</div>
-                 <div style="text-align: center; padding: 10px; border: 1px solid var(--border-color); border-radius: 10px; margin-top: 15px; color: var(--text-muted);">Coming Soon</div>
-            </div>
-        </section>
-
-        <!-- FAQ -->
-        <section class="section">
-            <div class="section-subtitle">FAQ</div>
-            <h2 class="section-title">Часто задаваемые<br>вопросы</h2>
-            <p class="section-desc">Всё, что нужно знать о Storm Snos. Если у вас остались вопросы, свяжитесь с нами.</p>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Как работает Storm Snos? <i class="fa-solid fa-chevron-down"></i>
+                <h1>STORM SNOS<br><span class="gradient-text">Следит за порядком</span></h1>
+                <p>Сервис помогает очистить Telegram от нарушителеи через автоматизированную методы отправки.</p>
+                <div class="btn-group">
+                    <!-- Добавлен класс mirror-trigger для JS -->
+                    <button class="btn mirror-trigger">Переити к зеркалам <i class="fa-solid fa-arrow-right"></i></button>
+                    <button class="btn btn-outline">Работы Storm Snos</button>
                 </div>
-                <div class="faq-answer">
-                    Сервис автоматизирует процесс отправки жалоб на каналы и пользователей, нарушающих правила платформы.
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Как быстро срабатывает система? <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    Обычно результаты видны в течение нескольких часов после запуска.
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Безопасен ли сервис для пользователя? <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    Да, использование сервиса абсолютно безопасно для вашего основного аккаунта.
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Команда -->
-        <section class="section">
-            <div class="section-subtitle">Команда</div>
-            <h2 class="section-title">Наша команда</h2>
-            <p class="section-desc">Список пользователей без которых бы проект никогда не состоялся и которым вы видите его сейчас</p>
-
-            <div class="team-member">
-                <div class="avatar"><i class="fa-regular fa-user"></i></div>
-                <div>
-                    <div style="font-weight: 700; font-size: 16px;">KRUIZ</div>
-                    <div style="color: var(--text-muted); font-size: 12px;">Совладелец проекта - №3</div>
+            <!-- Методы -->
+            <section class="section">
+                <div class="section-subtitle">Методы</div>
+                <h2 class="section-title">Методы отправки<br>"Telegram"</h2>
+                <div class="methods-scroll">
+                    <div class="method-item active">Метод "Канал"</div>
+                    <div class="method-item">Метод "БОТ"</div>
+                    <div class="method-item">Telegra.ph</div>
+                    <div class="method-item">Метод "WEB"</div>
+                    <div class="method-item">Метод "Email"</div>
                 </div>
-            </div>
-            <div class="team-member">
-                <div class="avatar"><i class="fa-regular fa-user"></i></div>
-                <div>
-                    <div style="font-weight: 700; font-size: 16px;">supernegr767</div>
-                    <div style="color: var(--text-muted); font-size: 12px;">Дизайнер проекта</div>
-                </div>
-            </div>
-            <div class="team-member">
-                <div class="avatar"><i class="fa-regular fa-user"></i></div>
-                <div>
-                    <div style="font-weight: 700; font-size: 16px;">мат!х | moral</div>
-                    <div style="color: var(--text-muted); font-size: 12px;">Оператор проекта</div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Финальный призыв -->
-        <section class="section card" style="background: linear-gradient(180deg, #1f1f3a, #0f0f16); border: none;">
-            <h2 class="section-title" style="font-size: 24px;">Наведём<br>порядок?</h2>
-            <p class="section-desc">Storm Snos помогает избавиться от нарушителей в твоём Telegram сообществе. Автоматическая блокировка через множество методов — гарантированный результат.</p>
-            <a href="#" class="btn" style="background: transparent; border: 1px solid #5b21ff;">Готов, перейти к зеркалам <i class="fa-solid fa-arrow-right"></i></a>
-        </section>
-
-        <!-- Подвал -->
-        <footer>
-            <div class="footer-links">
-                <h4>Навигация</h4>
-                <ul>
-                    <li><a href="#">Главная</a></li>
-                    <li><a href="#">Методы</a></li>
-                    <li><a href="#">Видеообзор</a></li>
-                    <li><a href="#">Возможности</a></li>
-                    <li><a href="#">Статистика</a></li>
-                    <li><a href="#">Цены</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Команда</a></li>
-                </ul>
+            <!-- ВИДЕООБЗОР (Обновлено) -->
+            <section class="section">
+                <div class="section-subtitle">Видеообзор</div>
+                <h2 class="section-title">Видеообзор</h2>
+                <p class="section-desc">Небольшои обзор возможностеи Storm Snos и того, как выглядит работа с платформои.</p>
                 
-                <h4>Документация</h4>
-                <ul>
-                    <li><a href="#">Политика конфиденциальности</a></li>
-                    <li><a href="#">Публичная оферта</a></li>
-                </ul>
-            </div>
-        </footer>
-    </div>
+                <div class="video-container">
+                    <!-- Постер с призраком -->
+                    <div class="video-poster" id="custom-poster" onclick="playPromoVideo()">
+                        <i class="fa-solid fa-ghost ghost-glow-icon"></i>
+                        <div class="video-start-btn">Start</div>
+                    </div>
+                    <!-- Сам видеоплеер (скрыт до клика) -->
+                    <video id="promo-video" controls style="display: none;">
+                        <source src="1950005106808122621.mp4" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+            </section>
 
-    <!-- Плавающая плашка внизу -->
-    <div class="floating-news">
-        <div class="badge">Новости</div>
-        <div style="font-size: 12px; color: #ccc; line-height: 1.2;">
-            Смотри актуальные<br>новости об обновлениях
+            <!-- Возможности -->
+            <section class="section">
+                <div class="section-subtitle">Возможности</div>
+                <h2 class="section-title">Хорошии инструмент<br>для комфортнои<br>работы</h2>
+                
+                <div class="card" style="text-align: left;">
+                    <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3 style="margin-bottom: 10px; font-size: 18px;">Множество Методов</h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">Используем 10+ различных методов сноса: через Email, UserName, Стикеры и другие способы.</p>
+                </div>
+                <div class="card" style="text-align: left;">
+                    <div class="feature-icon"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3 style="margin-bottom: 10px; font-size: 18px;">Точная Фильтрация</h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">Автоматическая проверка: принимаем запрос на логи только если система подтвердила реальное нарушение правил Telegram и оповещает вас.</p>
+                </div>
+            </section>
+
+            <!-- Статистика -->
+            <section class="section">
+                <div class="section-subtitle">Статистика</div>
+                <h2 class="section-title">Наша статистика</h2>
+                <p class="section-desc">Статистика обновляется каждые 24 часа</p>
+
+                <div class="card stat-card"><div class="stat-label">Пользователеи</div><div class="stat-value">113609</div></div>
+                <div class="card stat-card"><div class="stat-label">Обновлении вышло</div><div class="stat-value">50+</div></div>
+                <div class="card stat-card"><div class="stat-label">Покупателеи</div><div class="stat-value">3940</div></div>
+            </section>
+
+            <!-- Тарифы -->
+            <section class="section">
+                <div class="section-subtitle">Тарифы</div>
+                <h2 class="section-title">Честные цены на<br>подписки</h2>
+                
+                <div class="card tariff-card">
+                    <div class="tariff-title">1 день</div>
+                    <div class="tariff-price">249 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">Базовыи пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                </div>
+                <div class="card tariff-card">
+                    <div class="tariff-title">3 дня</div>
+                    <div class="tariff-price">499 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">Стандартныи пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                </div>
+                <div class="card tariff-card">
+                    <div class="tariff-title">7 днеи</div>
+                    <div class="tariff-price">699 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">Расширенныи пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                </div>
+                <div class="card tariff-card">
+                    <div class="badge-top badge-purple">Больше всего популярно</div>
+                    <div class="tariff-title">15 днеи</div>
+                    <div class="tariff-price">899 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">Профессиональныи пакет</div>
+                    <button class="btn mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                </div>
+                <div class="card tariff-card">
+                    <div class="tariff-title">30 днеи</div>
+                    <div class="tariff-price">1 299 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">Премиум пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                </div>
+                <div class="card tariff-card" style="border-color: rgba(255, 193, 7, 0.3);">
+                    <div class="badge-top badge-yellow">Лучшии выбор</div>
+                    <div class="tariff-title">Навсегда</div>
+                    <div class="tariff-price">2 499 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">VIP пакет</div>
+                    <button class="btn mirror-trigger" style="width:100%; box-shadow: 0 0 15px rgba(255,193,7,0.1);">Переити к зеркалам</button>
+                </div>
+            </section>
+
+            <!-- Доп Пакеты -->
+            <section class="section">
+                <div class="section-subtitle">Дополнения</div>
+                <h2 class="section-title">Дополнительные<br>пакеты</h2>
+                
+                <div class="card tariff-card" style="padding-top: 25px;">
+                    <div class="tariff-title">Лаит список</div>
+                    <div class="tariff-price">150 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc" style="margin-bottom: 15px;">Белыи список</div>
+                    <div class="addon-check"><i class="fa-solid fa-check"></i><span>Добавляет вас в белыи список сносера</span></div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                </div>
+                <div class="card tariff-card" style="padding-top: 25px;">
+                    <div class="tariff-title">VIP-доступ</div>
+                    <div class="tariff-price">500 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc" style="margin-bottom: 15px;">Премиум доступ</div>
+                    <div class="addon-check"><i class="fa-solid fa-check"></i><span>Расширенные возможности</span></div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="section">
+                <div class="section-subtitle">FAQ</div>
+                <h2 class="section-title">Часто задаваемые<br>вопросы</h2>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как работает Storm Snos? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Сервис автоматизирует отправку жалоб.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Какои процент успешных сносов? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Успешность более 80%.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как быстро срабатывает система? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">От 1 часа до 3 днеи.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Безопасен ли сервис для пользователя? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Да, абсолютно безопасно.</div></div>
+            </section>
+
+            <!-- Команда -->
+            <section class="section">
+                <div class="section-subtitle">Команда</div>
+                <h2 class="section-title">Наша команда</h2>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">???</div><div class="role">Владелец проекта</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">леха уставшии</div><div class="role">Совладелец проекта - №2</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">KRUIZ</div><div class="role">Совладелец проекта - №3</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">supernegr767</div><div class="role">Дизаинер проекта</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">мат!х | moral</div><div class="role">Оператор проекта</div></div></div>
+            </section>
+
+            <!-- Подвал -->
+            <footer>
+                <div class="copyright">© 2026 Storm Snos. Все права защищены.</div>
+            </footer>
         </div>
-        <i class="fa-solid fa-chevron-right" style="color: #6b40ff;"></i>
+
+        <div class="floating-news">
+            <div class="badge">Новости</div>
+            <div style="font-size: 13px; color: #d1d1d6; line-height: 1.3; flex-grow: 1; margin-left: 5px;">Смотри актуальные<br>новости об обновлениях</div>
+            <i class="fa-solid fa-chevron-right" style="color: #6b40ff; font-size: 14px;"></i>
+        </div>
     </div>
 
-    <!-- Простой скрипт для аккордеона FAQ -->
-    <script>
-        function toggleFaq(element) {
-            const answer = element.nextElementSibling;
-            const icon = element.querySelector('i');
+
+    <!-- =========================================
+         ВИД "ЗЕРКАЛО" (СТРАНИЦА БОТА)
+         ========================================= -->
+    <div id="mirror-view">
+        <header class="container" style="border-bottom: none;">
+            <div class="header-icon" onclick="goBack()">
+                <i class="fa-solid fa-arrow-left"></i>
+            </div>
+            <div class="logo">
+                <i class="fa-solid fa-ghost"></i> Storm Snos
+            </div>
+            <div class="header-icon" onclick="loadBot()">
+                <i class="fa-solid fa-rotate-right"></i>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="hero-glow"></div> <!-- Заднее свечение -->
             
-            if (answer.style.display === "block") {
-                answer.style.display = "none";
-                icon.classList.remove('fa-chevron-up');
-                icon.classList.add('fa-chevron-down');
-            } else {
-                answer.style.display = "block";
-                icon.classList.remove('fa-chevron-down');
-                icon.classList.add('fa-chevron-up');
-            }
+            <div class="mirror-header">
+                <h1>Зеркало</h1>
+                <p>Ваша персональная ссылка на бота</p>
+            </div>
+
+            <!-- Блок загрузки -->
+            <div id="loading-state">
+                <div class="spinner"></div>
+                Получаем зеркало...
+            </div>
+
+            <!-- Готовыи результат -->
+            <div id="result-state">
+                <div class="link-icon-circle">
+                    <i class="fa-solid fa-link"></i>
+                </div>
+                
+                <div class="bot-username">@storm_snoos_bot</div>
+                <div class="bot-link">https://t.me/storm_snoos_bot</div>
+
+                <div class="mirror-buttons">
+                    <!-- Ссылка в Telegram -->
+                    <a href="https://t.me/storm_snoos_bot" target="_blank" class="btn">Открыть бота</a>
+                    <!-- Копирование ссылки -->
+                    <button class="btn btn-dark" onclick="copyBotLink(this)">Копировать ссылку</button>
+                    <!-- Промокод -->
+                    <button class="btn btn-dark"><i class="fa-solid fa-gift" style="color:#6b40ff;"></i> Получить промокод</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         СКРИПТЫ
+         ========================================= -->
+    <script>
+        // 1. Воспроизведение видео при клике
+        function playPromoVideo() {
+            const poster = document.getElementById('custom-poster');
+            const video = document.getElementById('promo-video');
+            
+            poster.style.display = 'none'; // Скрываем постер
+            video.style.display = 'block'; // Показываем тег video
+            video.play();                  // Запускаем видео
+        }
+
+        // 2. Аккордеон FAQ
+        function toggleFaq(element) {
+            element.parentElement.classList.toggle('active');
+        }
+
+        // 3. SPA Навигация: Переход на страницу зеркал
+        const mirrorTriggers = document.querySelectorAll('.mirror-trigger');
+        const mainView = document.getElementById('main-view');
+        const mirrorView = document.getElementById('mirror-view');
+        const loadingState = document.getElementById('loading-state');
+        const resultState = document.getElementById('result-state');
+
+        // Вешаем клик на все кнопки "Переити к зеркалам"
+        mirrorTriggers.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showMirrorPage();
+            });
+        });
+
+        function showMirrorPage() {
+            // Переключаем видимость блоков
+            mainView.style.display = 'none';
+            mirrorView.style.display = 'block';
+            window.scrollTo(0, 0); // Прокрутка наверх
+            
+            loadBot(); // Запускаем феиковую загрузку
+        }
+
+        function goBack() {
+            mirrorView.style.display = 'none';
+            mainView.style.display = 'block';
+            window.scrollTo(0, 0);
+            
+            // Сбрасываем видео, если оно играло
+            const video = document.getElementById('promo-video');
+            video.pause();
+        }
+
+        // 4. Имитация загрузки зеркала (как на видео)
+        function loadBot() {
+            // Сначала показываем загрузку
+            loadingState.style.display = 'flex';
+            resultState.style.display = 'none';
+
+            // Ждем 1.5 секунды и показываем бота
+            setTimeout(() => {
+                loadingState.style.display = 'none';
+                resultState.style.display = 'block';
+            }, 1500);
+        }
+
+        // 5. Копирование ссылки
+        function copyBotLink(btnElement) {
+            navigator.clipboard.writeText("https://t.me/storm_snoos_bot").then(() => {
+                const originalText = btnElement.innerText;
+                btnElement.innerText = "Скопировано!";
+                btnElement.style.color = "#00ff88";
+                setTimeout(() => {
+                    btnElement.innerText = originalText;
+                    btnElement.style.color = "var(--text-main)";
+                }, 2000);
+            });
         }
     </script>
 </body>
