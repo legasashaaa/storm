@@ -7,32 +7,48 @@
     <style>
         body {
             background-color: #050505;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 20px;
         }
 
         .container { max-width: 600px; margin: 0 auto; }
 
-        .header { display: flex; align-items: center; margin-bottom: 40px; }
-        .back-btn { font-size: 20px; cursor: pointer; margin-right: 15px; }
-        .logo { display: flex; align-items: center; font-weight: bold; font-size: 1.2rem; }
-        .logo svg { width: 30px; margin-right: 10px; }
+        /* Шапка */
+        .header { display: flex; align-items: center; margin-bottom: 30px; gap: 15px; }
+        .back-btn { font-size: 16px; color: #aaa; cursor: pointer; display: flex; align-items: center; }
+        
+        .logo-box { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 22px; letter-spacing: -0.5px; }
+        
+        /* Призрак (SVG) */
+        .ghost-icon { width: 32px; height: 32px; fill: white; }
 
-        h1 { text-align: center; font-size: 2.5rem; margin-top: 20px; }
-        .description { text-align: center; color: #aaa; margin-bottom: 30px; line-height: 1.5; }
+        h1 { text-align: center; font-size: 42px; margin: 40px 0 20px; }
+        .description { text-align: center; color: #888; margin-bottom: 40px; line-height: 1.5; padding: 0 10px; }
 
-        .tag-info { background: #111; padding: 15px; border-radius: 10px; border-left: 4px solid #007bff; margin-bottom: 30px; }
+        .update-banner { 
+            background: #0d0d0d; 
+            padding: 15px; 
+            border-radius: 12px; 
+            margin-bottom: 30px; 
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #1a1a1a;
+        }
+        .dot { color: #007bff; font-size: 20px; line-height: 0; }
 
-        .card { background: #111; padding: 25px; border-radius: 20px; margin-bottom: 20px; }
-        .card h2 { margin-top: 0; }
+        /* Карточки */
+        .card { background: #0d0d0d; padding: 25px; border-radius: 20px; margin-bottom: 20px; border: 1px solid #1a1a1a; }
+        .card h2 { margin: 0 0 15px 0; font-size: 24px; }
         
         .meta { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-        .badge { background: #222; color: #888; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; }
-        .date { color: #555; font-size: 0.9rem; }
+        .badge { background: #1a1a1a; color: #a0a0a0; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 500; }
+        .date { color: #555; font-size: 13px; }
         
-        p { color: #ccc; line-height: 1.6; }
+        p { color: #b0b0b0; line-height: 1.5; margin: 0; font-size: 15px; }
     </style>
 </head>
 <body>
@@ -40,8 +56,11 @@
 <div class="container">
     <div class="header">
         <div class="back-btn">← Назад</div>
-        <div class="logo">
-            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9v9c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V9c0-3.87-3.13-7-7-7zm-3.5 11.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        <div class="logo-box">
+            <!-- Точная копия силуэта призрака -->
+            <svg class="ghost-icon" viewBox="0 0 24 24">
+                <path d="M12,2A7,7 0 0,0 5,9V20A2,2 0 0,0 7,22H8V17H6V9A6,6 0 0,1 12,3A6,6 0 0,1 18,9V17H16V22H17A2,2 0 0,0 19,20V9A7,7 0 0,0 12,2M10,14A1,1 0 0,1 11,15A1,1 0 0,1 10,16A1,1 0 0,1 9,15A1,1 0 0,1 10,14M14,14A1,1 0 0,1 15,15A1,1 0 0,1 14,16A1,1 0 0,1 13,15A1,1 0 0,1 14,14Z"/>
+            </svg>
             Storm Snos
         </div>
     </div>
@@ -49,7 +68,9 @@
     <h1>Новости Storm Snos</h1>
     <p class="description">На этой странице отображаются только те новости, которые мы публикуем через Админ-панель Storm Snos.</p>
 
-    <div class="tag-info">● Актуальные обновления проекта в формате ленты новостей</div>
+    <div class="update-banner">
+        <span class="dot">•</span> Актуальные обновления проекта в формате ленты новостей
+    </div>
 
     <!-- Статья 1 -->
     <div class="card">
