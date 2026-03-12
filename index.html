@@ -1,23 +1,24 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Storm Snos</title>
     <!-- Подключение шрифтов и иконок -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Базовые стили и переменные */
+        /* Базовые переменные и сброс стилей */
         :root {
-            --bg-color: #050508;
+            --bg-color: #030305;
             --text-main: #ffffff;
             --text-muted: #8b8b99;
             --accent-purple: #5b21ff;
             --accent-blue: #3244ff;
-            --card-bg: #0f0f16;
-            --border-color: #1f1f2e;
+            --card-bg: #0a0a0f;
+            --border-color: #1a1a24;
+            --badge-yellow: #ffc107;
         }
 
         * {
@@ -25,6 +26,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Montserrat', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -32,16 +34,17 @@
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.5;
+            padding-bottom: 80px; /* Отступ для плавающей панели новостей */
         }
 
         .container {
             width: 100%;
-            max-width: 500px; /* Ограничение для ПК, чтобы выглядело как на мобилке */
+            max-width: 500px; /* Ограничение для ПК, чтобы выглядело как на мобильном */
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* --- Header --- */
+        /* --- Шапка --- */
         header {
             display: flex;
             justify-content: space-between;
@@ -50,8 +53,9 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(5, 5, 8, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(3, 3, 5, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
         }
 
         .logo {
@@ -68,24 +72,23 @@
             cursor: pointer;
         }
 
-        /* --- Hero Section --- */
+        /* --- Главный экран (Hero) --- */
         .hero {
             text-align: center;
-            padding: 60px 0 40px;
+            padding: 50px 0 40px;
             position: relative;
         }
 
-        /* Фоновое свечение */
         .hero::before {
             content: '';
             position: absolute;
-            top: -100px;
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(91,33,255,0.4) 0%, rgba(50,68,255,0.2) 50%, transparent 70%);
-            filter: blur(40px);
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(91,33,255,0.35) 0%, rgba(50,68,255,0.15) 50%, transparent 70%);
+            filter: blur(50px);
             z-index: -1;
         }
 
@@ -93,25 +96,25 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 8px 16px;
             border-radius: 30px;
             font-size: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .trust-badge .dot {
             width: 8px;
             height: 8px;
             background: #00ff88;
             border-radius: 50%;
-            box-shadow: 0 0 10px #00ff88;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
         }
 
         .hero h1 {
             font-size: 38px;
             font-weight: 800;
-            line-height: 1.1;
+            line-height: 1.2;
             margin-bottom: 20px;
             text-transform: uppercase;
         }
@@ -129,6 +132,7 @@
             margin-bottom: 30px;
         }
 
+        /* --- Кнопки --- */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -137,18 +141,19 @@
             background: linear-gradient(90deg, #5b21ff, #3244ff);
             color: white;
             text-decoration: none;
-            padding: 16px 30px;
+            padding: 16px 20px;
             border-radius: 12px;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
             width: 100%;
             border: none;
             cursor: pointer;
             transition: 0.3s;
         }
-
-        .btn:hover {
-            box-shadow: 0 0 20px rgba(91, 33, 255, 0.5);
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
         }
 
         /* --- Общие секции --- */
@@ -159,7 +164,7 @@
 
         .section-subtitle {
             color: var(--accent-purple);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -167,9 +172,10 @@
         }
 
         .section-title {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             margin-bottom: 10px;
+            line-height: 1.3;
         }
 
         .section-desc {
@@ -178,16 +184,25 @@
             margin-bottom: 30px;
         }
 
+        /* --- Карточки --- */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
         /* --- Горизонтальный скролл (Методы) --- */
         .methods-scroll {
             display: flex;
             overflow-x: auto;
-            gap: 15px;
+            gap: 20px;
             padding-bottom: 10px;
             scroll-snap-type: x mandatory;
         }
         .methods-scroll::-webkit-scrollbar { display: none; }
-        
         .method-item {
             flex: 0 0 auto;
             color: var(--text-muted);
@@ -195,17 +210,9 @@
             font-weight: 600;
             scroll-snap-align: start;
         }
+        .method-item.active { color: white; }
 
-        /* --- Карточки (Видео, Фичи, Тарифы) --- */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 30px 20px;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
+        /* --- Видеообзор --- */
         .play-btn {
             width: 60px;
             height: 60px;
@@ -215,32 +222,48 @@
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            margin-bottom: 15px;
+            margin: 0 auto 15px;
             cursor: pointer;
         }
 
+        /* --- Возможности --- */
         .feature-icon {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: rgba(91, 33, 255, 0.1);
             color: #835cff;
-            border-radius: 10px;
+            border-radius: 12px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 15px;
+        }
+
+        /* --- Статистика --- */
+        .stat-card {
+            text-align: center;
+            padding: 25px 20px;
+        }
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
         }
 
         /* --- Тарифы --- */
         .tariff-card {
             text-align: left;
-            position: relative;
+            padding-top: 35px; /* Место под бейдж */
         }
         .tariff-title {
             color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 10px;
+            font-size: 15px;
+            margin-bottom: 5px;
         }
         .tariff-price {
             font-size: 32px;
@@ -250,7 +273,49 @@
         .tariff-price span {
             font-size: 14px;
             color: var(--text-muted);
-            font-weight: 400;
+            font-weight: 500;
+        }
+        .tariff-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* Бейджи для тарифов */
+        .badge-top {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .badge-purple {
+            background: #1a103c;
+            color: #a78bfa;
+            border: 1px solid #5b21ff;
+        }
+        .badge-yellow {
+            background: #2a220a;
+            color: var(--badge-yellow);
+            border: 1px solid var(--badge-yellow);
+        }
+
+        /* --- Дополнительные пакеты --- */
+        .addon-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .addon-check i {
+            color: var(--accent-purple);
+            margin-top: 3px;
         }
 
         /* --- FAQ --- */
@@ -268,14 +333,23 @@
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
+            font-size: 15px;
             cursor: pointer;
+            user-select: none;
+        }
+        .faq-question i {
+            color: var(--text-muted);
+            transition: transform 0.3s;
         }
         .faq-answer {
             padding: 0 20px 20px;
             color: var(--text-muted);
             font-size: 14px;
+            line-height: 1.6;
             display: none;
         }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--text-main); }
 
         /* --- Команда --- */
         .team-member {
@@ -290,9 +364,9 @@
             text-align: left;
         }
         .avatar {
-            width: 50px;
-            height: 50px;
-            background: #1f1f2e;
+            width: 46px;
+            height: 46px;
+            background: #14141f;
             color: #6b40ff;
             border-radius: 50%;
             display: flex;
@@ -300,55 +374,49 @@
             justify-content: center;
             font-size: 20px;
         }
+        .team-info .name { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
+        .team-info .role { color: var(--text-muted); font-size: 12px; }
 
-        /* --- Footer --- */
+        /* --- Подвал --- */
         footer {
             padding: 40px 0;
             border-top: 1px solid var(--border-color);
-            margin-top: 40px;
+            margin-top: 20px;
         }
-        .footer-links h4 {
-            margin: 20px 0 10px;
-            font-size: 14px;
-        }
-        .footer-links ul {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 14px;
-        }
+        .footer-links h4 { margin: 25px 0 15px; font-size: 16px; font-weight: 700; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.2s;}
+        .footer-links a:hover { color: var(--text-main); }
+        .copyright { margin-top: 30px; font-size: 13px; color: var(--text-muted); text-align: left; }
 
-        /* Плавающая кнопка новостей */
+        /* --- Плавающая панель новостей --- */
         .floating-news {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(30, 30, 45, 0.9);
+            background: rgba(15, 15, 22, 0.85);
             border: 1px solid #3244ff;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 30px;
             display: flex;
             align-items: center;
             gap: 15px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             z-index: 100;
-            width: 90%;
-            max-width: 400px;
+            width: calc(100% - 40px);
+            max-width: 460px;
             justify-content: space-between;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
         .floating-news .badge {
-            background: #3244ff;
+            background: linear-gradient(90deg, #5b21ff, #3244ff);
             color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
+            padding: 6px 12px;
+            border-radius: 15px;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 700;
         }
     </style>
 </head>
@@ -381,7 +449,7 @@
             <div class="section-subtitle">Методы</div>
             <h2 class="section-title">Методы отправки<br>"Telegram"</h2>
             <div class="methods-scroll">
-                <div class="method-item" style="color: white;">Метод "Канал"</div>
+                <div class="method-item active">Метод "Канал"</div>
                 <div class="method-item">Метод "БОТ"</div>
                 <div class="method-item">Telegra.ph</div>
                 <div class="method-item">Метод "WEB"</div>
@@ -394,11 +462,11 @@
             <div class="section-subtitle">Видеообзор</div>
             <h2 class="section-title">Видеообзор</h2>
             <p class="section-desc">Небольшой обзор возможностей Storm Snos и того, как выглядит работа с платформой.</p>
-            <div class="card">
+            <div class="card" style="text-align: center;">
                 <div class="play-btn">
                     <i class="fa-solid fa-play" style="margin-left: 5px;"></i>
                 </div>
-                <h3>Смотреть видеообзор</h3>
+                <h3 style="font-size: 18px; margin-bottom: 5px;">Смотреть видеообзор</h3>
                 <p class="section-desc" style="margin-bottom: 0;">Нажмите, чтобы запустить видео</p>
             </div>
         </section>
@@ -410,14 +478,34 @@
             <p class="section-desc">Storm Snos предоставляет полный арсенал методов для быстрой и эффективной отправки, которые нарушают правила Telegram.</p>
             
             <div class="card" style="text-align: left;">
-                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <h3 style="margin-bottom: 10px;">Эффективность Работы</h3>
-                <p style="color: var(--text-muted); font-size: 14px;">Storm Snos анализирует каждый подбор на нарушителей в Telegram, обеспечивая быструю эффективность.</p>
+                <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3 style="margin-bottom: 10px; font-size: 18px;">Множество Методов</h3>
+                <p style="color: var(--text-muted); font-size: 14px;">Используем 10+ различных методов сноса: через Email, UserName, Стикеры и другие способы.</p>
             </div>
             <div class="card" style="text-align: left;">
-                <div class="feature-icon"><i class="fa-solid fa-crosshairs"></i></div>
-                <h3 style="margin-bottom: 10px;">Точная Фильтрация</h3>
-                <p style="color: var(--text-muted); font-size: 14px;">Автоматическая проверка: принимаем запрос на логи только если система подтвердила реальное нарушение...</p>
+                <div class="feature-icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h3 style="margin-bottom: 10px; font-size: 18px;">Точная Фильтрация</h3>
+                <p style="color: var(--text-muted); font-size: 14px;">Автоматическая проверка: принимаем запрос на логи только если система подтвердила реальное нарушение правил Telegram и оповещает вас.</p>
+            </div>
+        </section>
+
+        <!-- Статистика -->
+        <section class="section">
+            <div class="section-subtitle">Статистика</div>
+            <h2 class="section-title">Наша статистика</h2>
+            <p class="section-desc">Статистика обновляется каждые 24 часа</p>
+
+            <div class="card stat-card">
+                <div class="stat-label">Пользователей</div>
+                <div class="stat-value">113609</div>
+            </div>
+            <div class="card stat-card">
+                <div class="stat-label">Обновлений вышло</div>
+                <div class="stat-value">50+</div>
+            </div>
+            <div class="card stat-card">
+                <div class="stat-label">Покупателей</div>
+                <div class="stat-value">3940</div>
             </div>
         </section>
 
@@ -427,15 +515,97 @@
             <h2 class="section-title">Честные цены на<br>подписки</h2>
             <p class="section-desc">Выбери подписку по длительности — от одного дня до пожизненного доступа. Никаких визуалов, только настоящая блокировка нарушителей.</p>
 
+            <!-- 1 день -->
             <div class="card tariff-card">
                 <div class="tariff-title">1 день</div>
                 <div class="tariff-price">249 ₽ <span>/ One-time</span></div>
-                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Базовый пакет</p>
+                <div class="tariff-desc">Базовый пакет</div>
+                <button class="btn btn-outline" style="width:100%">Перейти к зеркалам</button>
             </div>
             
+            <!-- 3 дня -->
             <div class="card tariff-card">
-                 <div class="tariff-title" style="text-align: center;">Новое предложение в разработке</div>
-                 <div style="text-align: center; padding: 10px; border: 1px solid var(--border-color); border-radius: 10px; margin-top: 15px; color: var(--text-muted);">Coming Soon</div>
+                <div class="tariff-title">3 дня</div>
+                <div class="tariff-price">499 ₽ <span>/ One-time</span></div>
+                <div class="tariff-desc">Стандартный пакет</div>
+                <button class="btn btn-outline" style="width:100%">Перейти к зеркалам</button>
+            </div>
+
+            <!-- 7 дней -->
+            <div class="card tariff-card">
+                <div class="tariff-title">7 дней</div>
+                <div class="tariff-price">699 ₽ <span>/ One-time</span></div>
+                <div class="tariff-desc">Расширенный пакет</div>
+                <button class="btn btn-outline" style="width:100%">Перейти к зеркалам</button>
+            </div>
+
+            <!-- 15 дней (Популярный) -->
+            <div class="card tariff-card">
+                <div class="badge-top badge-purple">Больше всего популярно</div>
+                <div class="tariff-title">15 дней</div>
+                <div class="tariff-price">899 ₽ <span>/ One-time</span></div>
+                <div class="tariff-desc">Профессиональный пакет</div>
+                <button class="btn" style="width:100%">Перейти к зеркалам</button>
+            </div>
+
+            <!-- 30 дней -->
+            <div class="card tariff-card">
+                <div class="tariff-title">30 дней</div>
+                <div class="tariff-price">1 299 ₽ <span>/ One-time</span></div>
+                <div class="tariff-desc">Премиум пакет</div>
+                <button class="btn btn-outline" style="width:100%">Перейти к зеркалам</button>
+            </div>
+
+            <!-- Навсегда (Лучший выбор) -->
+            <div class="card tariff-card" style="border-color: rgba(255, 193, 7, 0.3);">
+                <div class="badge-top badge-yellow">Лучший выбор</div>
+                <div class="tariff-title">Навсегда</div>
+                <div class="tariff-price">2 499 ₽ <span>/ One-time</span></div>
+                <div class="tariff-desc">VIP пакет</div>
+                <button class="btn" style="width:100%; box-shadow: 0 0 15px rgba(255,193,7,0.1);">Перейти к зеркалам</button>
+            </div>
+        </section>
+
+        <!-- Дополнительные пакеты -->
+        <section class="section">
+            <div class="section-subtitle">Дополнения</div>
+            <h2 class="section-title">Дополнительные<br>пакеты</h2>
+            <p class="section-desc">Расширьте возможности с дополнительными опциями для более одной защиты и функциональности.</p>
+
+            <!-- Лайт список -->
+            <div class="card tariff-card" style="padding-top: 25px;">
+                <div class="tariff-title">Лайт список</div>
+                <div class="tariff-price">150 ₽ <span>/ One-time</span></div>
+                <div class="tariff-desc" style="margin-bottom: 15px;">Белый список</div>
+                <div class="addon-check">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Добавляет вас в белый список сносера</span>
+                </div>
+                <button class="btn btn-outline" style="width:100%">Перейти к зеркалам</button>
+            </div>
+
+            <!-- VIP-доступ -->
+            <div class="card tariff-card" style="padding-top: 25px;">
+                <div class="tariff-title">VIP-доступ</div>
+                <div class="tariff-price">500 ₽ <span>/ One-time</span></div>
+                <div class="tariff-desc" style="margin-bottom: 15px;">Премиум доступ</div>
+                <div class="addon-check">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Расширенные возможности</span>
+                </div>
+                <button class="btn btn-outline" style="width:100%">Перейти к зеркалам</button>
+            </div>
+
+            <!-- Coming Soon -->
+            <div class="card tariff-card" style="padding-top: 25px;">
+                <div class="tariff-title">Coming Soon</div>
+                <div class="tariff-price">? <span>/ One-time</span></div>
+                <div class="tariff-desc" style="margin-bottom: 15px;">Скоро</div>
+                <div class="addon-check">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Новое предложение в разработке</span>
+                </div>
+                <button class="btn btn-outline" style="width:100%; opacity: 0.5; cursor: not-allowed;" disabled>Coming Soon</button>
             </div>
         </section>
 
@@ -450,7 +620,15 @@
                     Как работает Storm Snos? <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    Сервис автоматизирует процесс отправки жалоб на каналы и пользователей, нарушающих правила платформы.
+                    Сервис помогает очистить Telegram от нарушителей через автоматизированные методы отправки жалоб.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Какой процент успешных сносов? <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Storm Snos имеет более 1000+ успешных принятых логов. Благодаря множеству методов отправки и постоянному обновлению, вероятность успешного принятого лога превышает 80%
                 </div>
             </div>
             <div class="faq-item">
@@ -458,7 +636,7 @@
                     Как быстро срабатывает система? <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    Обычно результаты видны в течение нескольких часов после запуска.
+                    Большинство Логов Принимаются в течение 1 часа и до 3 дней. Скорость зависит от выбранного вами метода и реакции Telegram на Запрос.
                 </div>
             </div>
             <div class="faq-item">
@@ -466,7 +644,7 @@
                     Безопасен ли сервис для пользователя? <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    Да, использование сервиса абсолютно безопасно для вашего основного аккаунта.
+                    Да. Storm Snos использует безопасные методы отправки запросов и ваш аккаунт никак не связан с этим и не рискует быть заблокированным.
                 </div>
             </div>
         </section>
@@ -479,32 +657,46 @@
 
             <div class="team-member">
                 <div class="avatar"><i class="fa-regular fa-user"></i></div>
-                <div>
-                    <div style="font-weight: 700; font-size: 16px;">KRUIZ</div>
-                    <div style="color: var(--text-muted); font-size: 12px;">Совладелец проекта - №3</div>
+                <div class="team-info">
+                    <div class="name">???</div>
+                    <div class="role">Владелец проекта</div>
                 </div>
             </div>
             <div class="team-member">
                 <div class="avatar"><i class="fa-regular fa-user"></i></div>
-                <div>
-                    <div style="font-weight: 700; font-size: 16px;">supernegr767</div>
-                    <div style="color: var(--text-muted); font-size: 12px;">Дизайнер проекта</div>
+                <div class="team-info">
+                    <div class="name">леха уставший</div>
+                    <div class="role">Совладелец проекта - №2</div>
                 </div>
             </div>
             <div class="team-member">
                 <div class="avatar"><i class="fa-regular fa-user"></i></div>
-                <div>
-                    <div style="font-weight: 700; font-size: 16px;">мат!х | moral</div>
-                    <div style="color: var(--text-muted); font-size: 12px;">Оператор проекта</div>
+                <div class="team-info">
+                    <div class="name">KRUIZ</div>
+                    <div class="role">Совладелец проекта - №3</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="avatar"><i class="fa-regular fa-user"></i></div>
+                <div class="team-info">
+                    <div class="name">supernegr767</div>
+                    <div class="role">Дизайнер проекта</div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="avatar"><i class="fa-regular fa-user"></i></div>
+                <div class="team-info">
+                    <div class="name">мат!х | moral</div>
+                    <div class="role">Оператор проекта</div>
                 </div>
             </div>
         </section>
 
-        <!-- Финальный призыв -->
-        <section class="section card" style="background: linear-gradient(180deg, #1f1f3a, #0f0f16); border: none;">
-            <h2 class="section-title" style="font-size: 24px;">Наведём<br>порядок?</h2>
+        <!-- Финальный блок (Призыв к действию) -->
+        <section class="section card" style="background: linear-gradient(180deg, #11111c, #0a0a0f); border: 1px solid #1a1a24; padding: 40px 20px;">
+            <h2 class="section-title" style="font-size: 24px;">Готов навести<br>порядок?</h2>
             <p class="section-desc">Storm Snos помогает избавиться от нарушителей в твоём Telegram сообществе. Автоматическая блокировка через множество методов — гарантированный результат.</p>
-            <a href="#" class="btn" style="background: transparent; border: 1px solid #5b21ff;">Готов, перейти к зеркалам <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#" class="btn btn-outline" style="border-color: #5b21ff; color: white;">Готов, перейти к зеркалам <i class="fa-solid fa-arrow-right"></i></a>
         </section>
 
         <!-- Подвал -->
@@ -518,6 +710,7 @@
                     <li><a href="#">Возможности</a></li>
                     <li><a href="#">Статистика</a></li>
                     <li><a href="#">Цены</a></li>
+                    <li><a href="#">Доп. Пакеты</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">Команда</a></li>
                 </ul>
@@ -528,33 +721,34 @@
                     <li><a href="#">Публичная оферта</a></li>
                 </ul>
             </div>
+            <div class="copyright">
+                © 2026 Storm Snos. Все права защищены.
+            </div>
         </footer>
     </div>
 
     <!-- Плавающая плашка внизу -->
     <div class="floating-news">
         <div class="badge">Новости</div>
-        <div style="font-size: 12px; color: #ccc; line-height: 1.2;">
+        <div style="font-size: 13px; color: #d1d1d6; line-height: 1.3; flex-grow: 1; margin-left: 5px;">
             Смотри актуальные<br>новости об обновлениях
         </div>
-        <i class="fa-solid fa-chevron-right" style="color: #6b40ff;"></i>
+        <i class="fa-solid fa-chevron-right" style="color: #6b40ff; font-size: 14px;"></i>
     </div>
 
-    <!-- Простой скрипт для аккордеона FAQ -->
+    <!-- Скрипт для аккордеона FAQ -->
     <script>
         function toggleFaq(element) {
-            const answer = element.nextElementSibling;
-            const icon = element.querySelector('i');
+            const parentItem = element.parentElement;
             
-            if (answer.style.display === "block") {
-                answer.style.display = "none";
-                icon.classList.remove('fa-chevron-up');
-                icon.classList.add('fa-chevron-down');
-            } else {
-                answer.style.display = "block";
-                icon.classList.remove('fa-chevron-down');
-                icon.classList.add('fa-chevron-up');
-            }
+            // Если нужно, чтобы при открытии одного, другие закрывались (по желанию):
+            // const allItems = document.querySelectorAll('.faq-item');
+            // allItems.forEach(item => {
+            //     if (item !== parentItem) item.classList.remove('active');
+            // });
+
+            // Переключаем класс active у текущего
+            parentItem.classList.toggle('active');
         }
     </script>
 </body>
