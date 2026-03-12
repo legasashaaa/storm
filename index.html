@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Storm Snos</title>
-    
-    <!-- Подключение шрифтов и иконок для обеих страниц -->
+    <!-- Подключение шрифтов и иконок -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* =========================================
-           ОБЩИЕ ПЕРЕМЕННЫЕ И БАЗА
-           ========================================= */
+        /* --- Базовые переменные (из index.html 99) --- */
         :root {
             --bg-color: #030305;
             --text-main: #ffffff;
@@ -26,19 +23,18 @@
             --border-color: #1a1a24;
             --badge-yellow: #ffc107;
             
-            /* Переменные для страницы новостей */
-            --news-text-secondary: #9ba1b3;
-            --news-card-bg: #0b0d14;
-            --news-card-border: #1a1d2d;
-            --news-accent-blue: #3b82f6;
-            --news-tag-bg: #111424;
-            --news-tag-border: #232845;
+            /* Для новостной страницы */
+            --text-secondary: #9ba1b3;
+            --card-border: #1a1d2d;
+            --tag-bg: #111424;
+            --tag-border: #232845;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -47,19 +43,26 @@
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.5;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         /* =========================================
-           СТИЛИ ДЛЯ СТРАНИЦЫ НОВОСТЕЙ (ПЕРВЫЙ ЭКРАН)
+           СТИЛИ ДЛЯ НОВОСТНОЙ СТРАНИЦЫ (ai_studio_code)
            ========================================= */
-        #news-view {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
+        .news-page {
             position: relative;
-            display: block; /* Показываем при загрузке */
+            min-height: 100vh;
         }
 
-        .news-background-glow {
+        .news-page .background-glow {
             position: absolute;
             top: -20%;
             left: 50%;
@@ -71,13 +74,13 @@
             pointer-events: none;
         }
 
-        .news-container {
+        .news-page .news-container {
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        .news-header {
+        .news-page header {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -85,7 +88,7 @@
             position: relative;
         }
 
-        .back-button {
+        .news-page .back-button {
             position: absolute;
             left: 0;
             display: flex;
@@ -96,60 +99,64 @@
             font-size: 15px;
             font-weight: 400;
             cursor: pointer;
+            background: none;
+            border: none;
         }
 
-        .back-button svg {
+        .news-page .back-button svg {
             width: 20px;
             height: 20px;
             fill: currentColor;
         }
 
-        .news-logo-container {
+        .news-page .logo-container {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .news-logo-container svg {
+        .news-page .logo-container svg {
             width: 28px;
             height: 28px;
             fill: #ffffff;
         }
 
-        .news-logo-container h1 {
+        .news-page .logo-container h1 {
             font-size: 22px;
             font-weight: 700;
             letter-spacing: 0.5px;
+            font-family: 'Inter', sans-serif;
         }
 
-        .hero-section {
+        .news-page .hero-section {
             text-align: center;
             margin-bottom: 30px;
         }
 
-        .hero-section h2 {
+        .news-page .hero-section h2 {
             font-size: 46px;
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 15px;
             letter-spacing: -0.5px;
+            font-family: 'Inter', sans-serif;
         }
 
-        .hero-section p {
-            color: var(--news-text-secondary);
+        .news-page .hero-section p {
+            color: var(--text-secondary);
             font-size: 15px;
             max-width: 480px;
             margin: 0 auto;
         }
 
-        .hero-section p span {
+        .news-page .hero-section p span {
             color: var(--text-main);
             font-weight: 500;
         }
 
-        .info-banner {
+        .news-page .info-banner {
             background-color: rgba(15, 18, 30, 0.4);
-            border: 1px solid var(--news-card-border);
+            border: 1px solid var(--card-border);
             border-radius: 12px;
             padding: 16px 20px;
             display: flex;
@@ -159,97 +166,98 @@
             backdrop-filter: blur(10px);
         }
 
-        .news-dot {
+        .news-page .dot {
             width: 8px;
             height: 8px;
-            background-color: var(--news-accent-blue);
+            background-color: var(--accent-blue);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--news-accent-blue);
+            box-shadow: 0 0 10px var(--accent-blue);
             flex-shrink: 0;
         }
 
-        .info-banner p {
+        .news-page .info-banner p {
             font-size: 14px;
             color: #d1d5db;
         }
 
-        .news-feed {
+        .news-page .news-feed {
             display: flex;
             flex-direction: column;
             gap: 20px;
             padding-bottom: 50px;
         }
 
-        .news-card {
-            background-color: var(--news-card-bg);
-            border: 1px solid var(--news-card-border);
+        .news-page .news-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 30px 25px;
         }
 
-        .news-card h3 {
+        .news-page .news-card h3 {
             font-size: 26px;
             font-weight: 700;
             margin-bottom: 16px;
             line-height: 1.2;
+            font-family: 'Inter', sans-serif;
         }
 
-        .card-meta {
+        .news-page .card-meta {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 20px;
         }
 
-        .tag, .date {
-            background-color: var(--news-tag-bg);
-            border: 1px solid var(--news-tag-border);
+        .news-page .tag, .news-page .date {
+            background-color: var(--tag-bg);
+            border: 1px solid var(--tag-border);
             color: #8b94b2;
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 400;
+            font-family: 'Inter', sans-serif;
         }
 
-        .tag {
+        .news-page .tag {
             color: #a5b4fc;
         }
 
-        .news-separator {
+        .news-page .separator {
             color: #3f4661;
             font-size: 20px;
             line-height: 0;
         }
 
-        .news-card p {
+        .news-page .news-card p {
             color: #a0a6b8;
             font-size: 15px;
             line-height: 1.6;
+            font-family: 'Inter', sans-serif;
         }
 
         @media (max-width: 480px) {
-            .hero-section h2 { font-size: 36px; }
-            .news-card h3 { font-size: 22px; }
-            .news-card { padding: 20px 15px; }
+            .news-page .hero-section h2 {
+                font-size: 36px;
+            }
+            .news-page .news-card h3 {
+                font-size: 22px;
+            }
+            .news-page .news-card {
+                padding: 20px 15px;
+            }
         }
 
         /* =========================================
-           СТИЛИ ДЛЯ ГЛАВНОГО МЕНЮ И ЗЕРКАЛА
+           СТИЛИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ (index.html 99)
            ========================================= */
-        #main-view, #mirror-view {
-            font-family: 'Montserrat', sans-serif;
-            display: none; /* Скрыты при загрузке */
+        .main-page {
+            display: none;
             padding-bottom: 80px;
         }
 
-        .main-container {
-            width: 100%;
-            max-width: 500px; 
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .main-header {
+        .main-page header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -262,7 +270,7 @@
             border-bottom: 1px solid rgba(255,255,255,0.02);
         }
 
-        .main-logo {
+        .main-page .logo {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -270,7 +278,7 @@
             font-weight: 800;
         }
 
-        .header-icon {
+        .main-page .header-icon {
             font-size: 20px;
             color: var(--text-main);
             cursor: pointer;
@@ -278,12 +286,12 @@
             text-align: center;
         }
 
-        .main-hero {
+        .main-page .hero {
             text-align: center;
             padding: 50px 0 40px;
             position: relative;
         }
-        .hero-glow {
+        .main-page .hero-glow {
             position: absolute;
             top: -50px;
             left: 50%;
@@ -295,7 +303,7 @@
             z-index: -1;
         }
 
-        .trust-badge {
+        .main-page .trust-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -306,7 +314,7 @@
             font-size: 12px;
             margin-bottom: 25px;
         }
-        .trust-badge .dot {
+        .main-page .trust-badge .dot {
             width: 8px;
             height: 8px;
             background: #00ff88;
@@ -314,18 +322,22 @@
             box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
         }
 
-        .main-hero h1 { font-size: 38px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; text-transform: uppercase; }
-        .main-hero h1 .gradient-text {
+        .main-page .hero h1 { font-size: 38px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; text-transform: uppercase; }
+        .main-page .hero h1 .gradient-text {
             background: linear-gradient(90deg, #6b40ff, #3851ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: block;
         }
-        .main-hero p { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
+        .main-page .hero p { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
 
-        .btn-group { display: flex; flex-direction: column; gap: 12px; }
+        .main-page .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
-        .btn {
+        .main-page .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -342,23 +354,23 @@
             cursor: pointer;
             transition: 0.3s;
         }
-        .btn-outline {
+        .main-page .btn-outline {
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-main);
         }
-        .btn-dark {
+        .main-page .btn-dark {
             background: #14141e;
             border: 1px solid var(--border-color);
             color: var(--text-main);
         }
 
-        .section { padding: 40px 0; text-align: center; }
-        .section-subtitle { color: var(--accent-purple); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
-        .section-title { font-size: 26px; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
-        .section-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
+        .main-page .section { padding: 40px 0; text-align: center; }
+        .main-page .section-subtitle { color: var(--accent-purple); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .main-page .section-title { font-size: 26px; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
+        .main-page .section-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
         
-        .card {
+        .main-page .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
@@ -367,100 +379,174 @@
             position: relative;
         }
 
-        .methods-scroll { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 10px; scroll-snap-type: x mandatory; }
-        .methods-scroll::-webkit-scrollbar { display: none; }
-        .method-item { flex: 0 0 auto; color: var(--text-muted); font-size: 16px; font-weight: 600; scroll-snap-align: start; }
-        .method-item.active { color: white; }
+        .main-page .methods-scroll { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 10px; scroll-snap-type: x mandatory; }
+        .main-page .methods-scroll::-webkit-scrollbar { display: none; }
+        .main-page .method-item { flex: 0 0 auto; color: var(--text-muted); font-size: 16px; font-weight: 600; scroll-snap-align: start; }
+        .main-page .method-item.active { color: white; }
 
-        .video-container { width: 100%; background: #050508; border-radius: 15px; overflow: hidden; position: relative; border: 1px solid var(--border-color); }
-        .video-poster { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px 20px; cursor: pointer; }
-        .ghost-glow-icon { font-size: 60px; color: white; text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(91, 33, 255, 0.6); margin-bottom: 30px; }
-        .video-start-btn { background: rgba(255, 255, 255, 0.1); color: white; width: 100%; padding: 12px; border-radius: 10px; font-size: 16px; font-weight: 600; text-align: center; backdrop-filter: blur(5px); }
-        video { width: 100%; border-radius: 15px; display: block; }
-
-        .feature-icon { width: 44px; height: 44px; background: rgba(91, 33, 255, 0.1); color: #835cff; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 15px; }
-        .stat-card { text-align: center; padding: 25px 20px; }
-        .stat-label { color: var(--text-muted); font-size: 14px; margin-bottom: 5px; }
-        .stat-value { font-size: 32px; font-weight: 800; }
-        
-        .tariff-card { text-align: left; padding-top: 35px; }
-        .tariff-title { color: var(--text-muted); font-size: 15px; margin-bottom: 5px; }
-        .tariff-price { font-size: 32px; font-weight: 800; margin-bottom: 5px; }
-        .tariff-price span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
-        .tariff-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
-        .badge-top { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
-        .badge-purple { background: #1a103c; color: #a78bfa; border: 1px solid #5b21ff; }
-        .badge-yellow { background: #2a220a; color: var(--badge-yellow); border: 1px solid var(--badge-yellow); }
-        .addon-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; font-size: 14px; color: var(--text-muted); }
-        .addon-check i { color: var(--accent-purple); margin-top: 3px; }
-
-        .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 10px; overflow: hidden; text-align: left; }
-        .faq-question { padding: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 15px; cursor: pointer; user-select: none; }
-        .faq-question i { color: var(--text-muted); transition: transform 0.3s; }
-        .faq-answer { padding: 0 20px 20px; color: var(--text-muted); font-size: 14px; line-height: 1.6; display: none; }
-        .faq-item.active .faq-answer { display: block; }
-        .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--text-main); }
-
-        .team-member { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; text-align: left; }
-        .avatar { width: 46px; height: 46px; background: #14141f; color: #6b40ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-        .team-info .name { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
-        .team-info .role { color: var(--text-muted); font-size: 12px; }
-
-        footer { padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 20px; }
-        .copyright { margin-top: 30px; font-size: 13px; color: var(--text-muted); text-align: left; }
-        
-        .floating-news {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(15, 15, 22, 0.85);
-            border: 1px solid #3244ff;
-            padding: 12px 20px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            width: calc(100% - 40px);
-            max-width: 460px;
-            justify-content: space-between;
+        .main-page .video-container {
+            width: 100%;
+            background: #050508;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border-color);
         }
-        .floating-news .badge { background: linear-gradient(90deg, #5b21ff, #3244ff); color: white; padding: 6px 12px; border-radius: 15px; font-size: 12px; font-weight: 700; }
+        
+        .main-page .video-poster {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px 20px;
+            cursor: pointer;
+        }
 
-        .mirror-header { text-align: center; padding: 50px 0 30px; position: relative; }
+        .main-page .ghost-glow-icon {
+            font-size: 60px;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(91, 33, 255, 0.6);
+            margin-bottom: 30px;
+        }
+
+        .main-page .video-start-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .main-page video {
+            width: 100%;
+            border-radius: 15px;
+            display: block;
+        }
+
+        .main-page .feature-icon { width: 44px; height: 44px; background: rgba(91, 33, 255, 0.1); color: #835cff; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 15px; }
+        .main-page .stat-card { text-align: center; padding: 25px 20px; }
+        .main-page .stat-label { color: var(--text-muted); font-size: 14px; margin-bottom: 5px; }
+        .main-page .stat-value { font-size: 32px; font-weight: 800; }
+        
+        .main-page .tariff-card { text-align: left; padding-top: 35px; }
+        .main-page .tariff-title { color: var(--text-muted); font-size: 15px; margin-bottom: 5px; }
+        .main-page .tariff-price { font-size: 32px; font-weight: 800; margin-bottom: 5px; }
+        .main-page .tariff-price span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+        .main-page .tariff-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+
+        .main-page .badge-top { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+        .main-page .badge-purple { background: #1a103c; color: #a78bfa; border: 1px solid #5b21ff; }
+        .main-page .badge-yellow { background: #2a220a; color: var(--badge-yellow); border: 1px solid var(--badge-yellow); }
+
+        .main-page .addon-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; font-size: 14px; color: var(--text-muted); }
+        .main-page .addon-check i { color: var(--accent-purple); margin-top: 3px; }
+
+        .main-page .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 10px; overflow: hidden; text-align: left; }
+        .main-page .faq-question { padding: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 15px; cursor: pointer; user-select: none; }
+        .main-page .faq-question i { color: var(--text-muted); transition: transform 0.3s; }
+        .main-page .faq-answer { padding: 0 20px 20px; color: var(--text-muted); font-size: 14px; line-height: 1.6; display: none; }
+        .main-page .faq-item.active .faq-answer { display: block; }
+        .main-page .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--text-main); }
+
+        .main-page .team-member { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; text-align: left; }
+        .main-page .avatar { width: 46px; height: 46px; background: #14141f; color: #6b40ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .main-page .team-info .name { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
+        .main-page .team-info .role { color: var(--text-muted); font-size: 12px; }
+
+        .main-page footer { padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 20px; }
+        .main-page .copyright { margin-top: 30px; font-size: 13px; color: var(--text-muted); text-align: left; }
+
+        /* Стили для зеркала внутри главной страницы (для согласованности) */
+        #mirror-view {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .mirror-header {
+            text-align: center;
+            padding: 50px 0 30px;
+            position: relative;
+        }
+        
         .mirror-header h1 { font-size: 32px; font-weight: 800; margin-bottom: 5px; }
         .mirror-header p { color: var(--text-muted); font-size: 14px; }
 
-        #loading-state { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 25px; display: flex; align-items: center; gap: 15px; font-weight: 600; color: var(--text-muted); }
-        .spinner { width: 20px; height: 20px; border: 3px solid rgba(255, 255, 255, 0.1); border-top: 3px solid var(--accent-purple); border-radius: 50%; animation: spin 1s linear infinite; }
+        #loading-state {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--accent-purple);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        #result-state { display: none; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 40px 20px 25px; text-align: center; position: relative; box-shadow: 0 0 40px rgba(91, 33, 255, 0.1); }
-        .link-icon-circle { width: 50px; height: 50px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--text-muted); margin: 0 auto 20px; }
+        #result-state {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 20px 25px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 40px rgba(91, 33, 255, 0.1);
+        }
+
+        .link-icon-circle {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--text-muted);
+            margin: 0 auto 20px;
+        }
+
         .bot-username { font-size: 26px; font-weight: 800; margin-bottom: 5px; }
         .bot-link { color: var(--text-muted); font-size: 13px; margin-bottom: 30px; }
-        .mirror-buttons { display: flex; flex-direction: column; gap: 12px; }
 
+        .mirror-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
     </style>
 </head>
 <body>
-
     <!-- =========================================
-         ЭКРАН 1: СТРАНИЦА НОВОСТЕЙ (ОТКРЫВАЕТСЯ ПЕРВОЙ)
+         НОВОСТНАЯ СТРАНИЦА (ai_studio_code) - ОТОБРАЖАЕТСЯ ПЕРВОЙ
          ========================================= -->
-    <div id="news-view">
-        <div class="news-background-glow"></div>
+    <div class="news-page" id="news-view">
+        <div class="background-glow"></div>
         <div class="news-container">
-            <header class="news-header">
-                <a href="#" class="back-button" id="btn-back-to-main">
+            <header>
+                <button class="back-button" onclick="goToMainPage()">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
                     </svg>
                     Назад
-                </a>
-                <div class="news-logo-container">
+                </button>
+                <div class="logo-container">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2C7.58 2 4 5.58 4 10v12l2.5-2.5L9 22l3-2.5 3 2.5 2.5-2.5L20 22V10c0-4.42-3.58-8-8-8zm-2 9c-.83 0-1.5-.67-1.5-1.5S9.17 8 10 8s1.5.67 1.5 1.5S10.83 11 10 11zm4 0c-.83 0-1.5-.67-1.5-1.5S13.17 8 14 8s1.5.67 1.5 1.5S14.83 11 14 11z"/>
                     </svg>
@@ -475,7 +561,7 @@
                 </section>
 
                 <div class="info-banner">
-                    <div class="news-dot"></div>
+                    <div class="dot"></div>
                     <p>Актуальные обновления проекта в формате <strong>ленты новостей</strong>.</p>
                 </div>
 
@@ -484,7 +570,7 @@
                         <h3>Запуск StormSnos<br>v2.0</h3>
                         <div class="card-meta">
                             <span class="tag">Администрация</span>
-                            <span class="news-separator">•</span>
+                            <span class="separator">•</span>
                             <span class="date">2026-02-17</span>
                         </div>
                         <p>Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</p>
@@ -494,7 +580,7 @@
                         <h3>Обновление<br>безопасности</h3>
                         <div class="card-meta">
                             <span class="tag">Администрация</span>
-                            <span class="news-separator">•</span>
+                            <span class="separator">•</span>
                             <span class="date">2026-02-17</span>
                         </div>
                         <p>Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</p>
@@ -504,13 +590,12 @@
         </div>
     </div>
 
-
     <!-- =========================================
-         ЭКРАН 2: ГЛАВНОЕ МЕНЮ (ПОСЛЕ НАЖАТИЯ НАЗАД)
+         ГЛАВНАЯ СТРАНИЦА (index.html 99) СО ВСЕМ КОНТЕНТОМ
          ========================================= -->
-    <div id="main-view">
-        <header class="main-header main-container">
-            <div class="main-logo">
+    <div class="main-page" id="main-view">
+        <header class="container">
+            <div class="logo">
                 <i class="fa-solid fa-ghost"></i> Storm Snos
             </div>
             <div class="header-icon menu-btn">
@@ -518,8 +603,8 @@
             </div>
         </header>
 
-        <div class="main-container">
-            <section class="main-hero">
+        <div class="container">
+            <section class="hero">
                 <div class="hero-glow"></div>
                 <div class="trust-badge">
                     <div class="dot"></div>
@@ -549,6 +634,7 @@
                 <div class="section-subtitle">Видеообзор</div>
                 <h2 class="section-title">Видеообзор</h2>
                 <p class="section-desc">Небольшой обзор возможностей Storm Snos и того, как выглядит работа с платформой.</p>
+                
                 <div class="video-container">
                     <div class="video-poster" id="custom-poster" onclick="playPromoVideo()">
                         <i class="fa-solid fa-ghost ghost-glow-icon"></i>
@@ -564,6 +650,7 @@
             <section class="section">
                 <div class="section-subtitle">Возможности</div>
                 <h2 class="section-title">Хороший инструмент<br>для комфортной<br>работы</h2>
+                
                 <div class="card" style="text-align: left;">
                     <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
                     <h3 style="margin-bottom: 10px; font-size: 18px;">Множество Методов</h3>
@@ -580,6 +667,7 @@
                 <div class="section-subtitle">Статистика</div>
                 <h2 class="section-title">Наша статистика</h2>
                 <p class="section-desc">Статистика обновляется каждые 24 часа</p>
+
                 <div class="card stat-card"><div class="stat-label">Пользователей</div><div class="stat-value">113609</div></div>
                 <div class="card stat-card"><div class="stat-label">Обновлений вышло</div><div class="stat-value">50+</div></div>
                 <div class="card stat-card"><div class="stat-label">Покупателей</div><div class="stat-value">3940</div></div>
@@ -588,6 +676,7 @@
             <section class="section">
                 <div class="section-subtitle">Тарифы</div>
                 <h2 class="section-title">Честные цены на<br>подписки</h2>
+                
                 <div class="card tariff-card">
                     <div class="tariff-title">1 день</div>
                     <div class="tariff-price">249 ₽ <span>/ One-time</span></div>
@@ -631,6 +720,7 @@
             <section class="section">
                 <div class="section-subtitle">Дополнения</div>
                 <h2 class="section-title">Дополнительные<br>пакеты</h2>
+                
                 <div class="card tariff-card" style="padding-top: 25px;">
                     <div class="tariff-title">Лайт список</div>
                     <div class="tariff-price">150 ₽ <span>/ One-time</span></div>
@@ -670,24 +760,17 @@
                 <div class="copyright">© 2026 Storm Snos. Все права защищены.</div>
             </footer>
         </div>
-
-        <div class="floating-news">
-            <div class="badge">Новости</div>
-            <div style="font-size: 13px; color: #d1d1d6; line-height: 1.3; flex-grow: 1; margin-left: 5px;">Смотри актуальные<br>новости об обновлениях</div>
-            <i class="fa-solid fa-chevron-right" style="color: #6b40ff; font-size: 14px;"></i>
-        </div>
     </div>
 
-
     <!-- =========================================
-         ЭКРАН 3: ЗЕРКАЛО (ОТКРЫВАЕТСЯ ИЗ ГЛАВНОГО МЕНЮ)
+         ВИД "ЗЕРКАЛО" (внутри главной страницы)
          ========================================= -->
     <div id="mirror-view">
-        <header class="main-header main-container" style="border-bottom: none;">
-            <div class="header-icon" onclick="goBackToMain()">
+        <header class="container" style="border-bottom: none;">
+            <div class="header-icon" onclick="goBackFromMirror()">
                 <i class="fa-solid fa-arrow-left"></i>
             </div>
-            <div class="main-logo">
+            <div class="logo">
                 <i class="fa-solid fa-ghost"></i> Storm Snos
             </div>
             <div class="header-icon" onclick="loadBot()">
@@ -695,7 +778,7 @@
             </div>
         </header>
 
-        <div class="main-container">
+        <div class="container">
             <div class="hero-glow"></div>
             
             <div class="mirror-header">
@@ -725,40 +808,51 @@
         </div>
     </div>
 
-    <!-- =========================================
-         JAVASCRIPT
-         ========================================= -->
     <script>
-        // --- 1. ПЕРЕХОД С НОВОСТЕЙ В ГЛАВНОЕ МЕНЮ ---
-        document.getElementById('btn-back-to-main').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Скрываем новости, показываем главное меню
-            document.getElementById('news-view').style.display = 'none';
-            document.getElementById('main-view').style.display = 'block';
-            window.scrollTo(0, 0);
-        });
+        // Элементы страниц
+        const newsView = document.getElementById('news-view');
+        const mainView = document.getElementById('main-view');
+        const mirrorView = document.getElementById('mirror-view');
+        
+        // При загрузке показываем только новостную страницу
+        newsView.style.display = 'block';
+        mainView.style.display = 'none';
+        mirrorView.style.display = 'none';
 
-        // --- 2. ВОСПРОИЗВЕДЕНИЕ ВИДЕО ---
+        // Функция перехода на главную страницу (из новостей)
+        function goToMainPage() {
+            newsView.style.display = 'none';
+            mainView.style.display = 'block';
+            mirrorView.style.display = 'none';
+            window.scrollTo(0, 0);
+            
+            // Сбрасываем видео, если оно играло
+            const video = document.getElementById('promo-video');
+            if (video) {
+                video.pause();
+                video.style.display = 'none';
+                const poster = document.getElementById('custom-poster');
+                if (poster) poster.style.display = 'flex';
+            }
+        }
+
+        // Функции для главной страницы
         function playPromoVideo() {
             const poster = document.getElementById('custom-poster');
             const video = document.getElementById('promo-video');
+            
             poster.style.display = 'none';
             video.style.display = 'block';
             video.play();
         }
 
-        // --- 3. АККОРДЕОН FAQ ---
         function toggleFaq(element) {
             element.parentElement.classList.toggle('active');
         }
 
-        // --- 4. НАВИГАЦИЯ К ЗЕРКАЛАМ ---
+        // Функции для зеркала
         const mirrorTriggers = document.querySelectorAll('.mirror-trigger');
-        const mainView = document.getElementById('main-view');
-        const mirrorView = document.getElementById('mirror-view');
-        const loadingState = document.getElementById('loading-state');
-        const resultState = document.getElementById('result-state');
-
+        
         mirrorTriggers.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -770,30 +864,32 @@
             mainView.style.display = 'none';
             mirrorView.style.display = 'block';
             window.scrollTo(0, 0);
+            
             loadBot();
         }
 
-        // --- 5. НАВИГАЦИЯ ИЗ ЗЕРКАЛА В ГЛАВНОЕ МЕНЮ ---
-        function goBackToMain() {
+        function goBackFromMirror() {
             mirrorView.style.display = 'none';
             mainView.style.display = 'block';
             window.scrollTo(0, 0);
             
             const video = document.getElementById('promo-video');
-            video.pause();
+            if (video) video.pause();
         }
 
-        // --- 6. ИМИТАЦИЯ ЗАГРУЗКИ ЗЕРКАЛА ---
         function loadBot() {
+            const loadingState = document.getElementById('loading-state');
+            const resultState = document.getElementById('result-state');
+            
             loadingState.style.display = 'flex';
             resultState.style.display = 'none';
+
             setTimeout(() => {
                 loadingState.style.display = 'none';
                 resultState.style.display = 'block';
             }, 1500);
         }
 
-        // --- 7. КОПИРОВАНИЕ ССЫЛКИ ---
         function copyBotLink(btnElement) {
             navigator.clipboard.writeText("https://t.me/storm_snoos_bot").then(() => {
                 const originalText = btnElement.innerText;
