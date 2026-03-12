@@ -74,16 +74,12 @@
             text-align: center;
         }
 
-        .header-back {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
+        /* --- Главный экран --- */
+        .hero {
+            text-align: center;
+            padding: 50px 0 40px;
+            position: relative;
         }
-
-        /* --- Свечение на заднем фоне --- */
         .hero-glow {
             position: absolute;
             top: -50px;
@@ -94,84 +90,136 @@
             background: radial-gradient(circle, rgba(91,33,255,0.35) 0%, rgba(50,68,255,0.15) 50%, transparent 70%);
             filter: blur(50px);
             z-index: -1;
-            pointer-events: none;
         }
 
-        /* --- Общие элементы --- */
-        .hero { text-align: center; padding: 50px 0 40px; position: relative; }
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+        .trust-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
         .hero h1 { font-size: 38px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; text-transform: uppercase; }
-        .hero h1 .gradient-text { background: linear-gradient(90deg, #6b40ff, #3851ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
+        .hero h1 .gradient-text {
+            background: linear-gradient(90deg, #6b40ff, #3851ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
         .hero p { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
 
-        .btn-group { display: flex; flex-direction: column; gap: 12px; }
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(90deg, #5b21ff, #3244ff); color: white; text-decoration: none; padding: 16px 20px; border-radius: 12px; font-weight: 600; font-size: 15px; width: 100%; border: none; cursor: pointer; transition: 0.3s; }
-        .btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
-        .btn-dark { background: #14141e; border: 1px solid var(--border-color); color: var(--text-main); }
+        /* --- Кнопки --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(90deg, #5b21ff, #3244ff);
+            color: white;
+            text-decoration: none;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+        .btn-dark {
+            background: #14141e;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
 
+        /* --- Общие секции --- */
         .section { padding: 40px 0; text-align: center; }
         .section-subtitle { color: var(--accent-purple); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
         .section-title { font-size: 26px; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
         .section-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
         
-        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 25px 20px; margin-bottom: 15px; position: relative; }
-
-        /* --- Секция НОВОСТИ --- */
-        #news-view { display: block; min-height: 100vh; }
-        
-        .news-hero-text { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
-        .news-link { color: #8a63ff; text-decoration: underline; text-underline-offset: 3px; }
-        .news-bold { font-weight: 700; color: white; }
-
-        .info-badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(30, 30, 45, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 12px 16px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            color: #d1d1d6;
-            text-align: left;
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin-bottom: 15px;
+            position: relative;
         }
-        .info-badge .blue-dot { width: 8px; height: 8px; background: #3244ff; border-radius: 50%; box-shadow: 0 0 10px #3244ff; flex-shrink: 0; }
-        
-        /* Бейджи на главном */
-        .trust-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 8px 16px; border-radius: 30px; font-size: 12px; margin-bottom: 25px; }
-        .trust-badge .dot { width: 8px; height: 8px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 10px rgba(0, 255, 136, 0.5); }
 
-        .news-card { text-align: left; padding: 30px 20px; }
-        .news-card h3 { font-size: 24px; font-weight: 800; margin-bottom: 15px; }
-        
-        .news-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-        .meta-tag { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1px solid transparent; }
-        .meta-admin { background: rgba(91, 33, 255, 0.15); color: #b19afa; border-color: rgba(91, 33, 255, 0.3); }
-        .meta-date { background: transparent; color: var(--text-muted); border-color: var(--border-color); }
-        .meta-dot { color: var(--text-muted); font-size: 10px; }
-        
-        .news-card p { color: #b0b0bb; font-size: 14px; line-height: 1.6; }
-
-        /* --- Секция Видеообзора --- */
-        .video-container { width: 100%; background: #050508; border-radius: 15px; overflow: hidden; position: relative; border: 1px solid var(--border-color); }
-        .video-poster { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px 20px; cursor: pointer; }
-        .ghost-glow-icon { font-size: 60px; color: white; text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(91, 33, 255, 0.6); margin-bottom: 30px; }
-        .video-start-btn { background: rgba(255, 255, 255, 0.1); color: white; width: 100%; padding: 12px; border-radius: 10px; font-size: 16px; font-weight: 600; text-align: center; backdrop-filter: blur(5px); }
-        video { width: 100%; border-radius: 15px; display: block; }
-
-        /* --- Горизонтальный скролл --- */
         .methods-scroll { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 10px; scroll-snap-type: x mandatory; }
         .methods-scroll::-webkit-scrollbar { display: none; }
         .method-item { flex: 0 0 auto; color: var(--text-muted); font-size: 16px; font-weight: 600; scroll-snap-align: start; }
         .method-item.active { color: white; }
 
-        /* --- Плавающая панель --- */
-        .floating-news { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(15, 15, 22, 0.85); border: 1px solid #3244ff; padding: 12px 20px; border-radius: 30px; display: flex; align-items: center; gap: 15px; backdrop-filter: blur(10px); z-index: 100; width: calc(100% - 40px); max-width: 460px; justify-content: space-between; box-shadow: 0 5px 20px rgba(0,0,0,0.5); cursor: pointer; }
-        .floating-news .badge { background: linear-gradient(90deg, #5b21ff, #3244ff); color: white; padding: 6px 12px; border-radius: 15px; font-size: 12px; font-weight: 700; }
+        /* --- Секция Видеообзора --- */
+        .video-container {
+            width: 100%;
+            background: #050508;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border-color);
+        }
+        
+        .video-poster {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px 20px;
+            cursor: pointer;
+        }
 
-        /* --- Остальные элементы UI --- */
+        .ghost-glow-icon {
+            font-size: 60px;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(91, 33, 255, 0.6);
+            margin-bottom: 30px;
+        }
+
+        .video-start-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        video {
+            width: 100%;
+            border-radius: 15px;
+            display: block;
+        }
+
+        /* --- Различные элементы UI --- */
         .feature-icon { width: 44px; height: 44px; background: rgba(91, 33, 255, 0.1); color: #835cff; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 15px; }
         .stat-card { text-align: center; padding: 25px 20px; }
         .stat-label { color: var(--text-muted); font-size: 14px; margin-bottom: 5px; }
@@ -183,103 +231,139 @@
         .tariff-price { font-size: 32px; font-weight: 800; margin-bottom: 5px; }
         .tariff-price span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
         .tariff-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+
         .badge-top { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
         .badge-purple { background: #1a103c; color: #a78bfa; border: 1px solid #5b21ff; }
         .badge-yellow { background: #2a220a; color: var(--badge-yellow); border: 1px solid var(--badge-yellow); }
+
         .addon-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; font-size: 14px; color: var(--text-muted); }
         .addon-check i { color: var(--accent-purple); margin-top: 3px; }
 
-        /* --- FAQ & Команда --- */
+        /* --- FAQ --- */
         .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 10px; overflow: hidden; text-align: left; }
         .faq-question { padding: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 15px; cursor: pointer; user-select: none; }
         .faq-question i { color: var(--text-muted); transition: transform 0.3s; }
         .faq-answer { padding: 0 20px 20px; color: var(--text-muted); font-size: 14px; line-height: 1.6; display: none; }
         .faq-item.active .faq-answer { display: block; }
         .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--text-main); }
+
+        /* --- Команда --- */
         .team-member { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; text-align: left; }
         .avatar { width: 46px; height: 46px; background: #14141f; color: #6b40ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
         .team-info .name { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
         .team-info .role { color: var(--text-muted); font-size: 12px; }
 
-        /* --- Footer --- */
+        /* --- Подвал и плавающее меню --- */
         footer { padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 20px; }
+        .footer-links h4 { margin: 25px 0 15px; font-size: 16px; font-weight: 700; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.2s;}
         .copyright { margin-top: 30px; font-size: 13px; color: var(--text-muted); text-align: left; }
+        
+        .floating-news {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 15, 22, 0.85);
+            border: 1px solid #3244ff;
+            padding: 12px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            width: calc(100% - 40px);
+            max-width: 460px;
+            justify-content: space-between;
+        }
+        .floating-news .badge { background: linear-gradient(90deg, #5b21ff, #3244ff); color: white; padding: 6px 12px; border-radius: 15px; font-size: 12px; font-weight: 700; }
 
-        /* --- Зеркало --- */
-        #mirror-view { display: none; min-height: 100vh; }
-        .mirror-header { text-align: center; padding: 50px 0 30px; position: relative; }
+        /* =========================================
+           СТРАНИЦА "ЗЕРКАЛО" (SPA ЛОГИКА)
+           ========================================= */
+        #mirror-view {
+            display: none; /* Скрыто по умолчанию */
+            min-height: 100vh;
+        }
+
+        .mirror-header {
+            text-align: center;
+            padding: 50px 0 30px;
+            position: relative;
+        }
+        
         .mirror-header h1 { font-size: 32px; font-weight: 800; margin-bottom: 5px; }
         .mirror-header p { color: var(--text-muted); font-size: 14px; }
-        #loading-state { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 25px; display: flex; align-items: center; gap: 15px; font-weight: 600; color: var(--text-muted); }
-        .spinner { width: 20px; height: 20px; border: 3px solid rgba(255, 255, 255, 0.1); border-top: 3px solid var(--accent-purple); border-radius: 50%; animation: spin 1s linear infinite; }
+
+        /* Блок загрузки */
+        #loading-state {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--accent-purple);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        #result-state { display: none; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 40px 20px 25px; text-align: center; position: relative; box-shadow: 0 0 40px rgba(91, 33, 255, 0.1); }
-        .link-icon-circle { width: 50px; height: 50px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--text-muted); margin: 0 auto 20px; }
+
+        /* Блок результата (ссылка на бота) */
+        #result-state {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 20px 25px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 40px rgba(91, 33, 255, 0.1);
+        }
+
+        .link-icon-circle {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--text-muted);
+            margin: 0 auto 20px;
+        }
+
         .bot-username { font-size: 26px; font-weight: 800; margin-bottom: 5px; }
         .bot-link { color: var(--text-muted); font-size: 13px; margin-bottom: 30px; }
-        .mirror-buttons { display: flex; flex-direction: column; gap: 12px; }
+
+        .mirror-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
     </style>
 </head>
 <body>
 
     <!-- =========================================
-         1. ВИД "НОВОСТИ" (СТАРТОВАЯ СТРАНИЦА)
+         ОСНОВНОЙ ВИД (ГЛАВНАЯ СТРАНИЦА)
          ========================================= -->
-    <div id="news-view">
-        <header class="container" style="justify-content: flex-start; gap: 30px;">
-            <div class="header-back" onclick="showMainPage()">
-                <i class="fa-solid fa-arrow-left"></i> Назад
-            </div>
-            <div class="logo">
-                <i class="fa-solid fa-ghost"></i> Storm Snos
-            </div>
-        </header>
-
-        <div class="container">
-            <div class="hero" style="padding: 30px 0 20px;">
-                <div class="hero-glow"></div>
-                <h1>Новости Storm<br>Snos</h1>
-                <p class="news-hero-text">
-                    На этой <span class="news-link">странице</span> отображаются только те новости, <span class="news-link">которые мы публикуем</span> через <span class="news-bold">Админ-панель Storm Snos</span>.
-                </p>
-            </div>
-
-            <div class="info-badge">
-                <div class="blue-dot"></div> 
-                Актуальные обновления проекта в формате ленты новостей
-            </div>
-
-            <!-- Новость 1 -->
-            <div class="card news-card">
-                <h3>Запуск StormSnos v2.0</h3>
-                <div class="news-meta">
-                    <div class="meta-tag meta-admin">Администрация</div>
-                    <div class="meta-dot"><i class="fa-solid fa-circle"></i></div>
-                    <div class="meta-tag meta-date">2026-02-17</div>
-                </div>
-                <p>Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</p>
-            </div>
-
-            <!-- Новость 2 -->
-            <div class="card news-card">
-                <h3>Обновление безопасности</h3>
-                <div class="news-meta">
-                    <div class="meta-tag meta-admin">Администрация</div>
-                    <div class="meta-dot"><i class="fa-solid fa-circle"></i></div>
-                    <div class="meta-tag meta-date">2026-02-17</div>
-                </div>
-                <p>Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</p>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- =========================================
-         2. ОСНОВНОЙ ВИД (ГЛАВНАЯ СТРАНИЦА)
-         ========================================= -->
-    <!-- Скрыт при загрузке (display: none) -->
-    <div id="main-view" style="display: none;">
+    <div id="main-view">
         <header class="container">
             <div class="logo">
                 <i class="fa-solid fa-ghost"></i> Storm Snos
@@ -290,17 +374,23 @@
         </header>
 
         <div class="container">
+            <!-- Главный экран -->
             <section class="hero">
                 <div class="hero-glow"></div>
-                <div class="trust-badge"><div class="dot"></div>Нам доверяют тысячи пользователей</div>
+                <div class="trust-badge">
+                    <div class="dot"></div>
+                    Нам доверяют тысячи пользователей
+                </div>
                 <h1>STORM SNOS<br><span class="gradient-text">Следит за порядком</span></h1>
                 <p>Сервис помогает очистить Telegram от нарушителей через автоматизированную методы отправки.</p>
                 <div class="btn-group">
+                    <!-- Добавлен класс mirror-trigger для JS -->
                     <button class="btn mirror-trigger">Перейти к зеркалам <i class="fa-solid fa-arrow-right"></i></button>
                     <button class="btn btn-outline">Работы Storm Snos</button>
                 </div>
             </section>
 
+            <!-- Методы -->
             <section class="section">
                 <div class="section-subtitle">Методы</div>
                 <h2 class="section-title">Методы отправки<br>"Telegram"</h2>
@@ -313,16 +403,19 @@
                 </div>
             </section>
 
+            <!-- ВИДЕООБЗОР (Обновлено) -->
             <section class="section">
                 <div class="section-subtitle">Видеообзор</div>
                 <h2 class="section-title">Видеообзор</h2>
                 <p class="section-desc">Небольшой обзор возможностей Storm Snos и того, как выглядит работа с платформой.</p>
                 
                 <div class="video-container">
+                    <!-- Постер с призраком -->
                     <div class="video-poster" id="custom-poster" onclick="playPromoVideo()">
                         <i class="fa-solid fa-ghost ghost-glow-icon"></i>
                         <div class="video-start-btn">Start</div>
                     </div>
+                    <!-- Сам видеоплеер (скрыт до клика) -->
                     <video id="promo-video" controls style="display: none;">
                         <source src="1950005106808122621.mp4" type="video/mp4">
                         Ваш браузер не поддерживает видео.
@@ -330,9 +423,11 @@
                 </div>
             </section>
 
+            <!-- Возможности -->
             <section class="section">
                 <div class="section-subtitle">Возможности</div>
                 <h2 class="section-title">Хороший инструмент<br>для комфортной<br>работы</h2>
+                
                 <div class="card" style="text-align: left;">
                     <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
                     <h3 style="margin-bottom: 10px; font-size: 18px;">Множество Методов</h3>
@@ -341,23 +436,115 @@
                 <div class="card" style="text-align: left;">
                     <div class="feature-icon"><i class="fa-solid fa-bullseye"></i></div>
                     <h3 style="margin-bottom: 10px; font-size: 18px;">Точная Фильтрация</h3>
-                    <p style="color: var(--text-muted); font-size: 14px;">Автоматическая проверка: принимаем запрос на логи только если система подтвердила реальное нарушение...</p>
+                    <p style="color: var(--text-muted); font-size: 14px;">Автоматическая проверка: принимаем запрос на логи только если система подтвердила реальное нарушение правил Telegram и оповещает вас.</p>
                 </div>
             </section>
 
-            <!-- Статистика, Тарифы, FAQ, Команда (сокращено для читаемости, структура сохранена) -->
-            <section class="section"><div class="section-subtitle">Статистика</div><h2 class="section-title">Наша статистика</h2><div class="card stat-card"><div class="stat-label">Пользователей</div><div class="stat-value">113609</div></div><div class="card stat-card"><div class="stat-label">Обновлений вышло</div><div class="stat-value">50+</div></div><div class="card stat-card"><div class="stat-label">Покупателей</div><div class="stat-value">3940</div></div></section>
-            
-            <section class="section"><div class="section-subtitle">Тарифы</div><h2 class="section-title">Честные цены на<br>подписки</h2>
-                <div class="card tariff-card"><div class="tariff-title">1 день</div><div class="tariff-price">249 ₽</div><div class="tariff-desc">Базовый пакет</div><button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button></div>
-                <div class="card tariff-card"><div class="badge-top badge-purple">Больше всего популярно</div><div class="tariff-title">15 дней</div><div class="tariff-price">899 ₽</div><div class="tariff-desc">Профессиональный пакет</div><button class="btn mirror-trigger" style="width:100%">Перейти к зеркалам</button></div>
+            <!-- Статистика -->
+            <section class="section">
+                <div class="section-subtitle">Статистика</div>
+                <h2 class="section-title">Наша статистика</h2>
+                <p class="section-desc">Статистика обновляется каждые 24 часа</p>
+
+                <div class="card stat-card"><div class="stat-label">Пользователей</div><div class="stat-value">113609</div></div>
+                <div class="card stat-card"><div class="stat-label">Обновлений вышло</div><div class="stat-value">50+</div></div>
+                <div class="card stat-card"><div class="stat-label">Покупателей</div><div class="stat-value">3940</div></div>
             </section>
 
-            <footer><div class="copyright">© 2026 Storm Snos. Все права защищены.</div></footer>
+            <!-- Тарифы -->
+            <section class="section">
+                <div class="section-subtitle">Тарифы</div>
+                <h2 class="section-title">Честные цены на<br>подписки</h2>
+                
+                <div class="card tariff-card">
+                    <div class="tariff-title">1 день</div>
+                    <div class="tariff-price">249 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">Базовый пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
+                </div>
+                <div class="card tariff-card">
+                    <div class="tariff-title">3 дня</div>
+                    <div class="tariff-price">499 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">Стандартный пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
+                </div>
+                <div class="card tariff-card">
+                    <div class="tariff-title">7 дней</div>
+                    <div class="tariff-price">699 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">Расширенный пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
+                </div>
+                <div class="card tariff-card">
+                    <div class="badge-top badge-purple">Больше всего популярно</div>
+                    <div class="tariff-title">15 дней</div>
+                    <div class="tariff-price">899 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">Профессиональный пакет</div>
+                    <button class="btn mirror-trigger" style="width:100%">Перейти к зеркалам</button>
+                </div>
+                <div class="card tariff-card">
+                    <div class="tariff-title">30 дней</div>
+                    <div class="tariff-price">1 299 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">Премиум пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
+                </div>
+                <div class="card tariff-card" style="border-color: rgba(255, 193, 7, 0.3);">
+                    <div class="badge-top badge-yellow">Лучший выбор</div>
+                    <div class="tariff-title">Навсегда</div>
+                    <div class="tariff-price">2 499 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc">VIP пакет</div>
+                    <button class="btn mirror-trigger" style="width:100%; box-shadow: 0 0 15px rgba(255,193,7,0.1);">Перейти к зеркалам</button>
+                </div>
+            </section>
+
+            <!-- Доп Пакеты -->
+            <section class="section">
+                <div class="section-subtitle">Дополнения</div>
+                <h2 class="section-title">Дополнительные<br>пакеты</h2>
+                
+                <div class="card tariff-card" style="padding-top: 25px;">
+                    <div class="tariff-title">Лайт список</div>
+                    <div class="tariff-price">150 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc" style="margin-bottom: 15px;">Белый список</div>
+                    <div class="addon-check"><i class="fa-solid fa-check"></i><span>Добавляет вас в белый список сносера</span></div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
+                </div>
+                <div class="card tariff-card" style="padding-top: 25px;">
+                    <div class="tariff-title">VIP-доступ</div>
+                    <div class="tariff-price">500 ₽ <span>/ One-time</span></div>
+                    <div class="tariff-desc" style="margin-bottom: 15px;">Премиум доступ</div>
+                    <div class="addon-check"><i class="fa-solid fa-check"></i><span>Расширенные возможности</span></div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="section">
+                <div class="section-subtitle">FAQ</div>
+                <h2 class="section-title">Часто задаваемые<br>вопросы</h2>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как работает Storm Snos? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Сервис автоматизирует отправку жалоб.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Какой процент успешных сносов? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Успешность более 80%.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как быстро срабатывает система? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">От 1 часа до 3 дней.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Безопасен ли сервис для пользователя? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Да, абсолютно безопасно.</div></div>
+            </section>
+
+            <!-- Команда -->
+            <section class="section">
+                <div class="section-subtitle">Команда</div>
+                <h2 class="section-title">Наша команда</h2>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">???</div><div class="role">Владелец проекта</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">леха уставший</div><div class="role">Совладелец проекта - №2</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">KRUIZ</div><div class="role">Совладелец проекта - №3</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">supernegr767</div><div class="role">Дизайнер проекта</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">мат!х | moral</div><div class="role">Оператор проекта</div></div></div>
+            </section>
+
+            <!-- Подвал -->
+            <footer>
+                <div class="copyright">© 2026 Storm Snos. Все права защищены.</div>
+            </footer>
         </div>
 
-        <!-- Плавающая кнопка "Новости" (Видна только на главной) -->
-        <div class="floating-news" id="floating-news-btn" onclick="showNewsPage()">
+        <div class="floating-news">
             <div class="badge">Новости</div>
             <div style="font-size: 13px; color: #d1d1d6; line-height: 1.3; flex-grow: 1; margin-left: 5px;">Смотри актуальные<br>новости об обновлениях</div>
             <i class="fa-solid fa-chevron-right" style="color: #6b40ff; font-size: 14px;"></i>
@@ -366,11 +553,11 @@
 
 
     <!-- =========================================
-         3. ВИД "ЗЕРКАЛО" (СТРАНИЦА БОТА)
+         ВИД "ЗЕРКАЛО" (СТРАНИЦА БОТА)
          ========================================= -->
     <div id="mirror-view">
-        <header class="container" style="border-bottom: none; justify-content: space-between;">
-            <div class="header-icon" onclick="showMainPage()">
+        <header class="container" style="border-bottom: none;">
+            <div class="header-icon" onclick="goBack()">
                 <i class="fa-solid fa-arrow-left"></i>
             </div>
             <div class="logo">
@@ -382,24 +569,34 @@
         </header>
 
         <div class="container">
-            <div class="hero-glow"></div>
+            <div class="hero-glow"></div> <!-- Заднее свечение -->
             
             <div class="mirror-header">
                 <h1>Зеркало</h1>
                 <p>Ваша персональная ссылка на бота</p>
             </div>
 
+            <!-- Блок загрузки -->
             <div id="loading-state">
-                <div class="spinner"></div> Получаем зеркало...
+                <div class="spinner"></div>
+                Получаем зеркало...
             </div>
 
+            <!-- Готовый результат -->
             <div id="result-state">
-                <div class="link-icon-circle"><i class="fa-solid fa-link"></i></div>
+                <div class="link-icon-circle">
+                    <i class="fa-solid fa-link"></i>
+                </div>
+                
                 <div class="bot-username">@storm_snoos_bot</div>
                 <div class="bot-link">https://t.me/storm_snoos_bot</div>
+
                 <div class="mirror-buttons">
+                    <!-- Ссылка в Telegram -->
                     <a href="https://t.me/storm_snoos_bot" target="_blank" class="btn">Открыть бота</a>
+                    <!-- Копирование ссылки -->
                     <button class="btn btn-dark" onclick="copyBotLink(this)">Копировать ссылку</button>
+                    <!-- Промокод -->
                     <button class="btn btn-dark"><i class="fa-solid fa-gift" style="color:#6b40ff;"></i> Получить промокод</button>
                 </div>
             </div>
@@ -407,94 +604,72 @@
     </div>
 
     <!-- =========================================
-         СКРИПТЫ ЛОГИКИ ПЕРЕХОДОВ И ВИДЕО
+         СКРИПТЫ
          ========================================= -->
     <script>
-        // Элементы страниц
-        const newsView = document.getElementById('news-view');
+        // 1. Воспроизведение видео при клике
+        function playPromoVideo() {
+            const poster = document.getElementById('custom-poster');
+            const video = document.getElementById('promo-video');
+            
+            poster.style.display = 'none'; // Скрываем постер
+            video.style.display = 'block'; // Показываем тег video
+            video.play();                  // Запускаем видео
+        }
+
+        // 2. Аккордеон FAQ
+        function toggleFaq(element) {
+            element.parentElement.classList.toggle('active');
+        }
+
+        // 3. SPA Навигация: Переход на страницу зеркал
+        const mirrorTriggers = document.querySelectorAll('.mirror-trigger');
         const mainView = document.getElementById('main-view');
         const mirrorView = document.getElementById('mirror-view');
-        const floatingNewsBtn = document.getElementById('floating-news-btn');
-        
-        // Видео
-        const videoElement = document.getElementById('promo-video');
-
-        // Элементы загрузки зеркала
         const loadingState = document.getElementById('loading-state');
         const resultState = document.getElementById('result-state');
 
-        // --- ЛОГИКА НАВИГАЦИИ ---
-        
-        // 1. Показать Главную страницу (Main Menu)
-        function showMainPage() {
-            newsView.style.display = 'none';
-            mirrorView.style.display = 'none';
-            
-            mainView.style.display = 'block';
-            floatingNewsBtn.style.display = 'flex'; // возвращаем плавающую кнопку
-            
-            window.scrollTo(0, 0);
-            videoElement.pause(); // Останавливаем видео если оно играло
-        }
-
-        // 2. Показать страницу Новостей (News Page)
-        function showNewsPage() {
-            mainView.style.display = 'none';
-            mirrorView.style.display = 'none';
-            floatingNewsBtn.style.display = 'none'; // Скрываем плавающую кнопку на странице новостей
-            
-            newsView.style.display = 'block';
-            window.scrollTo(0, 0);
-            videoElement.pause(); 
-        }
-
-        // 3. Показать страницу Зеркала (Mirror Page)
-        function showMirrorPage() {
-            mainView.style.display = 'none';
-            newsView.style.display = 'none';
-            floatingNewsBtn.style.display = 'none'; 
-            
-            mirrorView.style.display = 'block';
-            window.scrollTo(0, 0);
-            videoElement.pause(); 
-            
-            loadBot(); // Запуск фейковой загрузки
-        }
-
-        // Привязываем клик к кнопкам "Перейти к зеркалам"
-        document.querySelectorAll('.mirror-trigger').forEach(btn => {
+        // Вешаем клик на все кнопки "Перейти к зеркалам"
+        mirrorTriggers.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 showMirrorPage();
             });
         });
 
-        // --- ОСТАЛЬНАЯ ЛОГИКА ---
-
-        // Воспроизведение видео
-        function playPromoVideo() {
-            const poster = document.getElementById('custom-poster');
-            poster.style.display = 'none';
-            videoElement.style.display = 'block';
-            videoElement.play();
+        function showMirrorPage() {
+            // Переключаем видимость блоков
+            mainView.style.display = 'none';
+            mirrorView.style.display = 'block';
+            window.scrollTo(0, 0); // Прокрутка наверх
+            
+            loadBot(); // Запускаем фейковую загрузку
         }
 
-        // FAQ
-        function toggleFaq(element) {
-            element.parentElement.classList.toggle('active');
+        function goBack() {
+            mirrorView.style.display = 'none';
+            mainView.style.display = 'block';
+            window.scrollTo(0, 0);
+            
+            // Сбрасываем видео, если оно играло
+            const video = document.getElementById('promo-video');
+            video.pause();
         }
 
-        // Имитация загрузки бота
+        // 4. Имитация загрузки зеркала (как на видео)
         function loadBot() {
+            // Сначала показываем загрузку
             loadingState.style.display = 'flex';
             resultState.style.display = 'none';
+
+            // Ждем 1.5 секунды и показываем бота
             setTimeout(() => {
                 loadingState.style.display = 'none';
                 resultState.style.display = 'block';
             }, 1500);
         }
 
-        // Копирование ссылки
+        // 5. Копирование ссылки
         function copyBotLink(btnElement) {
             navigator.clipboard.writeText("https://t.me/storm_snoos_bot").then(() => {
                 const originalText = btnElement.innerText;
