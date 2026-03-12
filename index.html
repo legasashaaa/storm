@@ -34,7 +34,7 @@
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.5;
-            padding-bottom: 80px; 
+            padding-bottom: 0px; /* Убран лишний отступ снизу */
         }
 
         .container {
@@ -144,10 +144,16 @@
             cursor: pointer;
             transition: 0.3s;
         }
+        .btn:hover {
+            opacity: 0.9;
+        }
         .btn-outline {
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-main);
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
         }
         .btn-dark {
             background: #14141e;
@@ -253,39 +259,21 @@
         .team-info .name { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
         .team-info .role { color: var(--text-muted); font-size: 12px; }
 
-        /* --- Подвал и плавающее меню --- */
+        /* --- Подвал и ссылки --- */
         footer { padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 20px; }
-        .footer-links h4 { margin: 25px 0 15px; font-size: 16px; font-weight: 700; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 10px; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.2s;}
-        .copyright { margin-top: 30px; font-size: 13px; color: var(--text-muted); text-align: left; }
-        
-        .floating-news {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(15, 15, 22, 0.85);
-            border: 1px solid #3244ff;
-            padding: 12px 20px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            width: calc(100% - 40px);
-            max-width: 460px;
-            justify-content: space-between;
-        }
-        .floating-news .badge { background: linear-gradient(90deg, #5b21ff, #3244ff); color: white; padding: 6px 12px; border-radius: 15px; font-size: 12px; font-weight: 700; }
+        .footer-links h4 { margin: 15px 0 20px; font-size: 16px; font-weight: 700; text-align: left; }
+        .footer-links ul { list-style: none; text-align: left; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { display: flex; align-items: center; gap: 10px; color: var(--text-muted); text-decoration: none; font-size: 15px; transition: color 0.2s; font-weight: 500;}
+        .footer-links a:hover { color: var(--text-main); }
+        .footer-links a i { color: var(--accent-purple); font-size: 18px; width: 20px; text-align: center;}
+        .copyright { margin-top: 40px; font-size: 13px; color: var(--text-muted); text-align: left; }
 
         /* =========================================
            СТРАНИЦА "ЗЕРКАЛО" (SPA ЛОГИКА)
            ========================================= */
         #mirror-view {
-            display: none; /* Скрыто по умолчанию */
+            display: none;
             min-height: 100vh;
         }
 
@@ -355,7 +343,6 @@
             flex-direction: column;
             gap: 12px;
         }
-
     </style>
 </head>
 <body>
@@ -384,7 +371,6 @@
                 <h1>STORM SNOS<br><span class="gradient-text">Следит за порядком</span></h1>
                 <p>Сервис помогает очистить Telegram от нарушителеи через автоматизированную методы отправки.</p>
                 <div class="btn-group">
-                    <!-- Добавлен класс mirror-trigger для JS -->
                     <button class="btn mirror-trigger">Переити к зеркалам <i class="fa-solid fa-arrow-right"></i></button>
                     <button class="btn btn-outline">Работы Storm Snos</button>
                 </div>
@@ -403,7 +389,7 @@
                 </div>
             </section>
 
-            <!-- ВИДЕООБЗОР (Обновлено) -->
+            <!-- ВИДЕООБЗОР -->
             <section class="section">
                 <div class="section-subtitle">Видеообзор</div>
                 <h2 class="section-title">Видеообзор</h2>
@@ -521,10 +507,10 @@
             <section class="section">
                 <div class="section-subtitle">FAQ</div>
                 <h2 class="section-title">Часто задаваемые<br>вопросы</h2>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как работает Storm Snos? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Сервис автоматизирует отправку жалоб.</div></div>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Какои процент успешных сносов? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Успешность более 80%.</div></div>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как быстро срабатывает система? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">От 1 часа до 3 днеи.</div></div>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Безопасен ли сервис для пользователя? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Да, абсолютно безопасно.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как работает Storm Snos? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Сервис автоматизирует отправку жалоб на нарушителей. Выбирается эффективный метод для конкретной ситуации.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Какои процент успешных сносов? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Успешность более 80%, в зависимости от типа нарушения и выбранного метода.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как быстро срабатывает система? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">В среднем обработка и результат занимают от 1 часа до 3 днеи.</div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Безопасен ли сервис для пользователя? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Да, использование сервиса абсолютно безопасно и анонимно.</div></div>
             </section>
 
             <!-- Команда -->
@@ -538,16 +524,19 @@
                 <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">мат!х | moral</div><div class="role">Оператор проекта</div></div></div>
             </section>
 
-            <!-- Подвал -->
+            <!-- Подвал и ссылки -->
             <footer>
+                <div class="footer-links">
+                    <h4>Полезные ссылки</h4>
+                    <ul>
+                        <li><a href="#"><i class="fa-brands fa-telegram"></i> Наш Telegram канал</a></li>
+                        <li><a href="#"><i class="fa-solid fa-headset"></i> Поддержка</a></li>
+                        <li><a href="#"><i class="fa-solid fa-shield-halved"></i> Правила сервиса</a></li>
+                        <li><a href="#"><i class="fa-solid fa-star"></i> Отзывы пользователей</a></li>
+                    </ul>
+                </div>
                 <div class="copyright">© 2026 Storm Snos. Все права защищены.</div>
             </footer>
-        </div>
-
-        <div class="floating-news">
-            <div class="badge">Новости</div>
-            <div style="font-size: 13px; color: #d1d1d6; line-height: 1.3; flex-grow: 1; margin-left: 5px;">Смотри актуальные<br>новости об обновлениях</div>
-            <i class="fa-solid fa-chevron-right" style="color: #6b40ff; font-size: 14px;"></i>
         </div>
     </div>
 
@@ -656,7 +645,7 @@
             video.pause();
         }
 
-        // 4. Имитация загрузки зеркала (как на видео)
+        // 4. Имитация загрузки зеркала
         function loadBot() {
             // Сначала показываем загрузку
             loadingState.style.display = 'flex';
