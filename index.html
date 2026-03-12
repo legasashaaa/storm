@@ -73,10 +73,10 @@
             text-align: center;
         }
 
-        /* --- Главныи экран --- */
+        /* --- Главный экран --- */
         .hero {
             text-align: center;
-            padding: 50px 0 40px;
+            padding: 40px 0;
             position: relative;
         }
         .hero-glow {
@@ -84,9 +84,9 @@
             top: -50px;
             left: 50%;
             transform: translateX(-50%);
-            width: 350px;
+            width: 100vw;
             height: 350px;
-            background: radial-gradient(circle, rgba(91,33,255,0.35) 0%, rgba(50,68,255,0.15) 50%, transparent 70%);
+            background: radial-gradient(circle, rgba(91,33,255,0.4) 0%, rgba(50,68,255,0.15) 50%, transparent 70%);
             filter: blur(50px);
             z-index: -1;
         }
@@ -95,11 +95,12 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.3);
             padding: 8px 16px;
             border-radius: 30px;
             font-size: 12px;
+            font-weight: 600;
             margin-bottom: 25px;
         }
         .trust-badge .dot {
@@ -110,20 +111,14 @@
             box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
         }
 
-        .hero h1 { font-size: 38px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; text-transform: uppercase; }
+        .hero h1 { font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; }
         .hero h1 .gradient-text {
             background: linear-gradient(90deg, #6b40ff, #3851ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: block;
         }
-        .hero p { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
-
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .hero p { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; font-weight: 500; padding: 0 10px; }
 
         /* --- Кнопки --- */
         .btn {
@@ -148,6 +143,17 @@
             border: 1px solid var(--border-color);
             color: var(--text-main);
         }
+        .btn-yellow-outline {
+            background: transparent;
+            border: 1px solid var(--badge-yellow);
+            color: var(--badge-yellow);
+        }
+        .btn-disabled {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.3);
+            cursor: not-allowed;
+        }
         .btn-dark {
             background: #14141e;
             border: 1px solid var(--border-color);
@@ -155,10 +161,10 @@
         }
 
         /* --- Общие секции --- */
-        .section { padding: 40px 0; text-align: center; }
-        .section-subtitle { color: var(--accent-purple); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
-        .section-title { font-size: 26px; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
-        .section-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
+        .section { padding: 40px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.02); }
+        .section-subtitle { color: #6b40ff; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .section-title { font-size: 26px; font-weight: 800; margin-bottom: 15px; line-height: 1.3; }
+        .section-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; line-height: 1.6; }
         
         .card {
             background: var(--card-bg);
@@ -169,16 +175,11 @@
             position: relative;
         }
 
-        .methods-scroll { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 10px; scroll-snap-type: x mandatory; }
-        .methods-scroll::-webkit-scrollbar { display: none; }
-        .method-item { flex: 0 0 auto; color: var(--text-muted); font-size: 16px; font-weight: 600; scroll-snap-align: start; }
-        .method-item.active { color: white; }
-
         /* --- Секция Видеообзора --- */
         .video-container {
             width: 100%;
-            background: #050508;
-            border-radius: 15px;
+            background: var(--card-bg);
+            border-radius: 20px;
             overflow: hidden;
             position: relative;
             border: 1px solid var(--border-color);
@@ -189,78 +190,80 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px 20px;
+            padding: 50px 20px;
             cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .video-poster:hover {
+            background: rgba(255, 255, 255, 0.02);
         }
 
-        .ghost-glow-icon {
-            font-size: 60px;
+        .play-circle {
+            width: 70px;
+            height: 70px;
+            background: #3244ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
             color: white;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(91, 33, 255, 0.6);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(50, 68, 255, 0.5);
+            padding-left: 5px; /* Visual center for play icon */
         }
 
-        .video-start-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            text-align: center;
-            backdrop-filter: blur(5px);
-        }
+        .video-title-text { font-size: 18px; font-weight: 700; margin-bottom: 5px; }
+        .video-sub-text { color: var(--text-muted); font-size: 13px; }
 
-        video {
-            width: 100%;
-            border-radius: 15px;
-            display: block;
-        }
+        video { width: 100%; display: block; }
 
         /* --- Различные элементы UI --- */
         .feature-icon { width: 44px; height: 44px; background: rgba(91, 33, 255, 0.1); color: #835cff; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 15px; }
         .stat-card { text-align: center; padding: 25px 20px; }
-        .stat-label { color: var(--text-muted); font-size: 14px; margin-bottom: 5px; }
+        .stat-label { color: var(--text-muted); font-size: 14px; margin-bottom: 5px; font-weight: 500;}
         .stat-value { font-size: 32px; font-weight: 800; }
         
         /* --- Тарифы --- */
         .tariff-card { text-align: left; padding-top: 35px; }
-        .tariff-title { color: var(--text-muted); font-size: 15px; margin-bottom: 5px; }
+        .tariff-title { color: var(--text-muted); font-size: 15px; margin-bottom: 5px; font-weight: 600;}
         .tariff-price { font-size: 32px; font-weight: 800; margin-bottom: 5px; }
         .tariff-price span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
         .tariff-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
 
-        .badge-top { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
-        .badge-purple { background: #1a103c; color: #a78bfa; border: 1px solid #5b21ff; }
+        .badge-top { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 6px 16px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+        .badge-blue { background: #3244ff; color: white; border: 1px solid #5b21ff; }
         .badge-yellow { background: #2a220a; color: var(--badge-yellow); border: 1px solid var(--badge-yellow); }
 
         .addon-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; font-size: 14px; color: var(--text-muted); }
-        .addon-check i { color: var(--accent-purple); margin-top: 3px; }
+        .addon-check i { color: #5b21ff; margin-top: 3px; }
 
         /* --- FAQ --- */
-        .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 10px; overflow: hidden; text-align: left; }
+        .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 10px; overflow: hidden; text-align: left; transition: all 0.3s ease; }
         .faq-question { padding: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 15px; cursor: pointer; user-select: none; }
         .faq-question i { color: var(--text-muted); transition: transform 0.3s; }
-        .faq-answer { padding: 0 20px 20px; color: var(--text-muted); font-size: 14px; line-height: 1.6; display: none; }
+        .faq-answer { padding: 0 20px 20px; color: var(--text-muted); font-size: 14px; line-height: 1.6; display: none; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 10px; padding-top: 15px;}
         .faq-item.active .faq-answer { display: block; }
-        .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--text-main); }
+        .faq-item.active .faq-question i { transform: rotate(180deg); color: #5b21ff; }
 
         /* --- Команда --- */
-        .team-member { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; text-align: left; }
-        .avatar { width: 46px; height: 46px; background: #14141f; color: #6b40ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-        .team-info .name { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
-        .team-info .role { color: var(--text-muted); font-size: 12px; }
+        .team-member { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.03); border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; text-align: left; }
+        .avatar { width: 50px; height: 50px; background: rgba(91, 33, 255, 0.1); color: #835cff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1px solid rgba(91, 33, 255, 0.2); }
+        .team-info .name { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+        .team-info .role { color: var(--text-muted); font-size: 13px; }
 
         /* --- Секция СTA (Готов навести порядок) --- */
         .cta-box {
             background: linear-gradient(180deg, #0d0d16 0%, #08080c 100%);
             border: 1px solid rgba(91, 33, 255, 0.15);
             border-radius: 20px;
-            padding: 35px 20px;
+            padding: 40px 20px;
             text-align: center;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
         .cta-news-pill {
@@ -274,11 +277,6 @@
             margin-bottom: 25px;
             font-size: 12px;
             cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .cta-news-pill:hover {
-            background: rgba(255, 255, 255, 0.06);
         }
 
         .cta-news-pill .badge {
@@ -289,35 +287,17 @@
             font-weight: 700;
         }
 
-        .cta-news-pill .text {
-            color: #d1d1d6;
-        }
+        .cta-news-pill .text { color: #d1d1d6; }
+        .cta-news-pill i { color: #6b40ff; font-size: 10px; margin-left: 5px; }
 
-        .cta-news-pill i {
-            color: #6b40ff;
-            font-size: 10px;
-            margin-left: 5px;
-        }
-
-        .cta-box h2 {
-            font-size: 28px;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 15px;
-        }
-
-        .cta-box p {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
+        .cta-box h2 { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+        .cta-box p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 30px; }
 
         .cta-box .btn-cta {
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 30px;
-            padding: 14px 25px;
+            padding: 16px 25px;
             color: white;
             font-size: 14px;
             font-weight: 600;
@@ -325,148 +305,47 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            transition: 0.3s;
+            width: 100%;
+            justify-content: center;
         }
 
-        .cta-box .btn-cta:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* --- Подвал (Обновленный) --- */
-        .main-footer {
-            padding: 0 0 40px;
-            text-align: left;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-        .footer-desc {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
-
-        .footer-nav {
-            margin-bottom: 35px;
-        }
-
-        .footer-nav h4 {
-            color: white;
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .footer-nav ul {
-            list-style: none;
-        }
-
-        .footer-nav li {
-            margin-bottom: 15px;
-        }
-
-        .footer-nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 15px;
-            transition: color 0.3s;
-        }
-
-        .footer-nav a:hover {
-            color: white;
-        }
-
+        /* --- Подвал --- */
+        .main-footer { padding: 40px 0; text-align: left; }
+        .footer-nav { margin-bottom: 35px; }
+        .footer-nav h4 { color: white; font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+        .footer-nav ul { list-style: none; }
+        .footer-nav li { margin-bottom: 15px; }
+        .footer-nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; }
+        
         .footer-bottom {
             border-top: 1px solid var(--border-color);
             padding-top: 25px;
-            margin-top: 10px;
             color: var(--text-muted);
-            font-size: 13px;
-            text-align: center;
+            font-size: 14px;
+            text-align: left;
         }
 
         /* =========================================
            СТРАНИЦА "ЗЕРКАЛО" (SPA ЛОГИКА)
            ========================================= */
         #mirror-view {
-            display: none; /* Скрыто по умолчанию */
+            display: none; 
             min-height: 100vh;
         }
 
-        .mirror-header {
-            text-align: center;
-            padding: 50px 0 30px;
-            position: relative;
-        }
-        
+        .mirror-header { text-align: center; padding: 50px 0 30px; position: relative; }
         .mirror-header h1 { font-size: 32px; font-weight: 800; margin-bottom: 5px; }
         .mirror-header p { color: var(--text-muted); font-size: 14px; }
 
-        /* Блок загрузки */
-        #loading-state {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid var(--accent-purple);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
+        #loading-state { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 25px; display: flex; align-items: center; gap: 15px; font-weight: 600; color: var(--text-muted); }
+        .spinner { width: 20px; height: 20px; border: 3px solid rgba(255, 255, 255, 0.1); border-top: 3px solid var(--accent-purple); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Блок результата (ссылка на бота) */
-        #result-state {
-            display: none;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 40px 20px 25px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 0 40px rgba(91, 33, 255, 0.1);
-        }
-
-        .link-icon-circle {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: var(--text-muted);
-            margin: 0 auto 20px;
-        }
-
+        #result-state { display: none; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 40px 20px 25px; text-align: center; position: relative; box-shadow: 0 0 40px rgba(91, 33, 255, 0.1); }
+        .link-icon-circle { width: 50px; height: 50px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--text-muted); margin: 0 auto 20px; }
         .bot-username { font-size: 26px; font-weight: 800; margin-bottom: 5px; }
         .bot-link { color: var(--text-muted); font-size: 13px; margin-bottom: 30px; }
-
-        .mirror-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .mirror-buttons { display: flex; flex-direction: column; gap: 12px; }
 
     </style>
 </head>
@@ -486,44 +365,40 @@
         </header>
 
         <div class="container">
-            <!-- Главныи экран -->
+            <!-- Главный экран -->
             <section class="hero">
                 <div class="hero-glow"></div>
                 <div class="trust-badge">
                     <div class="dot"></div>
-                    Нам доверяют тысячи пользователеи
+                    Нам доверяют тысячи пользователей
                 </div>
                 <h1>STORM SNOS<br><span class="gradient-text">Следит за порядком</span></h1>
-                <p>Сервис помогает очистить Telegram от нарушителеи через автоматизированную методы отправки.</p>
-                <div class="btn-group">
-                    <button class="btn mirror-trigger">Переити к зеркалам <i class="fa-solid fa-arrow-right"></i></button>
-                    <button class="btn btn-outline">Работы Storm Snos</button>
+                <p>Сервис помогает очистить Telegram от нарушителей через автоматизированную методы отправки.</p>
+                <div class="btn-group" style="margin-top: 25px;">
+                    <button class="btn mirror-trigger">Перейти к зеркалам <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </section>
 
             <!-- Методы -->
             <section class="section">
-                <div class="section-subtitle">Методы</div>
+                <div class="section-subtitle">МЕТОДЫ</div>
                 <h2 class="section-title">Методы отправки<br>"Telegram"</h2>
-                <div class="methods-scroll">
-                    <div class="method-item active">Метод "Канал"</div>
-                    <div class="method-item">Метод "БОТ"</div>
-                    <div class="method-item">Telegra.ph</div>
-                    <div class="method-item">Метод "WEB"</div>
-                    <div class="method-item">Метод "Email"</div>
-                </div>
+                <p class="section-desc">10+ различных способов блокировки: Email, Username, Стикеры, DC запросы и другие методы. Гарантированный результат для любого нарушителя.</p>
             </section>
 
             <!-- ВИДЕООБЗОР -->
-            <section class="section">
-                <div class="section-subtitle">Видеообзор</div>
+            <section class="section" style="border-top: none; padding-top: 0;">
+                <div class="section-subtitle">ВИДЕООБЗОР</div>
                 <h2 class="section-title">Видеообзор</h2>
-                <p class="section-desc">Небольшои обзор возможностеи Storm Snos и того, как выглядит работа с платформои.</p>
+                <p class="section-desc">Небольшой обзор возможностей Storm Snos и того, как выглядит работа с платформой.</p>
                 
                 <div class="video-container">
                     <div class="video-poster" id="custom-poster" onclick="playPromoVideo()">
-                        <i class="fa-solid fa-ghost ghost-glow-icon"></i>
-                        <div class="video-start-btn">Start</div>
+                        <div class="play-circle">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <div class="video-title-text">Смотреть видеообзор</div>
+                        <div class="video-sub-text">Нажмите, чтобы запустить видео</div>
                     </div>
                     <video id="promo-video" controls style="display: none;">
                         <source src="1950005106808122621.mp4" type="video/mp4">
@@ -534,8 +409,8 @@
 
             <!-- Возможности -->
             <section class="section">
-                <div class="section-subtitle">Возможности</div>
-                <h2 class="section-title">Хорошии инструмент<br>для комфортнои<br>работы</h2>
+                <div class="section-subtitle">ВОЗМОЖНОСТИ</div>
+                <h2 class="section-title">Эффективные методы<br>с гарантией</h2>
                 
                 <div class="card" style="text-align: left;">
                     <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
@@ -545,84 +420,93 @@
                 <div class="card" style="text-align: left;">
                     <div class="feature-icon"><i class="fa-solid fa-bullseye"></i></div>
                     <h3 style="margin-bottom: 10px; font-size: 18px;">Точная Фильтрация</h3>
-                    <p style="color: var(--text-muted); font-size: 14px;">Автоматическая проверка: принимаем запрос на логи только если система подтвердила реальное нарушение правил Telegram и оповещает вас.</p>
+                    <p style="color: var(--text-muted); font-size: 14px;">Автоматическая проверка: принимаем запрос на логи только если система подтвердила реальное нарушение правил Telegram и оповещает вас</p>
                 </div>
             </section>
 
             <!-- Статистика -->
             <section class="section">
-                <div class="section-subtitle">Статистика</div>
-                <h2 class="section-title">Наша статистика</h2>
-                <p class="section-desc">Статистика обновляется каждые 24 часа</p>
+                <div class="section-subtitle">СТАТИСТИКА</div>
+                <p class="section-desc" style="margin-top: 15px;">Статистика обновляется каждые 24 часа</p>
 
-                <div class="card stat-card"><div class="stat-label">Пользователеи</div><div class="stat-value">113609</div></div>
-                <div class="card stat-card"><div class="stat-label">Обновлении вышло</div><div class="stat-value">50+</div></div>
-                <div class="card stat-card"><div class="stat-label">Покупателеи</div><div class="stat-value">3940</div></div>
+                <div class="card stat-card"><div class="stat-label">Пользователей</div><div class="stat-value">113609</div></div>
+                <div class="card stat-card"><div class="stat-label">Обновлений вышло</div><div class="stat-value">50+</div></div>
+                <div class="card stat-card"><div class="stat-label">Покупателей</div><div class="stat-value">3940</div></div>
             </section>
 
             <!-- Тарифы -->
             <section class="section">
-                <div class="section-subtitle">Тарифы</div>
+                <div class="section-subtitle">ТАРИФЫ</div>
                 <h2 class="section-title">Честные цены на<br>подписки</h2>
+                <p class="section-desc">Выбери подписку по длительности — от одного дня до пожизненного доступа. Никаких визуалов, только настоящая блокировка нарушителей.</p>
                 
                 <div class="card tariff-card">
                     <div class="tariff-title">1 день</div>
                     <div class="tariff-price">249 ₽ <span>/ One-time</span></div>
-                    <div class="tariff-desc">Базовыи пакет</div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <div class="tariff-desc">Базовый пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
                 <div class="card tariff-card">
                     <div class="tariff-title">3 дня</div>
                     <div class="tariff-price">499 ₽ <span>/ One-time</span></div>
-                    <div class="tariff-desc">Стандартныи пакет</div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <div class="tariff-desc">Стандартный пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
                 <div class="card tariff-card">
-                    <div class="tariff-title">7 днеи</div>
+                    <div class="tariff-title">7 дней</div>
                     <div class="tariff-price">699 ₽ <span>/ One-time</span></div>
-                    <div class="tariff-desc">Расширенныи пакет</div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <div class="tariff-desc">Расширенный пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
                 <div class="card tariff-card">
-                    <div class="badge-top badge-purple">Больше всего популярно</div>
-                    <div class="tariff-title">15 днеи</div>
+                    <div class="badge-top badge-blue">Больше всего популярно</div>
+                    <div class="tariff-title">15 дней</div>
                     <div class="tariff-price">899 ₽ <span>/ One-time</span></div>
-                    <div class="tariff-desc">Профессиональныи пакет</div>
-                    <button class="btn mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <div class="tariff-desc">Профессиональный пакет</div>
+                    <button class="btn mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
                 <div class="card tariff-card">
-                    <div class="tariff-title">30 днеи</div>
+                    <div class="tariff-title">30 дней</div>
                     <div class="tariff-price">1 299 ₽ <span>/ One-time</span></div>
                     <div class="tariff-desc">Премиум пакет</div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
-                <div class="card tariff-card" style="border-color: rgba(255, 193, 7, 0.3);">
-                    <div class="badge-top badge-yellow">Лучшии выбор</div>
+                <div class="card tariff-card" style="border-color: rgba(255, 193, 7, 0.4);">
+                    <div class="badge-top badge-yellow">Лучший выбор</div>
                     <div class="tariff-title">Навсегда</div>
                     <div class="tariff-price">2 499 ₽ <span>/ One-time</span></div>
                     <div class="tariff-desc">VIP пакет</div>
-                    <button class="btn mirror-trigger" style="width:100%; box-shadow: 0 0 15px rgba(255,193,7,0.1);">Переити к зеркалам</button>
+                    <button class="btn btn-yellow-outline mirror-trigger" style="width:100%;">Перейти к зеркалам</button>
                 </div>
             </section>
 
             <!-- Доп Пакеты -->
             <section class="section">
-                <div class="section-subtitle">Дополнения</div>
+                <div class="section-subtitle">ДОПОЛНЕНИЯ</div>
                 <h2 class="section-title">Дополнительные<br>пакеты</h2>
+                <p class="section-desc">Расширьте возможности с дополнительными опциями для более одной защиты и функциональности.</p>
                 
-                <div class="card tariff-card" style="padding-top: 25px;">
-                    <div class="tariff-title">Лаит список</div>
+                <div class="card tariff-card">
+                    <div class="tariff-title">Лайт список</div>
                     <div class="tariff-price">150 ₽ <span>/ One-time</span></div>
-                    <div class="tariff-desc" style="margin-bottom: 15px;">Белыи список</div>
-                    <div class="addon-check"><i class="fa-solid fa-check"></i><span>Добавляет вас в белыи список сносера</span></div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <div class="tariff-desc" style="margin-bottom: 15px;">Белый список</div>
+                    <div class="addon-check"><i class="fa-solid fa-check"></i><span>Добавляет вас в белый список сносера</span></div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
-                <div class="card tariff-card" style="padding-top: 25px;">
+                <div class="card tariff-card">
                     <div class="tariff-title">VIP-доступ</div>
                     <div class="tariff-price">500 ₽ <span>/ One-time</span></div>
                     <div class="tariff-desc" style="margin-bottom: 15px;">Премиум доступ</div>
                     <div class="addon-check"><i class="fa-solid fa-check"></i><span>Расширенные возможности</span></div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
+                </div>
+                <!-- Новый блок: Скоро -->
+                <div class="card tariff-card">
+                    <div class="tariff-title">Coming Soon</div>
+                    <div class="tariff-price">? <span>/ One-time</span></div>
+                    <div class="tariff-desc" style="margin-bottom: 15px;">Скоро</div>
+                    <div class="addon-check"><i class="fa-solid fa-check"></i><span>Новое предложение в разработке</span></div>
+                    <button class="btn btn-disabled" style="width:100%" disabled>Coming Soon</button>
                 </div>
             </section>
 
@@ -630,25 +514,41 @@
             <section class="section">
                 <div class="section-subtitle">FAQ</div>
                 <h2 class="section-title">Часто задаваемые<br>вопросы</h2>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как работает Storm Snos? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Сервис автоматизирует отправку жалоб.</div></div>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Какои процент успешных сносов? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Успешность более 80%.</div></div>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Как быстро срабатывает система? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">От 1 часа до 3 днеи.</div></div>
-                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Безопасен ли сервис для пользователя? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Да, абсолютно безопасно.</div></div>
+                <p class="section-desc">Всё, что нужно знать о Storm Snos. Если у вас остались вопросы, свяжитесь с нами.</p>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Как работает Storm Snos? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Storm Snos Анализирует лог и подбирает лучшее решение для правил Telegram через множество методов (Email, Username, Стикеры и другие).</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Какой процент успешных сносов? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Storm Snos имеет более 1000+ успешных принятых логов. Благодаря множеству методов отправки и постоянному обновлению, вероятность успешного принятого лога превышает 80%</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Как быстро срабатывает система? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Большинство Логов Принимаются в течение 1 часа и до 3 дней. Скорость зависит от выбранного вами метода и реакции Telegram на Запрос.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Безопасен ли сервис для пользователя? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Да. Storm Snos использует безопасные методы отправки запросов и Ваш аккаунт никак не связан с этим и не рискует быть заблокированным.</div>
+                </div>
             </section>
 
             <!-- Команда -->
             <section class="section">
-                <div class="section-subtitle">Команда</div>
+                <div class="section-subtitle">КОМАНДА</div>
                 <h2 class="section-title">Наша команда</h2>
+                <p class="section-desc">Список пользователей без которых бы проект никогда не состоялся и которым вы видите его сейчас</p>
+
                 <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">???</div><div class="role">Владелец проекта</div></div></div>
-                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">леха уставшии</div><div class="role">Совладелец проекта - №2</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">леха уставший</div><div class="role">Совладелец проекта - №2</div></div></div>
                 <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">KRUIZ</div><div class="role">Совладелец проекта - №3</div></div></div>
-                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">supernegr767</div><div class="role">Дизаинер проекта</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">supernegr767</div><div class="role">Дизайнер проекта</div></div></div>
                 <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">мат!х | moral</div><div class="role">Оператор проекта</div></div></div>
             </section>
 
-            <!-- НОВЫЙ БЛОК: Готов навести порядок -->
-            <section class="section">
+            <!-- БЛОК: Готов навести порядок -->
+            <section class="section" style="border-top: none;">
                 <div class="cta-box">
                     <div class="cta-news-pill">
                         <span class="badge">Новости</span>
@@ -665,15 +565,8 @@
                 </div>
             </section>
 
-            <!-- НОВЫЙ ПОДВАЛ -->
+            <!-- ПОДВАЛ -->
             <footer class="main-footer">
-                <div class="footer-logo">
-                    <i class="fa-solid fa-ghost"></i> Storm Snos
-                </div>
-                <p class="footer-desc">
-                    Storm Snos — сервис для автоматизации работы с жалобами в Telegram. Помогает выявлять аккаунты и каналы, нарушающие правила платформы, и передавать обращения на модерацию в лучшем виде. Используется аналитика и структурированная подача жалоб. Более 1000 обращений успешно обработано.
-                </p>
-
                 <div class="footer-nav">
                     <h4>Навигация</h4>
                     <ul>
@@ -745,11 +638,8 @@
                 <div class="bot-link">https://t.me/storm_snoos_bot</div>
 
                 <div class="mirror-buttons">
-                    <!-- Ссылка в Telegram -->
                     <a href="https://t.me/storm_snoos_bot" target="_blank" class="btn">Открыть бота</a>
-                    <!-- Копирование ссылки -->
                     <button class="btn btn-dark" onclick="copyBotLink(this)">Копировать ссылку</button>
-                    <!-- Промокод -->
                     <button class="btn btn-dark"><i class="fa-solid fa-gift" style="color:#6b40ff;"></i> Получить промокод</button>
                 </div>
             </div>
@@ -760,29 +650,25 @@
          СКРИПТЫ
          ========================================= -->
     <script>
-        // 1. Воспроизведение видео при клике
         function playPromoVideo() {
             const poster = document.getElementById('custom-poster');
             const video = document.getElementById('promo-video');
             
-            poster.style.display = 'none'; // Скрываем постер
-            video.style.display = 'block'; // Показываем тег video
-            video.play();                  // Запускаем видео
+            poster.style.display = 'none'; 
+            video.style.display = 'block'; 
+            video.play();                  
         }
 
-        // 2. Аккордеон FAQ
         function toggleFaq(element) {
             element.parentElement.classList.toggle('active');
         }
 
-        // 3. SPA Навигация: Переход на страницу зеркал
         const mirrorTriggers = document.querySelectorAll('.mirror-trigger');
         const mainView = document.getElementById('main-view');
         const mirrorView = document.getElementById('mirror-view');
         const loadingState = document.getElementById('loading-state');
         const resultState = document.getElementById('result-state');
 
-        // Вешаем клик на все кнопки "Переити к зеркалам"
         mirrorTriggers.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -791,12 +677,10 @@
         });
 
         function showMirrorPage() {
-            // Переключаем видимость блоков
             mainView.style.display = 'none';
             mirrorView.style.display = 'block';
-            window.scrollTo(0, 0); // Прокрутка наверх
-            
-            loadBot(); // Запускаем феиковую загрузку
+            window.scrollTo(0, 0); 
+            loadBot(); 
         }
 
         function goBack() {
@@ -804,25 +688,20 @@
             mainView.style.display = 'block';
             window.scrollTo(0, 0);
             
-            // Сбрасываем видео, если оно играло
             const video = document.getElementById('promo-video');
-            video.pause();
+            if (video) video.pause();
         }
 
-        // 4. Имитация загрузки зеркала
         function loadBot() {
-            // Сначала показываем загрузку
             loadingState.style.display = 'flex';
             resultState.style.display = 'none';
 
-            // Ждем 1.5 секунды и показываем бота
             setTimeout(() => {
                 loadingState.style.display = 'none';
                 resultState.style.display = 'block';
             }, 1500);
         }
 
-        // 5. Копирование ссылки
         function copyBotLink(btnElement) {
             navigator.clipboard.writeText("https://t.me/storm_snoos_bot").then(() => {
                 const originalText = btnElement.innerText;
