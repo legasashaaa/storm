@@ -349,14 +349,11 @@
 
 
         /* =========================================
-           НОВАЯ СТРАНИЦА "НОВОСТИ" (ИЗ ai_studio_code)
+           СТРАНИЦА "НОВОСТИ" (НОВЫЙ ПЕРВЫЙ ЭКРАН)
            ========================================= */
         #news-view {
-            display: none;
+            display: block; /* Этот блок будет виден первым */
             min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            position: relative;
-            background-color: var(--bg-color);
         }
 
         /* Заднее фиолетово-синее свечение для страницы новостей */
@@ -372,67 +369,23 @@
             pointer-events: none;
         }
 
-        .news-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 0 40px 0;
-            position: relative;
-        }
-
-        .news-back-button {
-            position: absolute;
-            left: 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 400;
-            cursor: pointer;
-        }
-
-        .news-back-button svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        .news-logo-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .news-logo-container svg {
-            width: 28px;
-            height: 28px;
-            fill: #ffffff;
-        }
-
-        .news-logo-container h1 {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        /* Главный заголовок */
+        /* Главный заголовок страницы новостей */
         .news-hero-section {
             text-align: center;
             margin-bottom: 30px;
+            position: relative;
         }
 
         .news-hero-section h2 {
             font-size: 46px;
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.1;
             margin-bottom: 15px;
             letter-spacing: -0.5px;
         }
 
         .news-hero-section p {
-            color: #9ba1b3;
+            color: var(--text-muted);
             font-size: 15px;
             max-width: 480px;
             margin: 0 auto;
@@ -443,10 +396,10 @@
             font-weight: 500;
         }
 
-        /* Информационная панель */
+        /* Информационная панель (синяя точка) */
         .news-info-banner {
             background-color: rgba(15, 18, 30, 0.4);
-            border: 1px solid #1a1d2d;
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 16px 20px;
             display: flex;
@@ -459,9 +412,9 @@
         .news-info-banner .dot {
             width: 8px;
             height: 8px;
-            background-color: #3b82f6;
+            background-color: var(--accent-blue);
             border-radius: 50%;
-            box-shadow: 0 0 10px #3b82f6;
+            box-shadow: 0 0 10px var(--accent-blue);
             flex-shrink: 0;
         }
 
@@ -470,7 +423,7 @@
             color: #d1d5db;
         }
 
-        /* Список новостей */
+        /* Лента новостей */
         .news-feed {
             display: flex;
             flex-direction: column;
@@ -479,8 +432,8 @@
         }
 
         .news-card {
-            background-color: #0b0d14;
-            border: 1px solid #1a1d2d;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 30px 25px;
         }
@@ -490,7 +443,6 @@
             font-weight: 700;
             margin-bottom: 16px;
             line-height: 1.2;
-            color: white;
         }
 
         .news-card-meta {
@@ -526,7 +478,7 @@
             line-height: 1.6;
         }
 
-        /* Адаптивность для новостей */
+        /* Адаптивность для страницы новостей */
         @media (max-width: 480px) {
             .news-hero-section h2 {
                 font-size: 36px;
@@ -543,9 +495,71 @@
 <body>
 
     <!-- =========================================
+         ВИД "НОВОСТИ" (НОВЫЙ ПЕРВЫЙ ЭКРАН)
+         ========================================= -->
+    <div id="news-view">
+        <!-- Заднее свечение -->
+        <div class="news-background-glow"></div>
+
+        <header class="container">
+            <!-- Кнопка "Назад" ведет на главную страницу -->
+            <div class="header-icon" onclick="goToMainFromNews()">
+                <i class="fa-solid fa-arrow-left"></i>
+            </div>
+            <div class="logo">
+                <i class="fa-solid fa-ghost"></i> Storm Snos
+            </div>
+            <div class="header-icon">
+                <!-- Пустой div для соблюдения отступа -->
+            </div>
+        </header>
+
+        <div class="container">
+            <!-- Главный заголовок страницы новостей -->
+            <section class="news-hero-section">
+                <h2>Новости Storm<br>Snos</h2>
+                <p>На этой странице отображаются только те новости, которые мы публикуем через <span>Админ-панель Storm Snos</span>.</p>
+            </section>
+
+            <!-- Баннер "Актуальные обновления..." -->
+            <div class="news-info-banner">
+                <div class="dot"></div>
+                <p>Актуальные обновления проекта в формате <strong>ленты новостей</strong>.</p>
+            </div>
+
+            <!-- Лента новостей -->
+            <div class="news-feed">
+                
+                <!-- Карточка 1 -->
+                <article class="news-card">
+                    <h3>Запуск StormSnos<br>v2.0</h3>
+                    <div class="news-card-meta">
+                        <span class="news-tag">Администрация</span>
+                        <span class="news-separator">•</span>
+                        <span class="news-date">2026-02-17</span>
+                    </div>
+                    <p>Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</p>
+                </article>
+
+                <!-- Карточка 2 -->
+                <article class="news-card">
+                    <h3>Обновление<br>безопасности</h3>
+                    <div class="news-card-meta">
+                        <span class="news-tag">Администрация</span>
+                        <span class="news-separator">•</span>
+                        <span class="news-date">2026-02-17</span>
+                    </div>
+                    <p>Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</p>
+                </article>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
          ОСНОВНОЙ ВИД (ГЛАВНАЯ СТРАНИЦА)
          ========================================= -->
-    <div id="main-view">
+    <div id="main-view" style="display: none;">
         <header class="container">
             <div class="logo">
                 <i class="fa-solid fa-ghost"></i> Storm Snos
@@ -741,7 +755,7 @@
             <!-- БЛОК: Готов навести порядок -->
             <section class="section" style="border-top: none;">
                 <div class="cta-box">
-                    <div class="cta-news-pill" onclick="showNewsPage()">
+                    <div class="cta-news-pill">
                         <span class="badge">Новости</span>
                         <span class="text">Смотри актуальные новости об обновлениях</span>
                         <i class="fa-solid fa-chevron-right"></i>
@@ -838,76 +852,10 @@
     </div>
 
     <!-- =========================================
-         НОВЫЙ ВИД "НОВОСТИ" (ИЗ ai_studio_code)
-         ========================================= -->
-    <div id="news-view">
-        <div class="news-background-glow"></div>
-
-        <div class="container">
-            <!-- Шапка -->
-            <header class="news-header">
-                <div class="news-back-button" onclick="hideNewsPage()">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                    </svg>
-                    Назад
-                </div>
-                <div class="news-logo-container">
-                    <!-- Векторный логотип призрака -->
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C7.58 2 4 5.58 4 10v12l2.5-2.5L9 22l3-2.5 3 2.5 2.5-2.5L20 22V10c0-4.42-3.58-8-8-8zm-2 9c-.83 0-1.5-.67-1.5-1.5S9.17 8 10 8s1.5.67 1.5 1.5S10.83 11 10 11zm4 0c-.83 0-1.5-.67-1.5-1.5S13.17 8 14 8s1.5.67 1.5 1.5S14.83 11 14 11z"/>
-                    </svg>
-                    <h1>Storm Snos</h1>
-                </div>
-            </header>
-
-            <main>
-                <!-- Главный заголовок страницы -->
-                <section class="news-hero-section">
-                    <h2>Новости Storm<br>Snos</h2>
-                    <p>На этой странице отображаются только те новости, которые мы публикуем через <span>Админ-панель Storm Snos</span>.</p>
-                </section>
-
-                <!-- Баннер "Актуальные обновления..." -->
-                <div class="news-info-banner">
-                    <div class="dot"></div>
-                    <p>Актуальные обновления проекта в формате <strong>ленты новостей</strong>.</p>
-                </div>
-
-                <!-- Лента новостей -->
-                <div class="news-feed">
-                    
-                    <!-- Карточка 1 -->
-                    <article class="news-card">
-                        <h3>Запуск StormSnos<br>v2.0</h3>
-                        <div class="news-card-meta">
-                            <span class="news-tag">Администрация</span>
-                            <span class="news-separator">•</span>
-                            <span class="news-date">2026-02-17</span>
-                        </div>
-                        <p>Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</p>
-                    </article>
-
-                    <!-- Карточка 2 -->
-                    <article class="news-card">
-                        <h3>Обновление<br>безопасности</h3>
-                        <div class="news-card-meta">
-                            <span class="news-tag">Администрация</span>
-                            <span class="news-separator">•</span>
-                            <span class="news-date">2026-02-17</span>
-                        </div>
-                        <p>Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</p>
-                    </article>
-
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <!-- =========================================
          СКРИПТЫ
          ========================================= -->
     <script>
+        // Функция для видео
         function playPromoVideo() {
             const poster = document.getElementById('custom-poster');
             const video = document.getElementById('promo-video');
@@ -917,17 +865,20 @@
             video.play();                  
         }
 
+        // Функция для FAQ
         function toggleFaq(element) {
             element.parentElement.classList.toggle('active');
         }
 
-        const mirrorTriggers = document.querySelectorAll('.mirror-trigger');
+        // Получаем все элементы
+        const newsView = document.getElementById('news-view');
         const mainView = document.getElementById('main-view');
         const mirrorView = document.getElementById('mirror-view');
-        const newsView = document.getElementById('news-view');
         const loadingState = document.getElementById('loading-state');
         const resultState = document.getElementById('result-state');
+        const mirrorTriggers = document.querySelectorAll('.mirror-trigger');
 
+        // Настройка переходов на зеркала
         mirrorTriggers.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -935,14 +886,24 @@
             });
         });
 
+        // Функция перехода со страницы новостей на главную
+        function goToMainFromNews() {
+            newsView.style.display = 'none';
+            mainView.style.display = 'block';
+            mirrorView.style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+
+        // Функция показа страницы зеркал
         function showMirrorPage() {
             mainView.style.display = 'none';
-            mirrorView.style.display = 'block';
             newsView.style.display = 'none';
+            mirrorView.style.display = 'block';
             window.scrollTo(0, 0); 
             loadBot(); 
         }
 
+        // Функция возврата с зеркал на главную
         function goBack() {
             mirrorView.style.display = 'none';
             mainView.style.display = 'block';
@@ -953,6 +914,7 @@
             if (video) video.pause();
         }
 
+        // Функция загрузки бота
         function loadBot() {
             loadingState.style.display = 'flex';
             resultState.style.display = 'none';
@@ -963,6 +925,7 @@
             }, 1500);
         }
 
+        // Функция копирования ссылки
         function copyBotLink(btnElement) {
             navigator.clipboard.writeText("https://t.me/storm_snoos_bot").then(() => {
                 const originalText = btnElement.innerText;
@@ -973,21 +936,6 @@
                     btnElement.style.color = "var(--text-main)";
                 }, 2000);
             });
-        }
-
-        // Новые функции для страницы новостей
-        function showNewsPage() {
-            mainView.style.display = 'none';
-            mirrorView.style.display = 'none';
-            newsView.style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        function hideNewsPage() {
-            newsView.style.display = 'none';
-            mainView.style.display = 'block';
-            mirrorView.style.display = 'none';
-            window.scrollTo(0, 0);
         }
     </script>
 </body>
