@@ -1,3 +1,6 @@
+Вот полный код index.html, в который интегрирована страница новостей из второго файла. Теперь при нажатии на плашку "Новости" в блоке "Готов навести порядок?" открывается страница с лентой новостей, а кнопка "Назад" возвращает пользователя на главный экран.
+
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -73,7 +76,7 @@
             text-align: center;
         }
 
-        /* --- Главныи экран --- */
+        /* --- Главный экран --- */
         .hero {
             text-align: center;
             padding: 40px 0;
@@ -347,12 +350,203 @@
         .bot-link { color: var(--text-muted); font-size: 13px; margin-bottom: 30px; }
         .mirror-buttons { display: flex; flex-direction: column; gap: 12px; }
 
+
+        /* =========================================
+           НОВАЯ СТРАНИЦА "НОВОСТИ" (ИЗ ai_studio_code)
+           ========================================= */
+        #news-view {
+            display: none;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            background-color: var(--bg-color);
+        }
+
+        /* Заднее фиолетово-синее свечение для страницы новостей */
+        .news-background-glow {
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150vw;
+            height: 700px;
+            background: radial-gradient(ellipse at center, rgba(35, 25, 120, 0.5) 0%, rgba(15, 10, 60, 0.2) 40%, rgba(3, 3, 5, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .news-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 0 40px 0;
+            position: relative;
+        }
+
+        .news-back-button {
+            position: absolute;
+            left: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .news-back-button svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .news-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .news-logo-container svg {
+            width: 28px;
+            height: 28px;
+            fill: #ffffff;
+        }
+
+        .news-logo-container h1 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Главный заголовок */
+        .news-hero-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .news-hero-section h2 {
+            font-size: 46px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .news-hero-section p {
+            color: #9ba1b3;
+            font-size: 15px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .news-hero-section p span {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Информационная панель */
+        .news-info-banner {
+            background-color: rgba(15, 18, 30, 0.4);
+            border: 1px solid #1a1d2d;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .news-info-banner .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #3b82f6;
+            flex-shrink: 0;
+        }
+
+        .news-info-banner p {
+            font-size: 14px;
+            color: #d1d5db;
+        }
+
+        /* Список новостей */
+        .news-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-bottom: 50px;
+        }
+
+        .news-card {
+            background-color: #0b0d14;
+            border: 1px solid #1a1d2d;
+            border-radius: 16px;
+            padding: 30px 25px;
+        }
+
+        .news-card h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .news-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .news-tag, .news-date {
+            background-color: #111424;
+            border: 1px solid #232845;
+            color: #8b94b2;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .news-tag {
+            color: #a5b4fc;
+        }
+
+        .news-separator {
+            color: #3f4661;
+            font-size: 20px;
+            line-height: 0;
+        }
+
+        .news-card p {
+            color: #a0a6b8;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Адаптивность для новостей */
+        @media (max-width: 480px) {
+            .news-hero-section h2 {
+                font-size: 36px;
+            }
+            .news-card h3 {
+                font-size: 22px;
+            }
+            .news-card {
+                padding: 20px 15px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <!-- =========================================
-         ОСНОВНОИ ВИД (ГЛАВНАЯ СТРАНИЦА)
+         ОСНОВНОЙ ВИД (ГЛАВНАЯ СТРАНИЦА)
          ========================================= -->
     <div id="main-view">
         <header class="container">
@@ -365,17 +559,17 @@
         </header>
 
         <div class="container">
-            <!-- Главныи экран -->
+            <!-- Главный экран -->
             <section class="hero">
                 <div class="hero-glow"></div>
                 <div class="trust-badge">
                     <div class="dot"></div>
-                    Нам доверяют тысячи пользователеи
+                    Нам доверяют тысячи пользователей
                 </div>
                 <h1>STORM SNOS<br><span class="gradient-text">Следит за порядком</span></h1>
-                <p>Сервис помогает очистить Telegram от нарушителеи через автоматизированную методы отправки.</p>
+                <p>Сервис помогает очистить Telegram от нарушителей через автоматизированную методы отправки.</p>
                 <div class="btn-group" style="margin-top: 25px;">
-                    <button class="btn mirror-trigger">Переити к зеркалам <i class="fa-solid fa-arrow-right"></i></button>
+                    <button class="btn mirror-trigger">Перейти к зеркалам <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </section>
 
@@ -383,14 +577,14 @@
             <section class="section">
                 <div class="section-subtitle">МЕТОДЫ</div>
                 <h2 class="section-title">Методы отправки<br>"Telegram"</h2>
-                <p class="section-desc">10+ различных способов блокировки: Email, Username, Стикеры, DC запросы и другие методы. Гарантированныи результат для любого нарушителя.</p>
+                <p class="section-desc">10+ различных способов блокировки: Email, Username, Стикеры, DC запросы и другие методы. Гарантированный результат для любого нарушителя.</p>
             </section>
 
             <!-- ВИДЕООБЗОР -->
             <section class="section" style="border-top: none; padding-top: 0;">
                 <div class="section-subtitle">ВИДЕООБЗОР</div>
                 <h2 class="section-title">Видеообзор</h2>
-                <p class="section-desc">Небольшои обзор возможностеи Storm Snos и того, как выглядит работа с платформои.</p>
+                <p class="section-desc">Небольшой обзор возможностей Storm Snos и того, как выглядит работа с платформой.</p>
                 
                 <div class="video-container">
                     <div class="video-poster" id="custom-poster" onclick="playPromoVideo()">
@@ -410,7 +604,7 @@
             <!-- Возможности -->
             <section class="section">
                 <div class="section-subtitle">ВОЗМОЖНОСТИ</div>
-                <h2 class="section-title">Эффективные методы<br>с гарантиеи</h2>
+                <h2 class="section-title">Эффективные методы<br>с гарантией</h2>
                 
                 <div class="card" style="text-align: left;">
                     <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
@@ -429,54 +623,54 @@
                 <div class="section-subtitle">СТАТИСТИКА</div>
                 <p class="section-desc" style="margin-top: 15px;">Статистика обновляется каждые 24 часа</p>
 
-                <div class="card stat-card"><div class="stat-label">Пользователеи</div><div class="stat-value">113609</div></div>
-                <div class="card stat-card"><div class="stat-label">Обновлении вышло</div><div class="stat-value">50+</div></div>
-                <div class="card stat-card"><div class="stat-label">Покупателеи</div><div class="stat-value">3940</div></div>
+                <div class="card stat-card"><div class="stat-label">Пользователей</div><div class="stat-value">113609</div></div>
+                <div class="card stat-card"><div class="stat-label">Обновлений вышло</div><div class="stat-value">50+</div></div>
+                <div class="card stat-card"><div class="stat-label">Покупателей</div><div class="stat-value">3940</div></div>
             </section>
 
             <!-- Тарифы -->
             <section class="section">
                 <div class="section-subtitle">ТАРИФЫ</div>
                 <h2 class="section-title">Честные цены на<br>подписки</h2>
-                <p class="section-desc">Выбери подписку по длительности — от одного дня до пожизненного доступа. Никаких визуалов, только настоящая блокировка нарушителеи.</p>
+                <p class="section-desc">Выбери подписку по длительности — от одного дня до пожизненного доступа. Никаких визуалов, только настоящая блокировка нарушителей.</p>
                 
                 <div class="card tariff-card">
                     <div class="tariff-title">1 день</div>
                     <div class="tariff-price">249 ₽ <span>/ One-time</span></div>
-                    <div class="tariff-desc">Базовыи пакет</div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <div class="tariff-desc">Базовый пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
                 <div class="card tariff-card">
                     <div class="tariff-title">3 дня</div>
                     <div class="tariff-price">499 ₽ <span>/ One-time</span></div>
-                    <div class="tariff-desc">Стандартныи пакет</div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <div class="tariff-desc">Стандартный пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
                 <div class="card tariff-card">
-                    <div class="tariff-title">7 днеи</div>
+                    <div class="tariff-title">7 дней</div>
                     <div class="tariff-price">699 ₽ <span>/ One-time</span></div>
-                    <div class="tariff-desc">Расширенныи пакет</div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <div class="tariff-desc">Расширенный пакет</div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
                 <div class="card tariff-card">
                     <div class="badge-top badge-blue">Больше всего популярно</div>
-                    <div class="tariff-title">15 днеи</div>
+                    <div class="tariff-title">15 дней</div>
                     <div class="tariff-price">899 ₽ <span>/ One-time</span></div>
-                    <div class="tariff-desc">Профессиональныи пакет</div>
-                    <button class="btn mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <div class="tariff-desc">Профессиональный пакет</div>
+                    <button class="btn mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
                 <div class="card tariff-card">
-                    <div class="tariff-title">30 днеи</div>
+                    <div class="tariff-title">30 дней</div>
                     <div class="tariff-price">1 299 ₽ <span>/ One-time</span></div>
                     <div class="tariff-desc">Премиум пакет</div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
                 <div class="card tariff-card" style="border-color: rgba(255, 193, 7, 0.4);">
-                    <div class="badge-top badge-yellow">Лучшии выбор</div>
+                    <div class="badge-top badge-yellow">Лучший выбор</div>
                     <div class="tariff-title">Навсегда</div>
                     <div class="tariff-price">2 499 ₽ <span>/ One-time</span></div>
                     <div class="tariff-desc">VIP пакет</div>
-                    <button class="btn btn-yellow-outline mirror-trigger" style="width:100%;">Переити к зеркалам</button>
+                    <button class="btn btn-yellow-outline mirror-trigger" style="width:100%;">Перейти к зеркалам</button>
                 </div>
             </section>
 
@@ -484,23 +678,23 @@
             <section class="section">
                 <div class="section-subtitle">ДОПОЛНЕНИЯ</div>
                 <h2 class="section-title">Дополнительные<br>пакеты</h2>
-                <p class="section-desc">Расширьте возможности с дополнительными опциями для более однои защиты и функциональности.</p>
+                <p class="section-desc">Расширьте возможности с дополнительными опциями для более одной защиты и функциональности.</p>
                 
                 <div class="card tariff-card">
-                    <div class="tariff-title">Лаит список</div>
+                    <div class="tariff-title">Лайт список</div>
                     <div class="tariff-price">150 ₽ <span>/ One-time</span></div>
-                    <div class="tariff-desc" style="margin-bottom: 15px;">Белыи список</div>
-                    <div class="addon-check"><i class="fa-solid fa-check"></i><span>Добавляет вас в белыи список сносера</span></div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <div class="tariff-desc" style="margin-bottom: 15px;">Белый список</div>
+                    <div class="addon-check"><i class="fa-solid fa-check"></i><span>Добавляет вас в белый список сносера</span></div>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
                 <div class="card tariff-card">
                     <div class="tariff-title">VIP-доступ</div>
                     <div class="tariff-price">500 ₽ <span>/ One-time</span></div>
                     <div class="tariff-desc" style="margin-bottom: 15px;">Премиум доступ</div>
                     <div class="addon-check"><i class="fa-solid fa-check"></i><span>Расширенные возможности</span></div>
-                    <button class="btn btn-outline mirror-trigger" style="width:100%">Переити к зеркалам</button>
+                    <button class="btn btn-outline mirror-trigger" style="width:100%">Перейти к зеркалам</button>
                 </div>
-                <!-- Новыи блок: Скоро -->
+                <!-- Новый блок: Скоро -->
                 <div class="card tariff-card">
                     <div class="tariff-title">Coming Soon</div>
                     <div class="tariff-price">? <span>/ One-time</span></div>
@@ -514,19 +708,19 @@
             <section class="section">
                 <div class="section-subtitle">FAQ</div>
                 <h2 class="section-title">Часто задаваемые<br>вопросы</h2>
-                <p class="section-desc">Все, что нужно знать о Storm Snos. Если у вас остались вопросы, свяжитесь с нами.</p>
+                <p class="section-desc">Всё, что нужно знать о Storm Snos. Если у вас остались вопросы, свяжитесь с нами.</p>
                 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">Как работает Storm Snos? <i class="fa-solid fa-chevron-down"></i></div>
                     <div class="faq-answer">Storm Snos Анализирует лог и подбирает лучшее решение для правил Telegram через множество методов (Email, Username, Стикеры и другие).</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">Какои процент успешных сносов? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-question" onclick="toggleFaq(this)">Какой процент успешных сносов? <i class="fa-solid fa-chevron-down"></i></div>
                     <div class="faq-answer">Storm Snos имеет более 1000+ успешных принятых логов. Благодаря множеству методов отправки и постоянному обновлению, вероятность успешного принятого лога превышает 80%</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">Как быстро срабатывает система? <i class="fa-solid fa-chevron-down"></i></div>
-                    <div class="faq-answer">Большинство Логов Принимаются в течение 1 часа и до 3 днеи. Скорость зависит от выбранного вами метода и реакции Telegram на Запрос.</div>
+                    <div class="faq-answer">Большинство Логов Принимаются в течение 1 часа и до 3 дней. Скорость зависит от выбранного вами метода и реакции Telegram на Запрос.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">Безопасен ли сервис для пользователя? <i class="fa-solid fa-chevron-down"></i></div>
@@ -538,29 +732,29 @@
             <section class="section">
                 <div class="section-subtitle">КОМАНДА</div>
                 <h2 class="section-title">Наша команда</h2>
-                <p class="section-desc">Список пользователеи без которых бы проект никогда не состоялся и которым вы видите его сеичас</p>
+                <p class="section-desc">Список пользователей без которых бы проект никогда не состоялся и которым вы видите его сейчас</p>
 
                 <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">???</div><div class="role">Владелец проекта</div></div></div>
-                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">леха уставшии</div><div class="role">Совладелец проекта - №2</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">леха уставший</div><div class="role">Совладелец проекта - №2</div></div></div>
                 <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">KRUIZ</div><div class="role">Совладелец проекта - №3</div></div></div>
-                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">supernegr767</div><div class="role">Дизаинер проекта</div></div></div>
+                <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">supernegr767</div><div class="role">Дизайнер проекта</div></div></div>
                 <div class="team-member"><div class="avatar"><i class="fa-regular fa-user"></i></div><div class="team-info"><div class="name">мат!х | moral</div><div class="role">Оператор проекта</div></div></div>
             </section>
 
             <!-- БЛОК: Готов навести порядок -->
             <section class="section" style="border-top: none;">
                 <div class="cta-box">
-                    <div class="cta-news-pill">
+                    <div class="cta-news-pill" onclick="showNewsPage()">
                         <span class="badge">Новости</span>
                         <span class="text">Смотри актуальные новости об обновлениях</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                     
                     <h2>Готов навести<br>порядок?</h2>
-                    <p>Storm Snos помогает избавиться от нарушителеи в твоем Telegram сообществе. Автоматическая блокировка через множество методов — гарантированныи результат.</p>
+                    <p>Storm Snos помогает избавиться от нарушителей в твоём Telegram сообществе. Автоматическая блокировка через множество методов — гарантированный результат.</p>
                     
                     <button class="btn-cta mirror-trigger">
-                        Готов, переити к зеркалам <i class="fa-solid fa-arrow-right"></i>
+                        Готов, перейти к зеркалам <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
             </section>
@@ -628,21 +822,88 @@
                 Получаем зеркало...
             </div>
 
-            <!-- Готовыи результат -->
+            <!-- Готовый результат -->
             <div id="result-state">
                 <div class="link-icon-circle">
                     <i class="fa-solid fa-link"></i>
                 </div>
                 
-                <div class="bot-username">@storm_sn1oser_bot</div>
-                <div class="bot-link">https://t.me/storm_sn1oser_bot</div>
+                <div class="bot-username">@storm_snoos_bot</div>
+                <div class="bot-link">https://t.me/storm_snoos_bot</div>
 
                 <div class="mirror-buttons">
-                    <a href="https://t.me/storm_sn1oser_bot" target="_blank" class="btn">Открыть бота</a>
+                    <a href="https://t.me/storm_snoos_bot" target="_blank" class="btn">Открыть бота</a>
                     <button class="btn btn-dark" onclick="copyBotLink(this)">Копировать ссылку</button>
                     <button class="btn btn-dark"><i class="fa-solid fa-gift" style="color:#6b40ff;"></i> Получить промокод</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         НОВЫЙ ВИД "НОВОСТИ" (ИЗ ai_studio_code)
+         ========================================= -->
+    <div id="news-view">
+        <div class="news-background-glow"></div>
+
+        <div class="container">
+            <!-- Шапка -->
+            <header class="news-header">
+                <div class="news-back-button" onclick="hideNewsPage()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                    </svg>
+                    Назад
+                </div>
+                <div class="news-logo-container">
+                    <!-- Векторный логотип призрака -->
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C7.58 2 4 5.58 4 10v12l2.5-2.5L9 22l3-2.5 3 2.5 2.5-2.5L20 22V10c0-4.42-3.58-8-8-8zm-2 9c-.83 0-1.5-.67-1.5-1.5S9.17 8 10 8s1.5.67 1.5 1.5S10.83 11 10 11zm4 0c-.83 0-1.5-.67-1.5-1.5S13.17 8 14 8s1.5.67 1.5 1.5S14.83 11 14 11z"/>
+                    </svg>
+                    <h1>Storm Snos</h1>
+                </div>
+            </header>
+
+            <main>
+                <!-- Главный заголовок страницы -->
+                <section class="news-hero-section">
+                    <h2>Новости Storm<br>Snos</h2>
+                    <p>На этой странице отображаются только те новости, которые мы публикуем через <span>Админ-панель Storm Snos</span>.</p>
+                </section>
+
+                <!-- Баннер "Актуальные обновления..." -->
+                <div class="news-info-banner">
+                    <div class="dot"></div>
+                    <p>Актуальные обновления проекта в формате <strong>ленты новостей</strong>.</p>
+                </div>
+
+                <!-- Лента новостей -->
+                <div class="news-feed">
+                    
+                    <!-- Карточка 1 -->
+                    <article class="news-card">
+                        <h3>Запуск StormSnos<br>v2.0</h3>
+                        <div class="news-card-meta">
+                            <span class="news-tag">Администрация</span>
+                            <span class="news-separator">•</span>
+                            <span class="news-date">2026-02-17</span>
+                        </div>
+                        <p>Мы рады представить полностью обновлённую версию StormSnos! Новый дизайн, улучшенная производительность и множество новых функций.</p>
+                    </article>
+
+                    <!-- Карточка 2 -->
+                    <article class="news-card">
+                        <h3>Обновление<br>безопасности</h3>
+                        <div class="news-card-meta">
+                            <span class="news-tag">Администрация</span>
+                            <span class="news-separator">•</span>
+                            <span class="news-date">2026-02-17</span>
+                        </div>
+                        <p>Была проведена масштабная работа по улучшению безопасности. Обновлены системы авторизации и защиты данных.</p>
+                    </article>
+
+                </div>
+            </main>
         </div>
     </div>
 
@@ -666,6 +927,7 @@
         const mirrorTriggers = document.querySelectorAll('.mirror-trigger');
         const mainView = document.getElementById('main-view');
         const mirrorView = document.getElementById('mirror-view');
+        const newsView = document.getElementById('news-view');
         const loadingState = document.getElementById('loading-state');
         const resultState = document.getElementById('result-state');
 
@@ -679,6 +941,7 @@
         function showMirrorPage() {
             mainView.style.display = 'none';
             mirrorView.style.display = 'block';
+            newsView.style.display = 'none';
             window.scrollTo(0, 0); 
             loadBot(); 
         }
@@ -686,6 +949,7 @@
         function goBack() {
             mirrorView.style.display = 'none';
             mainView.style.display = 'block';
+            newsView.style.display = 'none';
             window.scrollTo(0, 0);
             
             const video = document.getElementById('promo-video');
@@ -703,7 +967,7 @@
         }
 
         function copyBotLink(btnElement) {
-            navigator.clipboard.writeText("https://t.me/storm_sn1oser_bot").then(() => {
+            navigator.clipboard.writeText("https://t.me/storm_snoos_bot").then(() => {
                 const originalText = btnElement.innerText;
                 btnElement.innerText = "Скопировано!";
                 btnElement.style.color = "#00ff88";
@@ -713,6 +977,22 @@
                 }, 2000);
             });
         }
+
+        // Новые функции для страницы новостей
+        function showNewsPage() {
+            mainView.style.display = 'none';
+            mirrorView.style.display = 'none';
+            newsView.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function hideNewsPage() {
+            newsView.style.display = 'none';
+            mainView.style.display = 'block';
+            mirrorView.style.display = 'none';
+            window.scrollTo(0, 0);
+        }
     </script>
 </body>
 </html>
+```
